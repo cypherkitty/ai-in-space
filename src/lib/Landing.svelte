@@ -121,10 +121,16 @@
     <div class="coordinate">41° 18′ 14″ N&nbsp;&nbsp; / &nbsp;&nbsp;72° 55′ 03″ W</div>
     <div class="scroll-cue" aria-hidden="true"><span>Scroll to transmit</span><i></i></div>
 
-    <div class="design-tools">
-      <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label="Open design gallery">All {designCount}</button>
-      <button type="button" onclick={() => runExperience('remix', onMix)} class:active={isMix} aria-label="Generate a widget mix">Remix</button>
-      <button type="button" onclick={() => runExperience('receive_transmission', onShuffle)} aria-label="Receive another design transmission">Receive ↻</button>
+    <div class="design-tools" aria-label="Generative design controls">
+      <button class="signal-control" type="button" onclick={() => runExperience('alternate_signal', onShuffle)} aria-label="Receive a new interface">
+        <span class="signal-status"><i></i> Alternate signal available</span>
+        <strong>Receive a new interface <b aria-hidden="true">↻</b></strong>
+        <small>Every transmission retunes the page.</small>
+      </button>
+      <div class="design-utilities">
+        <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label="Open design gallery">All {designCount}</button>
+        <button type="button" onclick={() => runExperience('remix', onMix)} class:active={isMix} aria-label="Generate a widget mix">Remix</button>
+      </div>
     </div>
   </section>
 
@@ -233,9 +239,18 @@
   .coordinate { position: absolute; right: 3rem; top: 50%; color: var(--muted); font-family: var(--font-mono); font-size: .48rem; letter-spacing: .12em; writing-mode: vertical-rl; }
   .scroll-cue { position: absolute; right: 4.5vw; bottom: 3rem; display: flex; align-items: center; gap: .8rem; color: var(--muted); font-family: var(--font-mono); font-size: .5rem; letter-spacing: .16em; text-transform: uppercase; transform: rotate(90deg); transform-origin: right bottom; }
   .scroll-cue i { width: 55px; border-top: 1px solid var(--accent); }
-  .design-tools { position: fixed; z-index: 50; right: 1rem; top: 50%; display: flex; flex-direction: column; gap: 2px; padding: 3px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: 8px; background: color-mix(in srgb, var(--bg) 72%, transparent); backdrop-filter: blur(18px); transform: translateY(-50%); }
-  .design-tools button { min-width: 64px; padding: .62rem .55rem; border-radius: 5px; color: var(--muted); font-family: var(--font-mono); font-size: .48rem; letter-spacing: .08em; text-transform: uppercase; }
-  .design-tools button:hover, .design-tools button.active { color: var(--bg); background: var(--accent); }
+  .design-tools { position: fixed; z-index: 50; right: 1rem; top: 50%; width: 244px; display: grid; gap: 3px; padding: 4px; border: 1px solid color-mix(in srgb, var(--text) 18%, transparent); border-radius: 10px; background: color-mix(in srgb, var(--bg) 78%, transparent); box-shadow: 0 18px 60px rgba(0,0,0,.26), 0 0 40px color-mix(in srgb, var(--accent) 6%, transparent); backdrop-filter: blur(18px); transform: translateY(-50%); }
+  .signal-control { display: grid; gap: .38rem; padding: .9rem .85rem .8rem; border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent) !important; border-radius: 6px; background: color-mix(in srgb, var(--accent) 5%, transparent) !important; text-align: left; transition: border-color .2s, background .2s, transform .2s; }
+  .signal-status { display: flex; align-items: center; gap: .5rem; color: var(--accent); font-family: var(--font-mono); font-size: .43rem; letter-spacing: .13em; text-transform: uppercase; }
+  .signal-status i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 12%, transparent), 0 0 12px var(--accent); animation: signal-pulse 2s ease-in-out infinite; }
+  .signal-control strong { display: flex; justify-content: space-between; align-items: center; gap: 1rem; color: var(--text); font-family: var(--font-mono); font-size: .62rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+  .signal-control strong b { color: var(--accent); font-size: .9rem; font-weight: 400; transition: transform .2s; }
+  .signal-control small { color: var(--muted); font-family: var(--font-mono); font-size: .43rem; letter-spacing: .04em; }
+  .signal-control:hover { border-color: var(--accent) !important; background: color-mix(in srgb, var(--accent) 11%, transparent) !important; transform: translateX(-2px); }
+  .signal-control:hover strong b { transform: rotate(40deg); }
+  .design-utilities { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .design-utilities button { min-width: 0; padding: .55rem; border-radius: 5px; color: var(--muted); font-family: var(--font-mono); font-size: .46rem; letter-spacing: .08em; text-transform: uppercase; }
+  .design-utilities button:hover, .design-utilities button.active { color: var(--bg); background: var(--accent); }
 
   .signup-layer { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 1.25rem; }
   .signup-backdrop { position: absolute; inset: 0; border: 0; background: color-mix(in srgb, #000 72%, transparent); backdrop-filter: blur(12px); cursor: pointer; }
@@ -398,6 +413,7 @@
   .light .grain { mix-blend-mode: multiply; }
   @keyframes breathe { to { transform: scale(1.045); } }
   @keyframes blink { 50% { opacity: 0; } }
+  @keyframes signal-pulse { 50% { opacity: .45; transform: scale(.72); } }
 
   @media (max-width: 900px) {
     .topbar { height: 82px; grid-template-columns: 1fr auto; }
@@ -419,8 +435,8 @@
     .layout-manifesto .hero-copy, .layout-radar .hero-copy, .layout-monolith .hero-copy { left: 1.25rem; top: 20%; width: calc(100vw - 2.5rem); transform: none; text-align: left; }
     .layout-manifesto .summary, .layout-radar .summary, .layout-monolith .summary, .layout-zenith .summary { margin-left: 0; }
     .layout-manifesto .actions, .layout-radar .actions, .layout-monolith .actions, .layout-zenith .actions { justify-content: flex-start; }
-    .design-tools { top: auto; right: .75rem; bottom: .75rem; flex-direction: row; transform: none; }
-    .design-tools button { min-width: auto; }
+    .design-tools { top: auto; right: .75rem; bottom: .75rem; width: min(420px, calc(100vw - 1.5rem)); grid-template-columns: 1fr auto; transform: none; }
+    .design-utilities { grid-template-columns: 62px; }
     .scroll-cue, .coordinate { display: none; }
     .story-grid { grid-template-columns: 1fr; margin: 4rem 0 5rem; }
   }
@@ -437,8 +453,8 @@
     h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1 { font-size: clamp(3.25rem, 17vw, 5.2rem); line-height: .87; }
     .actions { align-items: flex-start; flex-direction: column; gap: .9rem; }
     .primary { padding: .8rem 1rem; }
-    .widgets { bottom: 4.5rem !important; }
-    .design-tools { left: .75rem; right: auto; }
+    .widgets { bottom: 11.5rem !important; }
+    .design-tools { left: .75rem; right: .75rem; width: auto; }
     .story { padding-top: 5rem; }
     .story-grid { gap: 2rem; }
     .principles { grid-template-columns: 1fr; }
@@ -447,5 +463,5 @@
     .story footer { align-items: start; flex-direction: column; gap: 2rem; }
     .story footer p { text-align: left; }
   }
-  @media (prefers-reduced-motion: reduce) { .scene { animation: none; } .layout-terminal .summary::after { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .scene, .signal-status i { animation: none; } .layout-terminal .summary::after { animation: none; } }
 </style>
