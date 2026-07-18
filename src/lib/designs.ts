@@ -22,7 +22,13 @@ export type Layout =
   | 'aperture'
   | 'zenith'
   | 'broadcast'
-  | 'ledger';
+  | 'ledger'
+  | 'triptych'
+  | 'timeline'
+  | 'specimen'
+  | 'constellation'
+  | 'command'
+  | 'signalstack';
 
 export type WidgetName =
   | 'stats'
@@ -197,6 +203,48 @@ export const curatedDesigns: Design[] = [
     accent: '#ff6d5c', accent2: '#fff5ec', bg: '#070707', text: '#fff8f2', muted: '#9a918c', panel: 'rgba(11, 9, 8, .72)',
     kicker: 'Far side array / interference zero', title: 'The quietest', titleLine2: 'place to listen',
     summary: 'Shielded by a world, an automated observatory hears the frequencies Earth cannot.', action: 'Review the array', widgets: ['archive', 'delay'], stats: [['0.3K', 'receiver', 'noise'], ['128', 'array', 'elements'], ['18d', 'night', 'cycle']]
+  },
+  {
+    id: 'three-body', index: '16', name: 'Three Body', note: 'Triptych observatory', layout: 'triptych', scene: farObservatory,
+    visual: 'neural',
+    accent: '#ffcf70', accent2: '#fff6dc', bg: '#090806', text: '#fff9ea', muted: '#a99d82', panel: 'rgba(15, 12, 7, .82)',
+    kicker: 'Three instruments / one field', title: 'See it', titleLine2: 'three ways',
+    summary: 'Independent instruments compare the same impossible event before the mission decides what it means.', action: 'Compare the field', widgets: ['spectrum', 'coordinates', 'anomaly'], stats: [['03', 'independent', 'views'], ['0.91', 'agreement', 'index'], ['LIVE', 'cross-check', 'state']]
+  },
+  {
+    id: 'light-year-route', index: '17', name: 'Light-Year Route', note: 'Mission chronology', layout: 'timeline', scene: solarSail,
+    visual: 'orbit',
+    accent: '#ff6a3d', accent2: '#ffe8dc', bg: '#0d0806', text: '#fff7f2', muted: '#b18f82', panel: 'rgba(18, 9, 6, .76)',
+    kicker: 'Mission time / not screen time', title: 'Every delay', titleLine2: 'becomes a decision',
+    summary: 'A mission unfolds as a sequence of bounded choices, each carrying the context of the one before.', action: 'Follow the route', widgets: ['mission', 'delay'], stats: [['T+00', 'departure', 'phase'], ['227d', 'cruise', 'window'], ['04', 'decision', 'gates']]
+  },
+  {
+    id: 'specimen-forty-six', index: '18', name: 'Specimen Forty-Six', note: 'Scientific dossier', layout: 'specimen', scene: gravityLens,
+    visual: 'orbit',
+    accent: '#145f52', accent2: '#13221d', bg: '#e8eadf', text: '#101713', muted: '#627068', panel: 'rgba(244, 245, 236, .88)', tone: 'light',
+    kicker: 'Object 46 / evidence dossier', title: 'Study the', titleLine2: 'exception',
+    summary: 'A single anomaly becomes a living dossier: image, context, disagreement, and the next test.', action: 'Open the dossier', widgets: ['archive', 'anomaly'], stats: [['046', 'candidate', 'object'], ['7σ', 'signal', 'strength'], ['12', 'review', 'passes']]
+  },
+  {
+    id: 'constellation-engine', index: '19', name: 'Constellation Engine', note: 'Networked field map', layout: 'constellation', scene: gravityLens,
+    visual: 'neural',
+    accent: '#bc9cff', accent2: '#f4edff', bg: '#07050d', text: '#fbf8ff', muted: '#9f94b4', panel: 'rgba(12, 8, 21, .66)',
+    kicker: 'Shared sky / distributed memory', title: 'Connect', titleLine2: 'what no one sees alone',
+    summary: 'Each mission holds one fragment. The network makes their relationships visible without flattening their differences.', action: 'Enter the network', widgets: ['memory', 'orbit'], stats: [['81', 'active', 'nodes'], ['1.8B', 'linked', 'events'], ['SYNC', 'context', 'state']]
+  },
+  {
+    id: 'periapsis-control', index: '20', name: 'Periapsis Control', note: 'Mission command deck', layout: 'command', scene: earth,
+    visual: 'orbit',
+    accent: '#71e7ff', accent2: '#e6fbff', bg: '#03090c', text: '#effcff', muted: '#7898a1', panel: 'rgba(3, 15, 20, .82)',
+    kicker: 'Command deck / autonomy nominal', title: 'Think near', titleLine2: 'the instrument',
+    summary: 'Local models protect fleeting observations while Earth is still minutes away from answering.', action: 'Enter command', widgets: ['progress', 'signal', 'thermal'], stats: [['31ms', 'edge', 'response'], ['08', 'bounded', 'agents'], ['NOM', 'mission', 'state']]
+  },
+  {
+    id: 'carrier-bloom', index: '21', name: 'Carrier Bloom', note: 'Layered signal study', layout: 'signalstack', scene: copper,
+    visual: 'neural',
+    accent: '#ff4fa3', accent2: '#ffe5f2', bg: '#0c0409', text: '#fff5fa', muted: '#b5889e', panel: 'rgba(20, 5, 13, .72)',
+    kicker: 'Carrier 91.4 / pattern emerging', title: 'Let the signal', titleLine2: 'change shape',
+    summary: 'A transmission is not one thing. It is frequency, timing, uncertainty, and the pattern between them.', action: 'Tune the carrier', widgets: ['signal', 'spectrum', 'delay'], stats: [['91.4', 'carrier', 'band'], ['06', 'signal', 'layers'], ['AOS', 'receiver', 'state']]
   }
 ];
 
@@ -229,7 +277,13 @@ const familyRules: Record<Layout, FamilyRule> = {
   aperture: { visuals: ['neural', 'orbit'], treatments: ['native', 'mono'], textures: ['clean', 'grid'], alignments: ['center', 'right'], widgets: ['spectrum', 'anomaly', 'progress', 'thermal'] },
   zenith: { visuals: ['neural', 'orbit'], treatments: ['native', 'editorial'], textures: ['grain', 'clean'], alignments: ['center', 'right'], widgets: ['thermal', 'spectrum', 'quote', 'anomaly'] },
   broadcast: { visuals: ['orbit'], treatments: ['outline', 'mono', 'native'], textures: ['scan', 'grain'], alignments: ['center', 'right'], widgets: ['solar', 'delay', 'signal', 'progress'] },
-  ledger: { visuals: ['orbit', 'neural'], treatments: ['mono', 'native'], textures: ['grid', 'clean'], alignments: ['center', 'right'], widgets: ['archive', 'memory', 'coordinates', 'stats'] }
+  ledger: { visuals: ['orbit', 'neural'], treatments: ['mono', 'native'], textures: ['grid', 'clean'], alignments: ['center', 'right'], widgets: ['archive', 'memory', 'coordinates', 'stats'] },
+  triptych: { visuals: ['neural', 'orbit'], treatments: ['native', 'mono'], textures: ['clean', 'grain'], alignments: ['center', 'right'], widgets: ['spectrum', 'coordinates', 'anomaly', 'thermal'] },
+  timeline: { visuals: ['orbit'], treatments: ['native', 'outline'], textures: ['grain', 'scan'], alignments: ['center', 'right'], widgets: ['mission', 'delay', 'progress', 'solar'] },
+  specimen: { visuals: ['orbit', 'neural'], treatments: ['editorial', 'native'], textures: ['clean', 'grid'], alignments: ['left', 'center'], widgets: ['archive', 'anomaly', 'quote', 'memory'] },
+  constellation: { visuals: ['neural'], treatments: ['native', 'editorial'], textures: ['grid', 'grain'], alignments: ['center'], widgets: ['memory', 'orbit', 'coordinates', 'anomaly'] },
+  command: { visuals: ['orbit', 'neural'], treatments: ['mono', 'native'], textures: ['grid', 'scan'], alignments: ['center', 'right'], widgets: ['progress', 'signal', 'thermal', 'memory'] },
+  signalstack: { visuals: ['neural', 'orbit'], treatments: ['outline', 'mono'], textures: ['scan', 'grain'], alignments: ['center', 'right'], widgets: ['signal', 'spectrum', 'delay', 'coordinates'] }
 };
 
 const generatedPrefixes = ['Aster', 'Silent', 'Far', 'Helio', 'Signal', 'Nova', 'Liminal', 'Outer', 'Vector', 'Echo'];
@@ -504,8 +558,8 @@ export function randomSeed(): number {
 
 const selectCopy = (copySeed: number, layout: Layout): CopyPack => {
   const random = seededRandom(copySeed ^ 0x9e3779b9);
-  const compact = layout === 'origin' || layout === 'console' || layout === 'aperture' || layout === 'ledger';
-  const medium = layout === 'split' || layout === 'diagonal' || layout === 'broadcast';
+  const compact = layout === 'origin' || layout === 'console' || layout === 'aperture' || layout === 'ledger' || layout === 'triptych' || layout === 'command';
+  const medium = layout === 'split' || layout === 'diagonal' || layout === 'broadcast' || layout === 'timeline' || layout === 'specimen' || layout === 'signalstack';
   const maxLength = compact ? 28 : medium ? 34 : 46;
   const compatible = copyPacks.filter((copy) => `${copy.title} ${copy.titleLine2}`.length <= maxLength);
   return seededPick(random, compatible.length ? compatible : copyPacks);
