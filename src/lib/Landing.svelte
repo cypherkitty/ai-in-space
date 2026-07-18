@@ -123,10 +123,10 @@
     <div class="scroll-cue" aria-hidden="true"><span>Scroll to transmit</span><i></i></div>
 
     <div class="design-tools" aria-label="Generative design controls">
-      <button class="signal-control" type="button" onclick={() => runExperience('alternate_signal', onShuffle)} aria-label="Receive a new interface">
-        <span class="signal-status"><i></i> Alternate signal available</span>
-        <strong>Receive a new interface <b aria-hidden="true">↻</b></strong>
-        <small>Every transmission retunes the page.</small>
+      <button class="signal-control" type="button" onclick={() => runExperience('alternate_signal', onShuffle)} aria-label="Receive alternate signal">
+        <span class="signal-status"><i></i> Unmapped interface detected</span>
+        <strong>Alternate signal <b aria-hidden="true">↻</b></strong>
+        <small>Receive another interface from the field.</small>
       </button>
       <div class="design-utilities">
         <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label="Open design gallery">All {designCount}</button>
