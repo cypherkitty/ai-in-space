@@ -51,6 +51,7 @@
     {#each visibleDesigns as design, i}
       <button
         type="button"
+        data-design-id={design.id}
         class:feature={filter === 'curated' ? i === 0 || i === 3 || i === 8 || design.id === 'gravity-well' : i % 13 === 0}
         class:light={design.tone === 'light'}
         class={`design-card preview-${design.layout}`}
@@ -92,7 +93,7 @@
   .filters button span { color: #a7fce4; }
   .filters button.active { color: #07100d; border-color: #a7fce4; background: #a7fce4; }
   .filters button.active span { color: inherit; }
-  .design-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #24282c; }
+  .design-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: dense; gap: 1px; background: #24282c; }
   .design-card { display: block; min-width: 0; padding: 0; border: 0; background: #07090b; text-align: left; }
   .design-card.feature { grid-column: span 2; }
   .preview { position: relative; height: min(34vw, 520px); min-height: 260px; overflow: hidden; color: var(--text); background: var(--bg); }
@@ -159,6 +160,6 @@
   footer { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: end; padding: 7rem 4vw 3rem; }
   footer p { margin: 0; color: #8b949a; font-family: var(--font-display); font-size: 1.2rem; line-height: 1.4; }
   footer > span { justify-self: end; color: #616b72; font-family: var(--font-mono); font-size: .5rem; letter-spacing: .12em; }
-  @media (max-width: 800px) { .intro { grid-template-columns: 1fr; } .intro > p { margin: 0; } .intro-note { max-width: 40ch; } .design-grid { grid-template-columns: 1fr; } .design-card.feature { grid-column: auto; } .preview, .design-card:not(.feature) .preview { height: 63vw; min-height: 280px; } .preview-copy strong, .design-card:not(.feature) .preview-copy strong { font-size: clamp(2.2rem, 9vw, 4.5rem); } .preview-orbit { width: 34vw; } .preview-aperture .preview-copy { left: 7%; width: 44%; } .preview-aperture .preview-copy strong { font-size: clamp(1.8rem, 8vw, 4rem); } .preview-aperture .preview::before { right: -8%; top: 12%; width: 58vw; } .preview-aperture .preview-orbit { right: -2%; width: 50vw; } .generator-card { grid-template-columns: auto 1fr; } .generator-card > b { display: none; } footer { grid-template-columns: 1fr; gap: 3rem; } footer > span { justify-self: start; } }
+  @media (max-width: 800px) { .intro { grid-template-columns: 1fr; } .intro > p { margin: 0; } .intro-note { max-width: 40ch; } .design-grid { grid-template-columns: 1fr; grid-auto-flow: row; } .design-card.feature { grid-column: auto; } .preview, .design-card:not(.feature) .preview { height: 63vw; min-height: 280px; } .preview-copy strong, .design-card:not(.feature) .preview-copy strong { font-size: clamp(2.2rem, 9vw, 4.5rem); } .preview-orbit { width: 34vw; } .preview-aperture .preview-copy { left: 7%; width: 44%; } .preview-aperture .preview-copy strong { font-size: clamp(1.8rem, 8vw, 4rem); } .preview-aperture .preview::before { right: -8%; top: 12%; width: 58vw; } .preview-aperture .preview-orbit { right: -2%; width: 50vw; } .generator-card { grid-template-columns: auto 1fr; } .generator-card > b { display: none; } footer { grid-template-columns: 1fr; gap: 3rem; } footer > span { justify-self: start; } }
   @media (max-width: 520px) { header { height: 78px; } .header-actions button:first-child { display: none; } .intro { padding-top: 4rem; } .intro h1 { font-size: 17vw; } .preview, .design-card:not(.feature) .preview { height: 105vw; } .preview-orbit { opacity: .45; } .preview-copy { top: 30%; } .generator-card { gap: 1rem; padding: 1.25rem; } .generator-card > span { font-size: 3rem; } }
 </style>
