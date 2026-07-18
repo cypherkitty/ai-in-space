@@ -5,7 +5,7 @@
   import OrbitalArt from './OrbitalArt.svelte';
   import Widget from './Widget.svelte';
   import { designAnalyticsContext, trackEvent } from './analytics';
-  import type { Design } from './designs';
+  import { researchPrinciplesFor, type Design } from './designs';
 
   export let design: Design;
   export let designCount = 61;
@@ -21,6 +21,7 @@
   let signupEmail = '';
   let emailInput: HTMLInputElement;
   let storySection: HTMLElement;
+  $: principles = researchPrinciplesFor(design);
 
   const analyticsContext = () => designAnalyticsContext(design);
 
@@ -143,11 +144,17 @@
         <p>AI in Space develops legible, resilient systems for autonomous science, mission planning, and the discovery of patterns too faint for a hurried eye.</p>
       </div>
     </div>
-    <div class="principles">
-      <article><span>01</span><h3>Observe</h3><p>Turn raw instrument output into evidence without erasing uncertainty.</p></article>
-      <article><span>02</span><h3>Reason</h3><p>Connect observations across time, instruments, and missions.</p></article>
-      <article><span>03</span><h3>Act</h3><p>Make bounded decisions when Earth is too far away to answer in time.</p></article>
-    </div>
+    {#key `${design.id}-${design.copySeed ?? design.seed ?? 'curated'}`}
+      <div class="principles">
+        {#each principles as principle, index}
+          <article style={`--principle-delay:${index * 70}ms`}>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <h3>{principle.title}</h3>
+            <p>{principle.description}</p>
+          </article>
+        {/each}
+      </div>
+    {/key}
     <footer><Brand /><p>INTELLIGENCE FOR ELSEWHERE<br />© 2031 / EARTH</p></footer>
   </section>
 
@@ -281,7 +288,7 @@
   .story h2 { max-width: 13ch; margin: 0; font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 6.8rem); font-weight: 390; letter-spacing: -.06em; line-height: .95; }
   .story-grid > div { align-self: end; max-width: 46ch; color: var(--muted); font-size: .9rem; line-height: 1.8; }
   .principles { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
-  .principles article { padding: 2rem 6vw 3rem 0; border-right: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
+  .principles article { padding: 2rem 6vw 3rem 0; border-right: 1px solid color-mix(in srgb, var(--text) 12%, transparent); animation: principle-arrival .5s cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--principle-delay); }
   .principles article + article { padding-left: 2rem; }
   .principles span { color: var(--accent); font-family: var(--font-mono); font-size: .57rem; }
   .principles h3 { margin: 3.5rem 0 1rem; font-family: var(--font-display); font-size: 1.8rem; font-weight: 450; }
@@ -414,6 +421,7 @@
   @keyframes breathe { to { transform: scale(1.045); } }
   @keyframes blink { 50% { opacity: 0; } }
   @keyframes signal-pulse { 50% { opacity: .45; transform: scale(.72); } }
+  @keyframes principle-arrival { from { opacity: 0; transform: translateY(10px); } }
 
   @media (max-width: 900px) {
     .topbar { height: 82px; grid-template-columns: 1fr auto; }
@@ -463,5 +471,5 @@
     .story footer { align-items: start; flex-direction: column; gap: 2rem; }
     .story footer p { text-align: left; }
   }
-  @media (prefers-reduced-motion: reduce) { .scene, .signal-status i { animation: none; } .layout-terminal .summary::after { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .scene, .signal-status i, .principles article { animation: none; } .layout-terminal .summary::after { animation: none; } }
 </style>
