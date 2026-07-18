@@ -11,6 +11,9 @@
   let isMix = false;
   let analyticsReady = false;
   let lastTrackedLocation = '';
+  let remixCursor = randomSeed();
+
+  const REMIX_STEP = 0x9e3779b9;
 
   $: if (analyticsReady && typeof window !== 'undefined' && window.location.href !== lastTrackedLocation) {
     lastTrackedLocation = window.location.href;
@@ -83,15 +86,24 @@
     window.scrollTo({ top: 0 });
   }
 
-  function shuffle() {
-    window.location.hash = `/g/${randomSeed()}`;
+  function nextRemixSeed() {
+    const currentSeed = Number.isFinite(active.seed) ? active.seed! : remixCursor;
+    remixCursor = (currentSeed + REMIX_STEP) >>> 0;
+    if (remixCursor === 0) remixCursor = REMIX_STEP;
+    return remixCursor;
+  }
+
+  function launchRemix() {
+    const seed = nextRemixSeed();
+    active = generateDesign(seed);
+    view = 'landing';
+    isMix = true;
+    window.history.pushState({}, '', `${window.location.pathname}${window.location.search}#/g/${seed}`);
     window.scrollTo({ top: 0 });
   }
 
-  function mix() {
-    window.location.hash = `/g/${randomSeed()}`;
-    window.scrollTo({ top: 0 });
-  }
+  const shuffle = launchRemix;
+  const mix = launchRemix;
 
   function changeCopy() {
     const copySeed = randomSeed();
@@ -102,11 +114,7 @@
   }
 
   function randomRoot() {
-    active = generateDesign(randomSeed());
-    window.history.pushState({}, '', window.location.pathname + window.location.search);
-    view = 'landing';
-    isMix = true;
-    window.scrollTo({ top: 0 });
+    launchRemix();
   }
 </script>
 
