@@ -61,6 +61,11 @@ export interface Design {
   sceneAlign?: SceneAlign;
 }
 
+export type ResearchPrinciple = {
+  title: string;
+  description: string;
+};
+
 const coreStats: [string, string, string][] = [
   ['24', 'missions', 'supported'],
   ['87 TB', 'space data', 'processed'],
@@ -282,6 +287,169 @@ const storySlogans = [
   'Attention is our longest-range instrument.'
 ];
 
+const principlePacks: ResearchPrinciple[][] = [
+  [
+    { title: 'Observe', description: 'Turn raw instrument output into evidence without erasing uncertainty.' },
+    { title: 'Reason', description: 'Connect observations across time, instruments, and missions.' },
+    { title: 'Act', description: 'Make bounded decisions when Earth is too far away to answer in time.' }
+  ],
+  [
+    { title: 'Notice the faint', description: 'Give weak signals enough attention to reveal their structure.' },
+    { title: 'Hold the doubt', description: 'Keep uncertainty visible while the evidence is still becoming.' },
+    { title: 'Look again', description: 'Let every answer point toward the next useful observation.' }
+  ],
+  [
+    { title: 'Listen', description: 'Separate meaningful quiet from an instrument that has gone silent.' },
+    { title: 'Distill', description: 'Send the insight home when the raw data is too large to travel.' },
+    { title: 'Return', description: 'Bring each discovery back into the questions that made it possible.' }
+  ],
+  [
+    { title: 'Scan widely', description: 'Keep watch across scales no single observer could hold at once.' },
+    { title: 'Trace deeply', description: 'Follow the small anomaly through every instrument that touched it.' },
+    { title: 'Choose carefully', description: 'Spend the next observation where it can change the most.' }
+  ],
+  [
+    { title: 'Gather', description: 'Collect evidence without forcing it to agree too early.' },
+    { title: 'Test', description: 'Make every promising explanation survive a harder question.' },
+    { title: 'Transmit', description: 'Return conclusions with their limits still attached.' }
+  ],
+  [
+    { title: 'Sense', description: 'Extend perception into wavelengths, distances, and durations beyond us.' },
+    { title: 'Orient', description: 'Place each signal inside the larger system that shaped it.' },
+    { title: 'Explore', description: 'Move toward the unknown without pretending the path is certain.' }
+  ],
+  [
+    { title: 'Detect', description: 'Find the difference that almost disappears inside the noise.' },
+    { title: 'Question', description: 'Ask whether the strange result is physics, error, or something new.' },
+    { title: 'Revisit', description: 'Return with a sharper instrument and a better reason to look.' }
+  ],
+  [
+    { title: 'Map', description: 'Give every observation a place in an evolving picture of elsewhere.' },
+    { title: 'Remember', description: 'Preserve how the map changed, not only what it says now.' },
+    { title: 'Extend', description: 'Use what is known to reach one careful step beyond it.' }
+  ],
+  [
+    { title: 'Receive', description: 'Treat every transmission as evidence, not merely information.' },
+    { title: 'Resolve', description: 'Compare competing explanations without hiding what remains unclear.' },
+    { title: 'Respond', description: 'Turn limited contact time into the next precise instruction.' }
+  ],
+  [
+    { title: 'Watch longer', description: 'Let slow changes emerge from a sky that rarely repeats itself.' },
+    { title: 'Compare farther', description: 'Connect distant events through the patterns they share.' },
+    { title: 'Decide closer', description: 'Place bounded judgment beside the instrument that needs it.' }
+  ],
+  [
+    { title: 'Find the edge', description: 'Learn where the model stops seeing clearly.' },
+    { title: 'Name the limit', description: 'Make uncertainty legible before it becomes a decision.' },
+    { title: 'Cross with care', description: 'Advance only when the evidence can support the next step.' }
+  ],
+  [
+    { title: 'Measure', description: 'Turn an immense environment into details that can be tested.' },
+    { title: 'Model', description: 'Build explanations that remain open to contradiction.' },
+    { title: 'Move', description: 'Let the strongest evidence shape where the mission looks next.' }
+  ],
+  [
+    { title: 'Filter noise', description: 'Reduce the accidental without polishing away the unexpected.' },
+    { title: 'Frame context', description: 'Show what came before, what changed, and what may follow.' },
+    { title: 'Forward meaning', description: 'Transmit the part a distant team can actually use.' }
+  ],
+  [
+    { title: 'Look outward', description: 'Aim instruments at places where the old map runs out.' },
+    { title: 'Think locally', description: 'Reason near the data when a reply from Earth arrives too late.' },
+    { title: 'Learn together', description: 'Let every mission add context to the next.' }
+  ],
+  [
+    { title: 'Keep watch', description: 'Continue the science through darkness, delay, and lost contact.' },
+    { title: 'Keep context', description: 'Carry the reason for each observation alongside its result.' },
+    { title: 'Keep wondering', description: 'Protect the questions that do not yet have clean answers.' }
+  ],
+  [
+    { title: 'Sample', description: 'Take the smallest measurement that can still change the picture.' },
+    { title: 'Compare', description: 'Place the new signal beside everything that might explain it.' },
+    { title: 'Commit', description: 'Choose the next move without confusing confidence for certainty.' }
+  ],
+  [
+    { title: 'Track change', description: 'Notice what moves, fades, repeats, or refuses to fit.' },
+    { title: 'Build memory', description: 'Connect today’s anomaly to years of patient observation.' },
+    { title: 'Reveal pattern', description: 'Make structure visible without inventing order.' }
+  ],
+  [
+    { title: 'Slow down', description: 'Give difficult evidence time to remain difficult.' },
+    { title: 'Zoom out', description: 'See whether the anomaly survives a wider field of view.' },
+    { title: 'Go deeper', description: 'Spend precision where curiosity has earned it.' }
+  ],
+  [
+    { title: 'Read light', description: 'Recover temperature, motion, and chemistry from arriving photons.' },
+    { title: 'Read absence', description: 'Treat what is missing as part of the measurement.' },
+    { title: 'Read change', description: 'Find the story written between one observation and the next.' }
+  ],
+  [
+    { title: 'Chart', description: 'Turn scattered measurements into a navigable field of evidence.' },
+    { title: 'Connect', description: 'Link instruments that see different parts of the same event.' },
+    { title: 'Navigate', description: 'Use shared context to decide where attention travels next.' }
+  ],
+  [
+    { title: 'Ask clearly', description: 'Shape each observation around a question that can be tested.' },
+    { title: 'Answer lightly', description: 'Prefer an inspectable clue to an impressive certainty.' },
+    { title: 'Continue', description: 'Leave the inquiry more useful than you found it.' }
+  ],
+  [
+    { title: 'Catch the moment', description: 'Recognize a transient event before it disappears.' },
+    { title: 'Protect the trace', description: 'Preserve the evidence that makes the event worth believing.' },
+    { title: 'Point the array', description: 'Bring every available instrument toward the same question.' }
+  ],
+  [
+    { title: 'Stay curious', description: 'Treat an unfamiliar result as an invitation, not a failure.' },
+    { title: 'Stay legible', description: 'Keep the path from measurement to decision open for inspection.' },
+    { title: 'Stay bounded', description: 'Know what the system can decide and when it must wait.' }
+  ],
+  [
+    { title: 'Cross-check', description: 'Ask another instrument whether the strange thing is still there.' },
+    { title: 'Challenge', description: 'Search for the explanation most likely to prove the first one wrong.' },
+    { title: 'Converge', description: 'Let independent evidence meet before the mission changes course.' }
+  ],
+  [
+    { title: 'Compress data', description: 'Reduce the payload without losing the reason it matters.' },
+    { title: 'Preserve surprise', description: 'Keep room for signals the model was not trained to expect.' },
+    { title: 'Send insight', description: 'Use scarce bandwidth for evidence that changes the conversation.' }
+  ],
+  [
+    { title: 'Know the field', description: 'Build context before deciding what counts as unusual.' },
+    { title: 'Know the model', description: 'Expose the assumptions shaping every prediction.' },
+    { title: 'Know when', description: 'Recognize the moment to act, ask, or simply keep watching.' }
+  ],
+  [
+    { title: 'Make visible', description: 'Reveal patterns too distributed or faint for a hurried eye.' },
+    { title: 'Make testable', description: 'Turn a compelling pattern into a claim that can fail.' },
+    { title: 'Make useful', description: 'Connect the result to a decision the mission actually faces.' }
+  ],
+  [
+    { title: 'Before contact', description: 'Prepare the system to reason through the long communications gap.' },
+    { title: 'During silence', description: 'Continue bounded science while Earth is below the horizon.' },
+    { title: 'After signal', description: 'Reconcile local choices with the wider mission story.' }
+  ],
+  [
+    { title: 'One instrument', description: 'See one precise slice of a much larger event.' },
+    { title: 'Many viewpoints', description: 'Combine different measurements without flattening their differences.' },
+    { title: 'Shared sky', description: 'Build a common picture no mission could make alone.' }
+  ],
+  [
+    { title: 'Spot the strange', description: 'Flag what departs from expectation without calling it discovery.' },
+    { title: 'Study the ordinary', description: 'Understand the background well enough to trust the exception.' },
+    { title: 'Follow the difference', description: 'Let contrast, not excitement, guide the next observation.' }
+  ],
+  [
+    { title: 'Open the aperture', description: 'Collect enough of the faint source to begin asking why.' },
+    { title: 'Narrow the question', description: 'Trade a vague wonder for a measurement that can answer.' },
+    { title: 'Widen the horizon', description: 'Use that answer to expose a larger unknown.' }
+  ],
+  [
+    { title: 'Learn the rhythm', description: 'Find cycles hidden across long spans of observation.' },
+    { title: 'Catch the break', description: 'Notice the instant a familiar pattern changes.' },
+    { title: 'Rewrite the map', description: 'Let new evidence revise the system instead of defending it.' }
+  ]
+];
+
 const seededRandom = (seed: number) => {
   let state = seed >>> 0;
   return () => {
@@ -294,6 +462,21 @@ const seededRandom = (seed: number) => {
 };
 
 const seededPick = <T>(random: () => number, values: readonly T[]): T => values[Math.floor(random() * values.length)]!;
+
+const textSeed = (value: string): number => {
+  let hash = 2166136261;
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+};
+
+export function researchPrinciplesFor(design: Design): ResearchPrinciple[] {
+  const seed = design.copySeed ?? design.seed ?? textSeed(design.id);
+  const random = seededRandom(seed ^ 0xc2b2ae35);
+  return seededPick(random, principlePacks);
+}
 
 const pickWidgets = (random: () => number, pool: WidgetName[]): WidgetName[] => {
   if (pool.includes('stats') && random() < 0.28) return ['stats'];
