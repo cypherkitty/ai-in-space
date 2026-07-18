@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
   import Brand from './Brand.svelte';
+  import LayoutChrome from './LayoutChrome.svelte';
   import NeuralCore from './NeuralCore.svelte';
   import OrbitalArt from './OrbitalArt.svelte';
   import Widget from './Widget.svelte';
@@ -21,7 +22,9 @@
   let signupEmail = '';
   let emailInput: HTMLInputElement;
   let storySection: HTMLElement;
+  const expandedTelemetryLayouts = new Set(['triptych', 'timeline', 'specimen', 'constellation', 'command', 'signalstack']);
   $: principles = researchPrinciplesFor(design);
+  $: expandedTelemetry = expandedTelemetryLayouts.has(design.layout);
 
   const analyticsContext = () => designAnalyticsContext(design);
 
@@ -76,6 +79,7 @@
 >
   <section class="hero" aria-labelledby="hero-title" aria-hidden={signupOpen} inert={signupOpen}>
     <div class="scene"></div><div class="grain"></div><div class="grid-lines"></div>
+    <LayoutChrome layout={design.layout} />
 
     <header class="topbar">
       <button class="brand-button" type="button" onclick={onGallery}><Brand /></button>
@@ -113,7 +117,7 @@
 
     <aside class="widgets" aria-label="Mission telemetry">
       {#each design.widgets as widget, i}
-        <div class="widget-slot" class:secondary={i > 0} class:curated-hidden={!design.generated && i > 0 && widget !== 'stats'}>
+        <div class="widget-slot" class:secondary={i > 0} class:curated-hidden={!design.generated && !expandedTelemetry && i > 0 && widget !== 'stats'}>
           <Widget type={widget} {design} />
         </div>
       {/each}
@@ -415,6 +419,100 @@
   .layout-ledger .widgets { left: auto; right: 6vw; bottom: 3rem; }
   .layout-ledger .art { right: 10%; top: 26%; opacity: .3; }
 
+  /* Six composition systems use different structural chrome, not just a different crop. */
+  .layout-triptych .scene { inset: 104px 33.333% 0; background-image: linear-gradient(0deg, var(--bg), transparent 32%), var(--scene); background-position: center; opacity: .82; filter: grayscale(.2) contrast(1.08); }
+  .layout-triptych .grid-lines { display: none; }
+  .layout-triptych .hero-copy { left: 4.5vw; top: 23%; width: 24vw; }
+  .layout-triptych h1 { font-size: clamp(3.4rem, 5.3vw, 6.5rem); line-height: .88; }
+  .layout-triptych .actions { align-items: flex-start; flex-direction: column; gap: .75rem; }
+  .layout-triptych .widgets { left: auto; right: 3.2vw; top: 24%; bottom: auto; width: 27vw; max-width: none; flex-direction: column; }
+  .layout-triptych .art { left: 36%; right: auto; top: 22%; width: 28vw; opacity: .68; }
+  .layout-triptych .design-tools { right: calc(33.333% + 1rem); top: auto; bottom: 1rem; transform: none; }
+  .layout-triptych .coordinate, .layout-triptych .scroll-cue { display: none; }
+  .layout-triptych .story-grid { grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+  .layout-triptych .story-grid h2 { grid-column: span 2; }
+  .layout-triptych .principles { gap: 1rem; border: 0; }
+  .layout-triptych .principles article, .layout-triptych .principles article + article { padding: 2rem; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); }
+
+  .layout-timeline .scene { bottom: 51%; background-image: linear-gradient(0deg, var(--bg), transparent 48%), linear-gradient(90deg, color-mix(in srgb, var(--bg) 70%, transparent), transparent), var(--scene); background-position: center; opacity: .9; }
+  .layout-timeline .grid-lines { display: none; }
+  .layout-timeline .edition { top: 125px; }
+  .layout-timeline .hero-copy { left: 4.5vw; top: 57%; width: min(1080px, 78vw); }
+  .layout-timeline .kicker { display: none; }
+  .layout-timeline h1 { display: grid; grid-template-columns: .78fr 1.22fr; gap: 2vw; font-size: clamp(3.8rem, 7.5vw, 8.5rem); line-height: .82; }
+  .layout-timeline h1 span:last-child { font-family: Georgia, serif; font-style: italic; }
+  .layout-timeline .summary { margin-left: 41%; }
+  .layout-timeline .actions { margin-left: 41%; }
+  .layout-timeline .widgets { left: auto; right: 4.5vw; top: 18%; bottom: auto; }
+  .layout-timeline .art { left: 50%; right: auto; top: 8%; opacity: .28; }
+  .layout-timeline .coordinate, .layout-timeline .scroll-cue { display: none; }
+  .layout-timeline .story h2 { max-width: 18ch; }
+  .layout-timeline .principles { position: relative; gap: 5vw; border: 0; }
+  .layout-timeline .principles::before { content: ''; position: absolute; left: 0; right: 0; top: 2.25rem; border-top: 1px solid var(--accent); opacity: .5; }
+  .layout-timeline .principles article, .layout-timeline .principles article + article { position: relative; padding: 1.9rem 0 3rem; border: 0; }
+  .layout-timeline .principles span { display: grid; place-items: center; width: 1.2rem; height: 1.2rem; border: 1px solid var(--accent); border-radius: 50%; background: var(--bg); font-size: .42rem; }
+
+  .layout-specimen .scene { inset: 14% 55% 10% 6%; border: 1px solid color-mix(in srgb, var(--text) 24%, transparent); background-image: var(--scene); background-position: center; opacity: .78; filter: grayscale(.65) contrast(1.14); }
+  .layout-specimen .grain, .layout-specimen .grid-lines { display: none; }
+  .layout-specimen .hero-copy { left: 52%; top: 19%; width: 40vw; }
+  .layout-specimen h1 { font-family: Georgia, serif; font-size: clamp(4rem, 7.2vw, 8.2rem); font-weight: 400; line-height: .84; }
+  .layout-specimen h1 span:last-child { color: var(--accent); font-style: italic; }
+  .layout-specimen .widgets { left: 52%; bottom: 3.5rem; }
+  .layout-specimen .art, .layout-specimen .coordinate, .layout-specimen .scroll-cue { display: none; }
+  .layout-specimen .story-grid { grid-template-columns: .75fr 1.25fr; border-top: 1px solid color-mix(in srgb, var(--text) 18%, transparent); padding-top: 3rem; }
+  .layout-specimen .story h2 { font-family: Georgia, serif; font-weight: 400; }
+  .layout-specimen .principles { gap: 3vw; border: 0; }
+  .layout-specimen .principles article, .layout-specimen .principles article + article { padding: 2rem 0; border: 0; border-top: 5px solid var(--accent); }
+  .layout-specimen .principles article:nth-child(2) { transform: translateY(3rem); }
+
+  .layout-constellation .scene { background-image: radial-gradient(circle at center, transparent 0 18%, color-mix(in srgb, var(--bg) 35%, transparent) 42%, var(--bg) 82%), var(--scene); background-position: center; opacity: .5; filter: saturate(.6); }
+  .layout-constellation .grid-lines { mask-image: radial-gradient(circle at center, #000, transparent 68%); }
+  .layout-constellation .hero-copy { left: 50%; top: 16%; width: min(1120px, 88vw); text-align: center; transform: translateX(-50%); }
+  .layout-constellation h1 { font-size: clamp(4.2rem, 8.8vw, 9.8rem); line-height: .8; }
+  .layout-constellation .summary { margin-inline: auto; }
+  .layout-constellation .actions { justify-content: center; }
+  .layout-constellation .widgets { left: auto; right: 4vw; bottom: 3rem; }
+  .layout-constellation .art.neural { left: 50%; right: auto; top: 25%; width: min(60vw, 820px); transform: translateX(-50%); opacity: .48; }
+  .layout-constellation .coordinate, .layout-constellation .scroll-cue { display: none; }
+  .layout-constellation .story { text-align: center; }
+  .layout-constellation .story-grid { grid-template-columns: 1fr; justify-items: center; margin-inline: auto; }
+  .layout-constellation .story-grid > div { text-align: left; }
+  .layout-constellation .principles { gap: 2vw; border: 0; }
+  .layout-constellation .principles article, .layout-constellation .principles article + article { padding: 3rem 2rem; border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent); border-radius: 50%; aspect-ratio: 1; display: grid; align-content: center; text-align: left; }
+  .layout-constellation .principles h3 { margin: 1rem 0; }
+
+  .layout-command { --font-display: 'IBM Plex Mono', monospace; }
+  .layout-command .scene { inset: 174px 3vw 13rem 38%; border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent); background-image: linear-gradient(90deg, color-mix(in srgb, var(--bg) 60%, transparent), transparent), var(--scene); opacity: .72; filter: grayscale(.4) contrast(1.2) saturate(.8); }
+  .layout-command .edition { display: none; }
+  .layout-command .hero-copy { left: 4.5vw; top: 22%; width: 29vw; }
+  .layout-command h1 { font-size: clamp(3.2rem, 5.7vw, 6.4rem); line-height: .9; text-transform: uppercase; }
+  .layout-command .summary { font-family: var(--font-mono); font-size: .66rem; }
+  .layout-command .actions { align-items: flex-start; flex-direction: column; gap: .65rem; }
+  .layout-command .widgets { left: 38%; right: 3vw; bottom: 3.5rem; max-width: none; }
+  .layout-command .art { right: 12%; top: 25%; opacity: .48; }
+  .layout-command .coordinate, .layout-command .scroll-cue { display: none; }
+  .layout-command .story { font-family: var(--font-mono); }
+  .layout-command .story-grid { padding: 2rem; border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent); }
+  .layout-command .story h2 { font-family: var(--font-mono); font-size: clamp(2.5rem, 5vw, 5.5rem); text-transform: uppercase; }
+  .layout-command .principles { gap: 1px; border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent); background: color-mix(in srgb, var(--accent) 24%, transparent); }
+  .layout-command .principles article, .layout-command .principles article + article { padding: 2rem; border: 0; background: var(--bg); }
+  .layout-command .principles h3 { font-family: var(--font-mono); text-transform: uppercase; }
+
+  .layout-signalstack .scene { background-image: linear-gradient(90deg, var(--bg) 0 18%, transparent 52%), radial-gradient(ellipse at 72% 50%, transparent 0 20%, var(--bg) 58%), var(--scene); background-position: center; opacity: .72; filter: saturate(.7) contrast(1.18); }
+  .layout-signalstack .hero-copy { left: 5vw; top: 24%; width: 58vw; }
+  .layout-signalstack h1 { font-family: var(--font-mono); font-size: clamp(4.4rem, 9.2vw, 10rem); line-height: .76; text-transform: uppercase; }
+  .layout-signalstack h1 span:last-child { color: transparent; -webkit-text-stroke: 1px var(--accent); transform: translateX(7vw); }
+  .layout-signalstack .summary, .layout-signalstack .actions { margin-left: 7vw; }
+  .layout-signalstack .widgets { left: auto; right: 4vw; top: 28%; bottom: auto; width: 24vw; max-width: none; flex-direction: column; }
+  .layout-signalstack .art.neural { left: auto; right: 3%; top: 17%; width: 48vw; opacity: .45; }
+  .layout-signalstack .design-tools { left: 50%; right: auto; top: auto; bottom: 1rem; transform: translateX(-50%); }
+  .layout-signalstack .coordinate, .layout-signalstack .scroll-cue { display: none; }
+  .layout-signalstack .story-grid { grid-template-columns: 1fr; }
+  .layout-signalstack .story h2 { max-width: 18ch; font-family: var(--font-mono); text-transform: uppercase; }
+  .layout-signalstack .story-grid > div { margin-left: 48%; }
+  .layout-signalstack .principles { border: 0; gap: .5rem; transform: rotate(-1deg); }
+  .layout-signalstack .principles article, .layout-signalstack .principles article + article { padding: 2rem; border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent); background: color-mix(in srgb, var(--accent) 4%, transparent); }
+
   .light .scene { mix-blend-mode: multiply; opacity: .62; }
   .light .hero::before { content: ''; position: absolute; z-index: -2; inset: 0; background: linear-gradient(90deg, var(--bg) 0 44%, color-mix(in srgb, var(--bg) 88%, transparent) 62%, transparent 82%); }
   .light .grain { mix-blend-mode: multiply; }
@@ -451,9 +549,27 @@
     .design-utilities { grid-template-columns: 62px; }
     .scroll-cue, .coordinate { display: none; }
     .story-grid { grid-template-columns: 1fr; margin: 4rem 0 5rem; }
+    .layout-triptych .hero-copy, .layout-timeline .hero-copy, .layout-specimen .hero-copy, .layout-constellation .hero-copy, .layout-command .hero-copy, .layout-signalstack .hero-copy { left: 1.25rem; top: 20%; width: calc(100vw - 2.5rem); text-align: left; transform: none; }
+    .layout-triptych h1, .layout-timeline h1, .layout-specimen h1, .layout-constellation h1, .layout-command h1, .layout-signalstack h1 { display: block; font-size: clamp(3.6rem, 14vw, 7rem); }
+    .layout-timeline .summary, .layout-timeline .actions, .layout-signalstack .summary, .layout-signalstack .actions { margin-left: 0; }
+    .layout-constellation .summary { margin-left: 0; }
+    .layout-constellation .actions { justify-content: flex-start; }
+    .layout-signalstack h1 span:last-child { transform: none; }
+    .layout-triptych .scene, .layout-specimen .scene, .layout-command .scene { inset: 32% -12% 9% 38%; }
+    .layout-timeline .scene { inset: 0 0 48%; }
+    .layout-constellation .scene, .layout-signalstack .scene { inset: 0; }
+    .layout-triptych .art, .layout-timeline .art, .layout-command .art { right: -20%; left: auto; top: 34%; width: 90vw; }
+    .layout-triptych .widgets, .layout-timeline .widgets, .layout-specimen .widgets, .layout-constellation .widgets, .layout-command .widgets, .layout-signalstack .widgets { left: 1.25rem; right: 1.25rem; top: auto; bottom: 1.25rem; width: auto; max-width: none; flex-direction: row; transform: none; }
+    .layout-triptych .story-grid, .layout-specimen .story-grid { grid-template-columns: 1fr; }
+    .layout-triptych .story-grid h2 { grid-column: auto; }
+    .layout-constellation .principles article, .layout-constellation .principles article + article { border-radius: 0; aspect-ratio: auto; }
+    .layout-specimen .principles article:nth-child(2) { transform: none; }
+    .layout-signalstack .story-grid > div { margin-left: 0; }
+    .layout-triptych .design-tools, .layout-signalstack .design-tools { left: auto; right: .75rem; top: auto; bottom: .75rem; width: min(420px, calc(100vw - 1.5rem)); transform: none; }
   }
   @media (max-width: 600px) {
     .hero { min-height: 920px; }
+    .layout-signalstack .hero { min-height: 1060px; }
     .topbar { padding-inline: 1.1rem; }
     .explore { padding: .65rem .75rem; font-size: .5rem; }
     .mission-cta.compact { gap: .5rem; }
@@ -462,11 +578,12 @@
     .mission-cta.compact b { display: none; }
     .edition { left: 1.25rem; }
     .hero-copy { top: 19%; }
-    h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1 { font-size: clamp(3.25rem, 17vw, 5.2rem); line-height: .87; }
+    h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1, .layout-triptych h1, .layout-timeline h1, .layout-specimen h1, .layout-constellation h1, .layout-command h1, .layout-signalstack h1 { font-size: clamp(3.25rem, 17vw, 5.2rem); line-height: .87; }
     .actions { align-items: flex-start; flex-direction: column; gap: .9rem; }
     .primary { padding: .8rem 1rem; }
     .widgets { bottom: 11.5rem !important; }
     .design-tools { left: .75rem; right: .75rem; width: auto; }
+    .layout-triptych .design-tools, .layout-signalstack .design-tools { left: .75rem; right: .75rem; width: auto; }
     .story { padding-top: 5rem; }
     .story-grid { gap: 2rem; }
     .principles { grid-template-columns: 1fr; }

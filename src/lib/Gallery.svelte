@@ -52,7 +52,7 @@
       <button
         type="button"
         data-design-id={design.id}
-        class:feature={filter === 'curated' ? i === 0 || i === 3 || i === 8 || design.id === 'gravity-well' : i % 13 === 0}
+        class:feature={filter === 'curated' ? i === 0 || i === 3 || i === 8 || design.id === 'gravity-well' || design.id === 'three-body' || design.id === 'constellation-engine' || design.id === 'periapsis-control' : i % 13 === 0}
         class:light={design.tone === 'light'}
         class={`design-card preview-${design.layout}`}
         style={`--accent:${design.accent};--accent2:${design.accent2};--bg:${design.bg};--text:${design.text};--muted:${design.muted};--scene:url(${design.scene})`}
@@ -143,6 +143,43 @@
   .preview-ledger .preview-copy { width: 34%; }
   .preview-ledger .preview-copy strong { font-family: var(--font-mono); font-size: clamp(1.9rem, 3.8vw, 4.3rem); }
   .preview-ledger .preview::after { background: linear-gradient(90deg,transparent 49.8%,color-mix(in srgb,var(--accent) 18%,transparent) 50%,transparent 50.2%), linear-gradient(transparent 49.8%,color-mix(in srgb,var(--accent) 18%,transparent) 50%,transparent 50.2%); background-size: 10% 10%; }
+
+  .preview-triptych .preview { background-image: linear-gradient(90deg, transparent 33.2%, color-mix(in srgb,var(--text) 18%,transparent) 33.3% 33.4%, transparent 33.5% 66.5%, color-mix(in srgb,var(--text) 18%,transparent) 66.6% 66.7%, transparent 66.8%); }
+  .preview-triptych .preview-bg { left: 33.4%; right: 33.4%; background-image: linear-gradient(0deg,var(--bg),transparent 45%),var(--scene); opacity: .9; }
+  .preview-triptych .preview-copy { left: 4.5%; top: 29%; width: 25%; }
+  .preview-triptych .preview-copy strong { font-size: clamp(1.8rem, 3.8vw, 4.6rem); }
+  .preview-triptych .preview-orbit { right: 5%; width: min(23vw, 275px); }
+
+  .preview-timeline .preview-bg { bottom: 49%; background-image: linear-gradient(0deg,var(--bg),transparent 48%),var(--scene); opacity: .9; }
+  .preview-timeline .preview-copy { left: 5%; top: 58%; width: 80%; }
+  .preview-timeline .preview-copy strong { font-size: clamp(2rem, 4.2vw, 5.1rem); }
+  .preview-timeline .preview-copy::before { content: ''; position: absolute; left: 0; right: -12%; top: -28%; border-top: 1px solid var(--accent); }
+  .preview-timeline .preview-orbit { right: 9%; top: 8%; width: min(17vw, 210px); }
+
+  .preview-specimen .preview-bg { inset: 10% 54% 10% 6%; background-image: var(--scene); opacity: .74; filter: grayscale(.7) contrast(1.15); }
+  .preview-specimen .preview-copy { left: 53%; top: 26%; width: 40%; }
+  .preview-specimen .preview-copy strong { font-family: Georgia,serif; font-size: clamp(2rem, 4vw, 4.8rem); font-style: italic; }
+  .preview-specimen .preview-orbit { display: none; }
+  .preview-specimen .preview::before { content: '46'; position: absolute; left: 2%; bottom: -8%; color: color-mix(in srgb,var(--text) 9%,transparent); font-family: var(--font-display); font-size: 18vw; font-weight: 650; line-height: .8; }
+
+  .preview-constellation .preview-bg { background-image: radial-gradient(circle,transparent 0 15%,var(--bg) 72%),var(--scene); opacity: .5; }
+  .preview-constellation .preview-copy { left: 50%; top: 22%; width: 80%; align-items: center; text-align: center; transform: translateX(-50%); }
+  .preview-constellation .preview-copy strong { font-size: clamp(2.2rem, 5vw, 6rem); }
+  .preview-constellation .preview-orbit { left: 50%; right: auto; top: 32%; width: min(27vw, 330px); transform: translateX(-50%); opacity: .6; }
+
+  .preview-command .preview { background: linear-gradient(90deg,var(--bg) 0 35%,color-mix(in srgb,var(--accent) 12%,var(--bg)) 35% 35.2%,var(--bg) 35.3%); }
+  .preview-command .preview-bg { inset: 18% 4% 18% 39%; border: 1px solid color-mix(in srgb,var(--accent) 25%,transparent); background-image: linear-gradient(90deg,var(--bg),transparent),var(--scene); opacity: .75; filter: grayscale(.5); }
+  .preview-command .preview-copy { left: 5%; top: 29%; width: 29%; }
+  .preview-command .preview-copy strong { font-family: var(--font-mono); font-size: clamp(1.8rem, 3.4vw, 4.2rem); text-transform: uppercase; }
+  .preview-command .preview-orbit { right: 13%; top: 26%; width: min(20vw, 250px); }
+  .preview-command .preview::before { content: 'FLIGHT / AIS-20     UPLINK: STABLE     MODEL: NOMINAL'; position: absolute; z-index: 2; left: 39%; right: 4%; top: 11%; color: var(--accent); font-family: var(--font-mono); font-size: .4rem; letter-spacing: .12em; }
+
+  .preview-signalstack .preview-bg { background-image: linear-gradient(90deg,var(--bg),transparent 55%),radial-gradient(circle at 72% 50%,transparent,var(--bg) 62%),var(--scene); opacity: .76; }
+  .preview-signalstack .preview-copy { left: 6%; top: 27%; width: 62%; }
+  .preview-signalstack .preview-copy strong { font-family: var(--font-mono); font-size: clamp(2rem, 4.5vw, 5.4rem); line-height: .78; text-transform: uppercase; }
+  .preview-signalstack .preview-copy > i { width: 34vw; }
+  .preview-signalstack .preview-orbit { right: 5%; opacity: .42; }
+  .preview-signalstack .preview::before { content: '91.40 MHZ — CARRIER LOCKED — PATTERN 06'; position: absolute; z-index: 2; left: 0; right: 0; top: 63%; padding: .45rem 5%; border-block: 1px solid color-mix(in srgb,var(--accent) 30%,transparent); color: var(--accent); font-family: var(--font-mono); font-size: .4rem; letter-spacing: .14em; }
 
   .light .preview-bg { mix-blend-mode: multiply; }
   .card-meta { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem 1.5rem; background: #0b0e10; border-top: 1px solid #24282c; }
