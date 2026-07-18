@@ -1,25 +1,24 @@
 import type { Design } from './designs';
 
-// Replaced with the production GA4 web-stream ID after provisioning.
-export const GA_MEASUREMENT_ID = 'G-PENDING';
+export const GA_MEASUREMENT_ID = 'G-NEYK7MHJH9';
 
 type AnalyticsValue = string | number | boolean | undefined;
 export type AnalyticsParams = Record<string, AnalyticsValue>;
 
 declare global {
   interface Window {
-    dataLayer: unknown[][];
+    dataLayer: unknown[];
     gtag: (...args: unknown[]) => void;
   }
 }
 
-const configured = () => /^G-[A-Z0-9]+$/.test(GA_MEASUREMENT_ID) && GA_MEASUREMENT_ID !== 'G-PENDING';
+const configured = () => /^G-[A-Z0-9]+$/.test(GA_MEASUREMENT_ID);
 
 export function initAnalytics() {
   if (!configured() || typeof window === 'undefined' || document.querySelector(`script[data-ga-id="${GA_MEASUREMENT_ID}"]`)) return;
 
   window.dataLayer = window.dataLayer ?? [];
-  window.gtag = window.gtag ?? function (...args: unknown[]) { window.dataLayer.push(args); };
+  window.gtag = window.gtag ?? function () { window.dataLayer.push(arguments); };
   window.gtag('js', new Date());
   window.gtag('config', GA_MEASUREMENT_ID, {
     send_page_view: false,
