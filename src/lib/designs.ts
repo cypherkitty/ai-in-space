@@ -1,6 +1,5 @@
 import earth from './assets/orbital-earth.jpg';
 import copper from './assets/copper-eclipse.jpg';
-import ice from './assets/ice-signal.jpg';
 import ringWorld from './assets/ring-world.jpg';
 import gravityLens from './assets/gravity-lens.jpg';
 import oceanWorld from './assets/ocean-world.jpg';
@@ -88,7 +87,7 @@ export const curatedDesigns: Design[] = [
     summary: 'Machine perception for the places where distance turns every observation into history.', action: 'Enter the archive', widgets: ['signal', 'coordinates'], stats: [['04', 'active', 'relays'], ['8.3m', 'light-min', 'latency'], ['99.7', 'signal', 'integrity']]
   },
   {
-    id: 'lunar-signal', index: '02', name: 'Lunar Signal', note: 'Quiet intelligence', layout: 'editorial', scene: ice,
+    id: 'lunar-signal', index: '02', name: 'Lunar Signal', note: 'Quiet intelligence', layout: 'editorial', scene: farObservatory,
     visual: 'orbit',
     accent: '#72f7db', accent2: '#dffcf7', bg: '#e9ece8', text: '#101615', muted: '#596965', panel: 'rgba(236, 241, 237, .74)', tone: 'light',
     kicker: 'Field note 021 / autonomous science', title: 'A signal', titleLine2: 'learns to listen',
@@ -102,7 +101,7 @@ export const curatedDesigns: Design[] = [
     summary: 'A living observatory index built for hypotheses, not dashboards.', action: 'Open the index', widgets: ['coordinates', 'signal', 'stats'], stats: [['31.4', 'petapixels', 'charted'], ['062', 'candidate', 'worlds'], ['LIVE', 'deep field', 'relay']]
   },
   {
-    id: 'deep-field', index: '04', name: 'Deep Field', note: 'Type-first minimalism', layout: 'manifesto', scene: ice,
+    id: 'deep-field', index: '04', name: 'Deep Field', note: 'Type-first minimalism', layout: 'manifesto', scene: gravityLens,
     visual: 'neural',
     accent: '#b8a7ff', accent2: '#ffffff', bg: '#07060c', text: '#faf8ff', muted: '#9a95aa', panel: 'rgba(12, 9, 19, .62)',
     kicker: 'Deep field intelligence', title: 'The farther', titleLine2: 'we look, the more we learn.',
@@ -130,14 +129,14 @@ export const curatedDesigns: Design[] = [
     summary: 'Adaptive compression and inference for links measured in minutes, not milliseconds.', action: 'Follow the relay', widgets: ['signal', 'stats'], stats: [['7.4kb', 'uplink', 'rate'], ['14:22', 'next', 'window'], ['AOS', 'carrier', 'state']]
   },
   {
-    id: 'helix-dawn', index: '08', name: 'Helix Dawn', note: 'New-world biology', layout: 'monolith', scene: ice,
+    id: 'helix-dawn', index: '08', name: 'Helix Dawn', note: 'New-world biology', layout: 'monolith', scene: oceanWorld,
     visual: 'neural',
     accent: '#e6ff65', accent2: '#ffffff', bg: '#050703', text: '#f9ffe5', muted: '#919a75', panel: 'rgba(9, 12, 3, .57)',
     kicker: 'Life detection / protocol 08', title: 'Is anyone', titleLine2: 'else becoming?',
     summary: 'Patient intelligence for the most consequential yes-or-no question we can ask.', action: 'Examine the evidence', widgets: ['mission', 'quote'], stats: [['0.7', 'confidence', 'threshold'], ['41', 'bio-signature', 'classes'], ['08', 'worlds', 'queued']]
   },
   {
-    id: 'pale-machine', index: '09', name: 'Pale Machine', note: 'Lunar modernism', layout: 'atlas', scene: ice,
+    id: 'pale-machine', index: '09', name: 'Pale Machine', note: 'Lunar modernism', layout: 'atlas', scene: ringWorld,
     visual: 'orbit',
     accent: '#0f6d61', accent2: '#111815', bg: '#e7e9e4', text: '#121714', muted: '#5f6963', panel: 'rgba(242, 244, 239, .82)', tone: 'light',
     kicker: 'An operating system for elsewhere', title: 'Built for', titleLine2: 'the quiet',
@@ -221,7 +220,7 @@ const familyRules: Record<Layout, FamilyRule> = {
 
 const generatedPrefixes = ['Aster', 'Silent', 'Far', 'Helio', 'Signal', 'Nova', 'Liminal', 'Outer', 'Vector', 'Echo'];
 const generatedSuffixes = ['Memory', 'Relay', 'Atlas', 'Engine', 'Survey', 'Protocol', 'Horizon', 'Field', 'Archive', 'Dawn'];
-const scenes = [earth, copper, ice, ringWorld, gravityLens, oceanWorld, solarSail, farObservatory];
+const scenes = [earth, copper, ringWorld, gravityLens, oceanWorld, solarSail, farObservatory];
 
 type CopyPack = Pick<Design, 'kicker' | 'title' | 'titleLine2' | 'summary' | 'action'>;
 
