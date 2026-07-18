@@ -423,6 +423,10 @@
   @keyframes signal-pulse { 50% { opacity: .45; transform: scale(.72); } }
   @keyframes principle-arrival { from { opacity: 0; transform: translateY(10px); } }
 
+  @media (min-width: 901px) and (max-height: 820px) {
+    .hero { min-height: 920px; }
+  }
+
   @media (max-width: 900px) {
     .topbar { height: 82px; grid-template-columns: 1fr auto; }
     nav { display: none; }
