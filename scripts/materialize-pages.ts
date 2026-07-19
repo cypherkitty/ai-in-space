@@ -1,4 +1,4 @@
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { materializedPages } from '../src/lib/materialized-pages';
@@ -12,7 +12,8 @@ const staticLandingPages = [
   {
     path: '/landing/orbital-zero/',
     canonicalUrl: 'https://ai-in.space/landing/orbital-zero/',
-    template: join(projectRoot, 'static-pages/orbital-zero/index.html')
+    template: join(projectRoot, 'static-pages/orbital-zero/index.html'),
+    video: join(projectRoot, 'static-pages/orbital-zero/ai-discovery.mp4')
   }
 ] as const;
 
@@ -85,6 +86,7 @@ for (const page of staticLandingPages) {
   const replacements = new Map([
     ['{{ORBITAL_EARTH_ASSET}}', `../../assets/${orbitalEarth}`],
     ['{{ORBITAL_EARTH_SOCIAL_URL}}', `https://ai-in.space/assets/${orbitalEarth}`],
+    ['{{AI_DISCOVERY_VIDEO}}', './ai-discovery.mp4'],
     ['{{SPACE_GROTESK_FONT}}', `../../assets/${findAsset('space-grotesk-latin-wght-normal-', '.woff2')}`],
     ['{{IBM_PLEX_MONO_FONT}}', `../../assets/${findAsset('ibm-plex-mono-latin-400-normal-', '.woff2')}`],
     ['{{MANROPE_FONT}}', `../../assets/${findAsset('manrope-latin-wght-normal-', '.woff2')}`]
@@ -94,6 +96,7 @@ for (const page of staticLandingPages) {
   if (/\{\{[A-Z0-9_]+\}\}/.test(html)) throw new Error(`Unresolved template token in ${page.template}`);
   await mkdir(dirname(outputPath), { recursive: true });
   await writeFile(outputPath, html);
+  await copyFile(page.video, join(dirname(outputPath), 'ai-discovery.mp4'));
 }
 
 const sitemapUrls = [
