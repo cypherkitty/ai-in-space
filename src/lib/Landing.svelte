@@ -126,7 +126,7 @@
 <svelte:window onkeydown={(event) => event.key === 'Escape' && signupOpen && closeSignup()} />
 
 <div
-  class={`site layout-${design.layout} treatment-${design.treatment ?? 'native'} texture-${design.texture ?? 'grid'} scene-${design.sceneAlign ?? 'center'} exposure-${design.exposureBand ?? 'deep'}`}
+  class={`site layout-${design.layout} composition-${design.composition ?? 'native'} treatment-${design.treatment ?? 'native'} texture-${design.texture ?? 'grid'} scene-${design.sceneAlign ?? 'center'} exposure-${design.exposureBand ?? 'deep'}`}
   class:generated={design.generated}
   data-exposure={design.exposureBand ?? 'deep'}
   style={`--accent:${design.accent};--accent2:${design.accent2};--bg:${design.bg};--text:${design.text};--muted:${design.muted};--panel:${design.panel};--scene:url(${design.scene})`}
@@ -602,6 +602,62 @@
   .layout-specimen .widgets.telemetry-focus { left: 7vw; right: auto; bottom: 4rem; }
   .layout-poster .widgets.telemetry-focus { right: 7vw; bottom: 5rem; }
   .layout-timeline .widgets.telemetry-focus { right: .5vw; width: min(24vw, 340px); }
+
+  /* Generated pages also vary their composition grammar. These modes deliberately
+     override the family layout on wide screens so remixes change hierarchy, not
+     only palette, crop, and telemetry. */
+  @media (min-width: 901px) {
+    .generated.composition-cinema .scene { inset: 104px 0 31%; clip-path: none; border-radius: 0; background-position: center; opacity: .9; }
+    .generated.composition-cinema .hero-copy { left: 4.5vw; top: 43vh; bottom: auto; width: min(88vw, 1180px); text-align: left; transform: none; }
+    .generated.composition-cinema h1 { display: grid; grid-template-columns: auto 1fr; gap: .22em; max-width: none; font-size: clamp(3.8rem, 7vw, 8rem); line-height: .82; }
+    .generated.composition-cinema .summary { max-width: 55ch; margin-left: 35%; }
+    .generated.composition-cinema .actions { margin-left: 35%; }
+    .generated.composition-cinema .widgets { left: auto; right: 3vw; top: 17%; bottom: auto; width: min(30vw, 390px); transform: none; }
+    .generated.composition-cinema .art { left: 50%; right: auto; top: 16%; transform: translateX(-50%); opacity: .35; }
+
+    .generated.composition-masthead .scene { inset: 104px 24vw 0 27vw; clip-path: none; border-radius: 0; background-position: center; opacity: .76; }
+    .generated.composition-masthead .hero-copy { left: 4vw; top: 17%; width: 21vw; text-align: left; transform: none; }
+    .generated.composition-masthead h1 { max-width: 5ch; font-size: clamp(3.4rem, 5.3vw, 6rem); line-height: .78; writing-mode: horizontal-tb; }
+    .generated.composition-masthead .summary { max-width: 26ch; }
+    .generated.composition-masthead .actions { align-items: flex-start; flex-direction: column; gap: .55rem; }
+    .generated.composition-masthead .widgets { left: auto; right: 3vw; top: 20%; bottom: auto; width: 19vw; max-width: none; flex-direction: column; transform: none; }
+    .generated.composition-masthead .art { left: 38%; right: auto; top: 25%; opacity: .42; }
+
+    .generated.composition-viewport .scene { inset: 155px 4vw 5rem; clip-path: none; border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent); border-radius: 0; background-position: center; opacity: .72; }
+    .generated.composition-viewport .hero-copy { left: 8vw; top: 25%; width: min(760px, 55vw); padding: 2rem; border-left: 4px solid var(--accent); background: color-mix(in srgb, var(--bg) 78%, transparent); text-align: left; transform: none; backdrop-filter: blur(12px); }
+    .generated.composition-viewport h1 { max-width: none; font-size: clamp(3.5rem, 6.8vw, 7.6rem); }
+    .generated.composition-viewport .widgets { left: auto; right: 6vw; top: auto; bottom: 6.5rem; width: min(30vw, 410px); transform: none; }
+    .generated.composition-viewport .art { right: 11%; top: 22%; opacity: .48; }
+
+    .generated.composition-island .scene { inset: 0; clip-path: none; border-radius: 0; background-position: center; opacity: .5; filter: saturate(.62) contrast(.9); }
+    .generated.composition-island .hero-copy { left: 50%; top: 50%; width: min(720px, 62vw); padding: 3rem; border: 1px solid color-mix(in srgb, var(--text) 18%, transparent); background: color-mix(in srgb, var(--bg) 84%, transparent); text-align: center; transform: translate(-50%, -48%); backdrop-filter: blur(18px); }
+    .generated.composition-island h1 { max-width: none; font-size: clamp(3.7rem, 7vw, 7.8rem); }
+    .generated.composition-island .summary { margin-inline: auto; }
+    .generated.composition-island .actions { justify-content: center; }
+    .generated.composition-island .widgets { left: auto; right: 2.5vw; top: auto; bottom: 2rem; width: min(24vw, 320px); transform: none; }
+    .generated.composition-island .art { left: 50%; right: auto; top: 20%; transform: translateX(-50%); opacity: .55; }
+
+    .generated.composition-magazine .scene { inset: 104px 42% 0 0; clip-path: none; border-radius: 0; background-position: center; opacity: .88; }
+    .generated.composition-magazine .hero-copy { left: 61%; top: 18%; width: 34vw; text-align: left; transform: none; }
+    .generated.composition-magazine h1 { max-width: 8ch; font-family: Georgia, serif; font-size: clamp(3.7rem, 5.8vw, 6.8rem); font-weight: 400; line-height: .84; }
+    .generated.composition-magazine .widgets { left: 3vw; right: auto; top: auto; bottom: 3rem; width: min(50vw, 680px); transform: none; }
+    .generated.composition-magazine .art { left: 20%; right: auto; top: 21%; opacity: .5; }
+
+    .generated.composition-index .scene { inset: 104px 0 0 50%; clip-path: none; border-radius: 0; background-position: center; opacity: .62; }
+    .generated.composition-index .hero-copy { left: 4.5vw; top: 21%; width: 88vw; text-align: left; transform: none; }
+    .generated.composition-index h1 { width: 48%; max-width: 7ch; font-family: var(--font-mono); font-size: clamp(4rem, 7.8vw, 8.8rem); line-height: .78; text-transform: uppercase; }
+    .generated.composition-index .summary { position: absolute; left: 55%; top: 5rem; width: min(34vw, 440px); }
+    .generated.composition-index .actions { position: absolute; left: 55%; top: 12rem; width: 38vw; flex-wrap: wrap; }
+    .generated.composition-index .widgets { left: 4.5vw; right: auto; top: auto; bottom: 3rem; width: min(42vw, 590px); transform: none; }
+    .generated.composition-index .art { left: 62%; right: auto; top: 25%; opacity: .38; }
+
+    .generated.composition-horizon-strip .scene { inset: 42% 0 0; clip-path: none; border-radius: 0; background-position: center 58%; opacity: .92; }
+    .generated.composition-horizon-strip .hero-copy { left: 4.5vw; top: 18%; width: 91vw; text-align: left; transform: none; }
+    .generated.composition-horizon-strip h1 { display: flex; justify-content: space-between; gap: 4vw; max-width: none; font-size: clamp(4rem, 8vw, 9rem); line-height: .8; }
+    .generated.composition-horizon-strip .summary { max-width: 48ch; }
+    .generated.composition-horizon-strip .widgets { left: auto; right: 4vw; top: auto; bottom: 3rem; width: min(46vw, 640px); transform: none; }
+    .generated.composition-horizon-strip .art { right: 18%; top: 45%; opacity: .52; }
+  }
 
   @media (min-width: 901px) {
     .layout-manifesto .hero, .layout-radar .hero, .layout-monolith .hero, .layout-zenith .hero, .layout-constellation .hero { min-height: max(860px, calc(100svh + 140px)); }

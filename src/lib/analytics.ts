@@ -52,6 +52,7 @@ export function designAnalyticsContext(design: Design): AnalyticsParams {
   return {
     design_id: design.id,
     design_layout: design.layout,
+    design_composition: design.composition ?? 'native',
     design_source: design.generated ? 'generated' : 'curated',
     design_visual: design.visual,
     design_exposure: design.exposureBand ?? 'deep',
