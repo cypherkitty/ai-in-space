@@ -5,6 +5,26 @@ import gravityLens from './assets/gravity-lens.jpg';
 import oceanWorld from './assets/ocean-world.jpg';
 import solarSail from './assets/solar-sail.jpg';
 import farObservatory from './assets/far-observatory.jpg';
+import iceCoreLab from './assets/ice-core-lab.jpg';
+import photonicInference from './assets/photonic-inference.jpg';
+import syntheticGreenhouse from './assets/synthetic-greenhouse.jpg';
+import cometScouts from './assets/comet-scouts.jpg';
+import adaptiveArray from './assets/adaptive-array.jpg';
+import neutrinoChamber from './assets/neutrino-chamber.jpg';
+import oceanProbeGarden from './assets/ocean-probe-garden.jpg';
+import asteroidBuilders from './assets/asteroid-builders.jpg';
+import cosmicWebGallery from './assets/cosmic-web-gallery.jpg';
+import knowledgeConservatory from './assets/knowledge-conservatory.jpg';
+import waveObservatory from './assets/wave-observatory.jpg';
+import magneticFlock from './assets/magnetic-flock.jpg';
+import spaceElevator from './assets/space-elevator.jpg';
+import lavaTubeVillage from './assets/lava-tube-village.jpg';
+import dustCurator from './assets/dust-curator.jpg';
+import quantumClockLab from './assets/quantum-clock-lab.jpg';
+import spectralRemnant from './assets/spectral-remnant.jpg';
+import mirrorAssembly from './assets/mirror-assembly.jpg';
+import materialsGarden from './assets/materials-garden.jpg';
+import origamiProbes from './assets/origami-probes.jpg';
 import earthPreview from './assets/previews/orbital-earth-preview.jpg';
 import copperPreview from './assets/previews/copper-eclipse-preview.jpg';
 import ringWorldPreview from './assets/previews/ring-world-preview.jpg';
@@ -12,6 +32,26 @@ import gravityLensPreview from './assets/previews/gravity-lens-preview.jpg';
 import oceanWorldPreview from './assets/previews/ocean-world-preview.jpg';
 import solarSailPreview from './assets/previews/solar-sail-preview.jpg';
 import farObservatoryPreview from './assets/previews/far-observatory-preview.jpg';
+import iceCoreLabPreview from './assets/previews/ice-core-lab-preview.jpg';
+import photonicInferencePreview from './assets/previews/photonic-inference-preview.jpg';
+import syntheticGreenhousePreview from './assets/previews/synthetic-greenhouse-preview.jpg';
+import cometScoutsPreview from './assets/previews/comet-scouts-preview.jpg';
+import adaptiveArrayPreview from './assets/previews/adaptive-array-preview.jpg';
+import neutrinoChamberPreview from './assets/previews/neutrino-chamber-preview.jpg';
+import oceanProbeGardenPreview from './assets/previews/ocean-probe-garden-preview.jpg';
+import asteroidBuildersPreview from './assets/previews/asteroid-builders-preview.jpg';
+import cosmicWebGalleryPreview from './assets/previews/cosmic-web-gallery-preview.jpg';
+import knowledgeConservatoryPreview from './assets/previews/knowledge-conservatory-preview.jpg';
+import waveObservatoryPreview from './assets/previews/wave-observatory-preview.jpg';
+import magneticFlockPreview from './assets/previews/magnetic-flock-preview.jpg';
+import spaceElevatorPreview from './assets/previews/space-elevator-preview.jpg';
+import lavaTubeVillagePreview from './assets/previews/lava-tube-village-preview.jpg';
+import dustCuratorPreview from './assets/previews/dust-curator-preview.jpg';
+import quantumClockLabPreview from './assets/previews/quantum-clock-lab-preview.jpg';
+import spectralRemnantPreview from './assets/previews/spectral-remnant-preview.jpg';
+import mirrorAssemblyPreview from './assets/previews/mirror-assembly-preview.jpg';
+import materialsGardenPreview from './assets/previews/materials-garden-preview.jpg';
+import origamiProbesPreview from './assets/previews/origami-probes-preview.jpg';
 import { copyPacks, type CopyPack } from './slogans';
 import { applyExposure, exposureForSeed, type ExposureBand } from './exposure';
 
@@ -298,7 +338,36 @@ const familyRules: Record<Layout, FamilyRule> = {
 
 const generatedPrefixes = ['Aster', 'Silent', 'Far', 'Helio', 'Signal', 'Nova', 'Liminal', 'Outer', 'Vector', 'Echo'];
 const generatedSuffixes = ['Memory', 'Relay', 'Atlas', 'Engine', 'Survey', 'Protocol', 'Horizon', 'Field', 'Archive', 'Dawn'];
-const scenes = [earth, copper, ringWorld, gravityLens, oceanWorld, solarSail, farObservatory];
+const scenes = [
+  earth,
+  copper,
+  ringWorld,
+  gravityLens,
+  oceanWorld,
+  solarSail,
+  farObservatory,
+  iceCoreLab,
+  photonicInference,
+  syntheticGreenhouse,
+  cometScouts,
+  adaptiveArray,
+  neutrinoChamber,
+  oceanProbeGarden,
+  asteroidBuilders,
+  cosmicWebGallery,
+  knowledgeConservatory,
+  waveObservatory,
+  magneticFlock,
+  spaceElevator,
+  lavaTubeVillage,
+  dustCurator,
+  quantumClockLab,
+  spectralRemnant,
+  mirrorAssembly,
+  materialsGarden,
+  origamiProbes
+];
+export const sceneCount = scenes.length;
 const scenePreviews = new Map([
   [earth, earthPreview],
   [copper, copperPreview],
@@ -306,7 +375,27 @@ const scenePreviews = new Map([
   [gravityLens, gravityLensPreview],
   [oceanWorld, oceanWorldPreview],
   [solarSail, solarSailPreview],
-  [farObservatory, farObservatoryPreview]
+  [farObservatory, farObservatoryPreview],
+  [iceCoreLab, iceCoreLabPreview],
+  [photonicInference, photonicInferencePreview],
+  [syntheticGreenhouse, syntheticGreenhousePreview],
+  [cometScouts, cometScoutsPreview],
+  [adaptiveArray, adaptiveArrayPreview],
+  [neutrinoChamber, neutrinoChamberPreview],
+  [oceanProbeGarden, oceanProbeGardenPreview],
+  [asteroidBuilders, asteroidBuildersPreview],
+  [cosmicWebGallery, cosmicWebGalleryPreview],
+  [knowledgeConservatory, knowledgeConservatoryPreview],
+  [waveObservatory, waveObservatoryPreview],
+  [magneticFlock, magneticFlockPreview],
+  [spaceElevator, spaceElevatorPreview],
+  [lavaTubeVillage, lavaTubeVillagePreview],
+  [dustCurator, dustCuratorPreview],
+  [quantumClockLab, quantumClockLabPreview],
+  [spectralRemnant, spectralRemnantPreview],
+  [mirrorAssembly, mirrorAssemblyPreview],
+  [materialsGarden, materialsGardenPreview],
+  [origamiProbes, origamiProbesPreview]
 ]);
 
 export const previewSceneFor = (scene: string): string => scenePreviews.get(scene) ?? scene;
@@ -585,6 +674,9 @@ export function generateDesign(seed: number, catalogIndex?: number, copySeed = s
   const treatmentPool = copyLength > 30 ? rules.treatments.filter((treatment) => treatment !== 'editorial') : rules.treatments;
   const prefix = generatedPrefixes[seed % generatedPrefixes.length]!;
   const suffix = generatedSuffixes[Math.floor(seed / generatedPrefixes.length) % generatedSuffixes.length]!;
+  const scene = catalogIndex
+    ? scenes[(catalogIndex - 1) % scenes.length]!
+    : seededPick(random, scenes);
 
   return {
     ...base,
@@ -596,7 +688,7 @@ export function generateDesign(seed: number, catalogIndex?: number, copySeed = s
     seed,
     copySeed,
     visual,
-    scene: seededPick(random, scenes),
+    scene,
     accent: exposedPalette.accent,
     accent2: exposedPalette.accent2,
     bg: exposedPalette.bg,
