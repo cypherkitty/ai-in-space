@@ -30,11 +30,11 @@
       a { color: inherit; text-decoration: none; }
       a:focus-visible { outline: 1px solid #d7eaff; outline-offset: 5px; }
       .hero { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; border: 1px solid rgba(190, 215, 238, .16); border-radius: 22px; background: #02060b; }
-      .space { position: absolute; z-index: -4; inset: 0; background: linear-gradient(90deg, rgba(1, 5, 10, .99) 0%, rgba(1, 5, 10, .8) 32%, rgba(1, 5, 10, .08) 62%), url("{{ORBITAL_EARTH_ASSET}}") right center / cover no-repeat; transform: scale(1.003); }
-      .space::before { content: ""; position: absolute; width: clamp(104px, 11vw, 190px); aspect-ratio: 1; top: 14.5%; right: 10.2%; border-radius: 50%; background: radial-gradient(circle at 33% 30%, #818b96 0 2%, #3f4650 17%, #141b23 43%, #04080d 68%, #000 74%); box-shadow: inset -22px -16px 35px #000, -12px 8px 30px rgba(0, 0, 0, .65); opacity: .88; }
-      .space::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 66% 49%, transparent 0 12%, rgba(1, 4, 8, .06) 31%, rgba(1, 4, 8, .48) 100%), linear-gradient(180deg, rgba(0, 0, 0, .08), rgba(0, 3, 8, .12) 62%, rgba(0, 2, 6, .65)); }
+      .space { position: absolute; z-index: -4; inset: 0; overflow: hidden; background: #02060b url("{{ORBITAL_EARTH_ASSET}}") right center / cover no-repeat; transform: scale(1.003); }
+      .space video { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.86) contrast(1.04); }
+      .space::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(1, 5, 10, .97) 0%, rgba(1, 5, 10, .74) 34%, rgba(1, 5, 10, .12) 66%), linear-gradient(180deg, rgba(0, 0, 0, .08), rgba(0, 3, 8, .16) 60%, rgba(0, 2, 6, .82)); transition: opacity .55s ease; }
       .grain { position: absolute; z-index: -2; inset: 0; opacity: .09; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E"); }
-      .topbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 3rem; padding: clamp(28px, 4.7vw, 72px) clamp(28px, 5.1vw, 82px); }
+      .topbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 3rem; padding: clamp(28px, 4.7vw, 72px) clamp(28px, 5.1vw, 82px); transition: opacity .4s ease, transform .4s ease; }
       .brand { display: inline-flex; align-items: center; gap: 1rem; width: max-content; font-family: "AIS Display", sans-serif; font-size: clamp(.72rem, 1.1vw, 1.08rem); font-weight: 520; letter-spacing: .34em; white-space: nowrap; }
       .brand svg { width: 34px; height: 34px; overflow: visible; }
       nav { display: flex; align-items: center; gap: clamp(2.2rem, 5vw, 5rem); font-family: "AIS Mono", monospace; font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; }
@@ -43,16 +43,17 @@
       nav a:hover { color: #fff; }
       .explore-top { justify-self: end; display: inline-flex; align-items: center; justify-content: center; gap: .8rem; min-width: 155px; padding: .86rem 1.15rem; border: 1px solid rgba(207, 225, 242, .2); border-radius: 16px; font-family: "AIS Mono", monospace; font-size: .65rem; letter-spacing: .17em; text-transform: uppercase; }
       .explore-top:hover, .button:hover { border-color: rgba(210, 232, 255, .58); background: rgba(159, 204, 246, .07); }
-      .hero-copy { width: min(45rem, 47vw); margin: clamp(72px, 12vh, 150px) 0 0 clamp(36px, 7.3vw, 118px); }
+      .hero-copy { width: min(45rem, 47vw); margin: clamp(72px, 12vh, 150px) 0 0 clamp(36px, 7.3vw, 118px); transition: opacity .4s ease, transform .4s ease; }
       h1 { margin: 0; font-family: "AIS Display", sans-serif; font-size: clamp(4rem, 7.15vw, 7.1rem); font-weight: 360; letter-spacing: .11em; line-height: .7; text-transform: uppercase; text-shadow: 0 0 30px rgba(170, 214, 255, .1); }
       h1 span { display: block; margin-top: .38em; font-size: .66em; letter-spacing: .19em; white-space: nowrap; }
       .kicker { margin: 1.65rem 0 0; font-family: "AIS Display", sans-serif; font-size: clamp(.73rem, 1.05vw, 1rem); letter-spacing: .19em; text-transform: uppercase; }
       .summary { max-width: 36ch; margin: 1.85rem 0 0; color: rgba(221, 231, 241, .56); font-size: clamp(.78rem, 1vw, .96rem); line-height: 1.8; }
       .actions { display: flex; align-items: center; gap: clamp(1.4rem, 3.1vw, 3.2rem); margin-top: 2rem; }
-      .button { display: inline-flex; align-items: center; justify-content: space-between; gap: 2.3rem; min-width: 245px; padding: 1.03rem 1.45rem; border: 1px solid rgba(206, 226, 244, .42); border-radius: 15px; font-family: "AIS Mono", monospace; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; transition: border-color .2s ease, background .2s ease; }
-      .video-link { display: inline-flex; align-items: center; gap: .75rem; padding: 0; border: 0; color: rgba(235, 243, 250, .86); background: transparent; font-family: "AIS Mono", monospace; font-size: .63rem; letter-spacing: .15em; text-transform: uppercase; white-space: nowrap; cursor: pointer; }
+      .button { display: inline-flex; align-items: center; justify-content: space-between; gap: 2.3rem; min-width: 245px; padding: 1.03rem 1.45rem; border: 1px solid rgba(206, 226, 244, .42); border-radius: 15px; color: #eef5fc; background: rgba(2, 8, 14, .2); font-family: "AIS Mono", monospace; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; transition: border-color .2s ease, background .2s ease, box-shadow .2s ease; }
+      .film-button { border-color: rgba(193, 225, 251, .68); background: rgba(195, 226, 251, .1); cursor: pointer; box-shadow: 0 0 30px rgba(91, 174, 238, .08); }
+      .film-button:hover { box-shadow: 0 0 35px rgba(91, 174, 238, .18); }
       .play { display: inline-grid; width: 21px; height: 21px; place-items: center; border: 1px solid rgba(220, 238, 252, .72); border-radius: 50%; font-size: .5rem; }
-      .stats { display: grid; grid-template-columns: repeat(3, minmax(170px, 210px)); gap: 1.3rem; margin: clamp(58px, 8vh, 105px) 0 34px clamp(36px, 4.7vw, 76px); }
+      .stats { display: grid; grid-template-columns: repeat(3, minmax(170px, 210px)); gap: 1.3rem; margin: clamp(58px, 8vh, 105px) 0 34px clamp(36px, 4.7vw, 76px); transition: opacity .4s ease, transform .4s ease; }
       .stat { min-height: 184px; padding: 1.55rem 1.8rem; border: 1px solid rgba(192, 216, 238, .14); border-radius: 14px; background: linear-gradient(145deg, rgba(8, 17, 27, .34), rgba(2, 7, 13, .7)); backdrop-filter: blur(5px); }
       .stat svg { width: 46px; height: 46px; color: #e3f1ff; }
       .stat strong { display: block; margin-top: 1.35rem; font-family: "AIS Display", sans-serif; font-size: 1.72rem; font-weight: 400; letter-spacing: .08em; }
@@ -61,16 +62,21 @@
       .scroll-cue i { width: 2px; height: 38px; background: linear-gradient(#fff, rgba(255, 255, 255, .2)); box-shadow: 0 0 10px rgba(199, 227, 255, .3); }
       .scroll-cue::before, .scroll-cue::after { content: "✦"; font-size: .7rem; }
       .scroll-cue::after { opacity: .45; transform: scale(.55); }
-      .video-dialog { width: min(1080px, calc(100vw - 48px)); padding: 0; overflow: hidden; border: 1px solid rgba(190, 222, 249, .34); border-radius: 18px; color: #eef7ff; background: #02070d; box-shadow: 0 30px 100px rgba(0, 0, 0, .76), 0 0 80px rgba(57, 161, 245, .12); }
-      .video-dialog::backdrop { background: rgba(0, 4, 9, .84); backdrop-filter: blur(12px); }
-      .film-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.2rem; border-bottom: 1px solid rgba(190, 222, 249, .15); }
-      .film-header div { display: grid; gap: .2rem; }
-      .film-header small { color: #7dbbe9; font-family: "AIS Mono", monospace; font-size: .56rem; letter-spacing: .18em; text-transform: uppercase; }
-      .film-header h2 { margin: 0; font-family: "AIS Display", sans-serif; font-size: 1rem; font-weight: 450; letter-spacing: .08em; }
-      .film-close { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid rgba(202, 228, 249, .25); border-radius: 50%; color: #eaf6ff; background: transparent; font-size: 1.2rem; cursor: pointer; }
-      .film-close:hover { border-color: rgba(210, 235, 255, .65); background: rgba(124, 194, 246, .08); }
-      .video-dialog video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; object-fit: cover; }
-      .film-note { margin: 0; padding: .85rem 1.2rem 1rem; color: rgba(217, 233, 246, .58); font-size: .72rem; line-height: 1.5; }
+      .film-hud { position: absolute; z-index: 3; right: clamp(20px, 4vw, 64px); bottom: clamp(22px, 4vw, 60px); left: clamp(20px, 4vw, 64px); display: flex; align-items: end; justify-content: space-between; gap: 2rem; opacity: 0; pointer-events: none; transform: translateY(18px); transition: opacity .4s ease, transform .4s ease; }
+      .film-hud-copy { max-width: 44rem; text-shadow: 0 2px 24px #000; }
+      .film-hud small { color: #9fd5ff; font-family: "AIS Mono", monospace; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; }
+      .film-hud h2 { margin: .45rem 0 0; font-family: "AIS Display", sans-serif; font-size: clamp(2rem, 4vw, 4.3rem); font-weight: 380; letter-spacing: -.03em; }
+      .film-hud p { max-width: 62ch; margin: .65rem 0 0; color: rgba(236, 246, 255, .72); font-size: .82rem; line-height: 1.55; }
+      .film-controls { display: flex; align-items: center; gap: .7rem; white-space: nowrap; }
+      .film-controls button { min-width: 116px; padding: .8rem 1rem; border: 1px solid rgba(218, 237, 252, .5); border-radius: 12px; color: #f1f8ff; background: rgba(2, 8, 15, .62); backdrop-filter: blur(10px); font-family: "AIS Mono", monospace; font-size: .61rem; letter-spacing: .13em; text-transform: uppercase; cursor: pointer; }
+      .film-progress { position: absolute; right: 0; bottom: -18px; left: 0; height: 2px; overflow: hidden; background: rgba(220, 239, 255, .22); }
+      .film-progress i { display: block; width: var(--film-progress, 0%); height: 100%; background: #d7edff; box-shadow: 0 0 12px #8fcfff; }
+      .hero.film-playing { position: fixed; z-index: 100; inset: 0; width: 100vw; height: 100svh; min-height: 0; border-radius: 0; }
+      .hero.film-playing .topbar, .hero.film-playing .hero-copy, .hero.film-playing .stats, .hero.film-playing .scroll-cue { opacity: 0; pointer-events: none; transform: translateY(-12px); }
+      .hero.film-playing .space::after { opacity: .2; }
+      .hero.film-playing .space video { filter: saturate(1) contrast(1); }
+      .hero.film-playing .grain { opacity: .025; }
+      .hero.film-playing .film-hud { opacity: 1; pointer-events: auto; transform: none; }
       .content { display: grid; grid-template-columns: .75fr 1.25fr; gap: clamp(3rem, 8vw, 9rem); padding: clamp(5rem, 10vw, 10rem) clamp(2rem, 8vw, 9rem); border-top: 1px solid rgba(192, 216, 238, .12); background: radial-gradient(circle at 72% 38%, #0a1b2d, #02060b 43%); }
       .eyebrow { margin: 0; color: #9ecdf5; font-family: "AIS Mono", monospace; font-size: .67rem; letter-spacing: .2em; text-transform: uppercase; }
       .content h2 { margin: .9rem 0 0; font-family: "AIS Display", sans-serif; font-size: clamp(2.7rem, 5vw, 5.5rem); font-weight: 350; letter-spacing: -.04em; line-height: .95; }
@@ -106,6 +112,8 @@
         .scroll-cue { display: none; }
         .content { padding: 5rem 24px; }
         .content-grid { grid-template-columns: 1fr; }
+        .film-hud { align-items: stretch; flex-direction: column; }
+        .film-controls button { flex: 1; min-width: 0; }
       }
       @media (prefers-reduced-motion: no-preference) {
         .space { animation: reveal 1.4s ease-out both; }
@@ -122,7 +130,11 @@
   </head>
   <body>
     <section class="hero" id="mission" aria-labelledby="hero-title">
-      <div class="space" aria-hidden="true"></div>
+      <div class="space" aria-hidden="true">
+        <video id="mission-video" autoplay muted loop playsinline preload="metadata" poster="{{ORBITAL_EARTH_ASSET}}">
+          <source src="{{AI_DISCOVERY_VIDEO}}" type="video/mp4" />
+        </video>
+      </div>
       <div class="grain" aria-hidden="true"></div>
       <header class="topbar">
         <a class="brand" href="https://ai-in.space/" aria-label="AI in Space home">
@@ -140,7 +152,7 @@
         <p class="summary">Advancing AI technologies to explore, understand, and shape the future of space.</p>
         <div class="actions">
           <a class="button" href="#technology">Explore the future <span aria-hidden="true">→</span></a>
-          <button class="video-link" id="video-trigger" type="button" aria-haspopup="dialog" aria-controls="mission-film"><span class="play" aria-hidden="true">▶</span> Watch video</button>
+          <button class="button film-button" id="video-trigger" type="button"><span><span class="play" aria-hidden="true">▶</span>&nbsp; Play film with sound</span><span aria-hidden="true">↗</span></button>
         </div>
       </main>
       <div class="stats" aria-label="Mission statistics">
@@ -158,18 +170,19 @@
         </article>
       </div>
       <a class="scroll-cue" href="#technology" aria-label="Continue to technology"><i></i></a>
+      <aside class="film-hud" id="film-hud" aria-live="polite">
+        <div class="film-hud-copy">
+          <small>AI mission film / 00:20 / Sound on</small>
+          <h2>The Second Question</h2>
+          <p>Forty-three minutes from Earth, LYRA turns a damaged Jovian observatory and a swarm of origami probes into a new instrument—then discovers that the noise was the signal.</p>
+        </div>
+        <div class="film-controls">
+          <button id="film-toggle" type="button">Pause</button>
+          <button id="film-exit" type="button">Exit film</button>
+        </div>
+        <div class="film-progress" aria-hidden="true"><i></i></div>
+      </aside>
     </section>
-    <dialog class="video-dialog" id="mission-film" aria-labelledby="film-title">
-      <header class="film-header">
-        <div><small>AI mission film / 00:20 / Sound on</small><h2 id="film-title">The Second Question</h2></div>
-        <button class="film-close" type="button" aria-label="Close video">×</button>
-      </header>
-      <video controls playsinline preload="metadata" poster="{{ORBITAL_EARTH_ASSET}}">
-        <source src="{{AI_DISCOVERY_VIDEO}}" type="video/mp4" />
-        Your browser does not support embedded video.
-      </video>
-      <p class="film-note">Forty-three minutes from Earth, LYRA turns a damaged Jovian observatory and a swarm of origami probes into a new instrument—then discovers that the noise was the signal.</p>
-    </dialog>
     <section class="content" id="technology" aria-labelledby="technology-title">
       <div>
         <p class="eyebrow">Mission architecture / 01</p>
@@ -182,21 +195,51 @@
       </div>
     </section>
     <script>
-      const filmDialog = document.querySelector('#mission-film');
+      const hero = document.querySelector('.hero');
       const filmTrigger = document.querySelector('#video-trigger');
-      const filmClose = filmDialog.querySelector('.film-close');
-      const filmVideo = filmDialog.querySelector('video');
+      const filmVideo = document.querySelector('#mission-video');
+      const filmToggle = document.querySelector('#film-toggle');
+      const filmExit = document.querySelector('#film-exit');
+      const filmProgress = document.querySelector('.film-progress i');
 
-      filmTrigger.addEventListener('click', () => {
-        filmDialog.showModal();
+      function enterFilm() {
+        hero.classList.add('film-playing');
+        filmVideo.loop = false;
+        filmVideo.muted = false;
         filmVideo.currentTime = 0;
         filmVideo.play().catch(() => {});
+        filmToggle.textContent = 'Pause';
+        filmToggle.focus();
+      }
+
+      function exitFilm() {
+        hero.classList.remove('film-playing');
+        filmVideo.muted = true;
+        filmVideo.loop = true;
+        filmVideo.play().catch(() => {});
+        filmTrigger.focus();
+      }
+
+      filmTrigger.addEventListener('click', enterFilm);
+      filmExit.addEventListener('click', exitFilm);
+      filmToggle.addEventListener('click', () => {
+        if (filmVideo.paused) {
+          filmVideo.play().catch(() => {});
+          filmToggle.textContent = 'Pause';
+        } else {
+          filmVideo.pause();
+          filmToggle.textContent = 'Resume';
+        }
       });
-      filmClose.addEventListener('click', () => filmDialog.close());
-      filmDialog.addEventListener('click', (event) => {
-        if (event.target === filmDialog) filmDialog.close();
+      filmVideo.addEventListener('timeupdate', () => {
+        const progress = filmVideo.duration ? (filmVideo.currentTime / filmVideo.duration) * 100 : 0;
+        filmProgress.style.setProperty('--film-progress', `${progress}%`);
       });
-      filmDialog.addEventListener('close', () => filmVideo.pause());
+      filmVideo.addEventListener('ended', exitFilm);
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && hero.classList.contains('film-playing')) exitFilm();
+      });
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) filmVideo.pause();
     </script>
   </body>
 </html>
