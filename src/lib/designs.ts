@@ -705,6 +705,14 @@ export function randomSeed(): number {
   return Math.floor(Math.random() * 0xffffffff);
 }
 
+export function randomSeedDistinctFrom(...excluded: (number | undefined)[]): number {
+  const blocked = new Set(excluded.filter((value): value is number => Number.isFinite(value)));
+  let candidate = randomSeed();
+  for (let attempt = 0; attempt < 8 && blocked.has(candidate); attempt += 1) candidate = randomSeed();
+  while (blocked.has(candidate)) candidate = (candidate + 0x9e3779b9) >>> 0;
+  return candidate;
+}
+
 const selectCopy = (copySeed: number, layout: Layout): CopyPack => {
   const random = seededRandom(copySeed ^ 0x9e3779b9);
   const compact = layout === 'origin' || layout === 'aperture' || layout === 'ledger' || layout === 'triptych' || layout === 'command';
@@ -802,5 +810,6 @@ export function randomDesign(exceptId?: string): Design {
 }
 
 export function crazyMix(): Design {
-  return generateDesign(randomSeed());
+  const seed = randomSeed();
+  return generateDesign(seed, undefined, randomSeedDistinctFrom(seed));
 }
