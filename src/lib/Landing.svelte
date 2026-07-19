@@ -159,22 +159,20 @@
       </button>
     </header>
 
-    <div class="transmission-rail">
-      <div class="edition"><span>{design.index}</span><i></i><span>{design.name}</span></div>
-
-      <div class="design-tools" aria-label="Generative design controls">
-        <button class="signal-control" type="button" onclick={() => runExperience('alternate_signal', onShuffle)} aria-label="Receive alternate signal">
-          <span class="signal-status"><i></i> Alternate signal</span>
-          <strong>New interface <b aria-hidden="true">↻</b></strong>
-        </button>
-        <div class="design-utilities">
-          <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label="Open design gallery">All {designCount}</button>
-          <button type="button" onclick={() => runExperience('remix', onMix)} class:active={isMix} aria-label="Generate a widget mix">Remix</button>
+    <main class="hero-copy">
+      <div class="transmission-rail">
+        <div class="edition"><span>{design.index}</span><i></i><span>{design.name}</span></div>
+        <div class="design-tools" aria-label="Generative design controls">
+          <button class="signal-control" type="button" onclick={() => runExperience('alternate_signal', onShuffle)} aria-label="Receive alternate signal">
+            <span class="signal-status"><i></i> Alternate signal</span>
+            <strong>New interface <b aria-hidden="true">↻</b></strong>
+          </button>
+          <div class="design-utilities">
+            <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label="Open design gallery">All {designCount}</button>
+            <button type="button" onclick={() => runExperience('remix', onMix)} class:active={isMix} aria-label="Generate a widget mix">Remix</button>
+          </div>
         </div>
       </div>
-    </div>
-
-    <main class="hero-copy">
       <p class="kicker">{design.kicker}</p>
       <h1 id="hero-title"><span>{design.title}</span><span>{design.titleLine2}</span></h1>
       <p class="summary">{design.summary}</p>
@@ -290,7 +288,7 @@
   .mission-cta.compact:hover { color: var(--bg); border-color: var(--accent); background: var(--accent); }
   .mission-cta.compact:hover small, .mission-cta.compact:hover strong, .mission-cta.compact:hover b { color: var(--bg); }
   .mission-cta.compact:hover b { transform: translate(2px, -2px); }
-  .transmission-rail { position: absolute; z-index: 6; left: clamp(1.25rem, 4.5vw, 5rem); top: 110px; display: flex; align-items: center; gap: 1rem; max-width: calc(100vw - 9rem); }
+  .transmission-rail { position: absolute; z-index: 6; left: 0; bottom: calc(100% + 1.15rem); display: flex; align-items: flex-start; flex-direction: column; gap: .55rem; width: min(500px, 82vw); }
   .edition { display: flex; flex: 0 0 auto; align-items: center; gap: .65rem; color: var(--muted); font-family: var(--font-mono); font-size: .55rem; letter-spacing: .16em; text-transform: uppercase; }
   .edition i { display: block; width: 40px; border-top: 1px solid currentColor; }
   .hero-copy { position: absolute; z-index: 5; left: clamp(1.25rem, 7vw, 7.5rem); top: 27%; width: min(540px, 48vw); }
@@ -388,7 +386,6 @@
 
   .layout-console .hero { padding-left: 28vw; }
   .layout-console .topbar { left: 25vw; }
-  .layout-console .transmission-rail { left: 31vw; }
   .layout-console::before { content: 'AIS / INDEX\A\A 01  OBSERVATIONS\A 02  MODELS\A 03  MISSIONS\A 04  FIELD NOTES\A\A NETWORK: LIVE'; white-space: pre; position: absolute; z-index: 5; top: 0; bottom: 0; width: 25vw; padding: 9rem 2.4rem; border-right: 1px solid color-mix(in srgb, var(--accent) 24%, transparent); background: color-mix(in srgb, var(--bg) 88%, transparent); color: var(--muted); font-family: var(--font-mono); font-size: .6rem; line-height: 2.5; letter-spacing: .1em; }
   .layout-console .hero-copy { left: 31vw; top: 23%; width: 46vw; }
   .layout-console h1 { font-family: var(--font-mono); font-size: clamp(3rem, 6.5vw, 7rem); line-height: .92; letter-spacing: -.07em; }
@@ -505,7 +502,6 @@
 
   .layout-timeline .scene { bottom: 51%; background-image: linear-gradient(0deg, var(--bg), transparent 48%), linear-gradient(90deg, color-mix(in srgb, var(--bg) 70%, transparent), transparent), var(--scene); background-position: center; opacity: .9; }
   .layout-timeline .grid-lines { display: none; }
-  .layout-timeline .transmission-rail { top: 110px; }
   .layout-timeline .hero-copy { left: 4.5vw; top: 44%; width: min(1080px, 78vw); }
   .layout-timeline .kicker { display: none; }
   .layout-timeline h1 { display: grid; grid-template-columns: .78fr 1.22fr; gap: 2vw; font-size: clamp(3.8rem, 7.5vw, 8.5rem); line-height: .82; }
@@ -628,7 +624,7 @@
     .generated.composition-cinema .art { left: 50%; right: auto; top: 16%; transform: translateX(-50%); opacity: .35; }
 
     .generated.composition-masthead .scene { inset: 104px 24vw 0 27vw; clip-path: none; border-radius: 0; background-position: center; opacity: .76; }
-    .generated.composition-masthead .hero-copy { left: 4vw; top: 17%; width: 21vw; text-align: left; transform: none; }
+    .generated.composition-masthead .hero-copy { left: 4vw; top: 22%; width: 21vw; text-align: left; transform: none; }
     .generated.composition-masthead h1 { max-width: 5ch; font-size: clamp(3.4rem, 5.3vw, 6rem); line-height: .78; writing-mode: horizontal-tb; }
     .generated.composition-masthead .summary { max-width: 26ch; }
     .generated.composition-masthead .actions { align-items: flex-start; flex-direction: column; gap: .55rem; }
@@ -687,7 +683,7 @@
     .hero { min-height: 900px; }
     .topbar { height: 82px; grid-template-columns: 1fr auto; }
     nav { display: none; }
-    .transmission-rail { left: 1.25rem; top: 94px; max-width: calc(100vw - 2.5rem); }
+    .transmission-rail { left: 0; width: min(500px, calc(100vw - 2.5rem)); }
     .transmission-rail .edition { display: none; }
     .hero-copy, .layout-console .hero-copy, .layout-atlas .hero-copy, .layout-horizon .hero-copy, .layout-aperture .hero-copy, .layout-zenith .hero-copy, .layout-broadcast .hero-copy, .layout-ledger .hero-copy { left: 1.25rem; top: 22%; width: calc(100vw - 2.5rem); transform: none; text-align: left; }
     h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1 { font-size: clamp(3.4rem, 10.5vw, 6rem); }
