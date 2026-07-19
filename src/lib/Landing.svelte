@@ -573,6 +573,7 @@
   .widgets.telemetry-dock { left: 50%; right: auto; bottom: 2rem; width: min(88vw, 980px); max-width: none; justify-content: center; transform: translateX(-50%); }
   .telemetry-dock .widget-slot { flex: 1 1 220px; max-width: 380px; }
   .telemetry-dock .widget-slot:only-child { flex-basis: auto; max-width: 680px; }
+  .layout-origin .widgets.telemetry-dock { left: auto; right: 3vw; width: min(50vw, 720px); justify-content: flex-end; transform: none; }
 
   .widgets.telemetry-duo { left: auto; right: 4vw; top: auto; bottom: 1.5rem; width: min(52vw, 700px); max-width: none; display: grid; grid-template-columns: minmax(250px, 1.15fr) minmax(240px, .85fr); align-items: end; gap: 1rem; transform: none; }
   .telemetry-duo .widget-slot:first-child { transform: translateY(-1.5rem); }
