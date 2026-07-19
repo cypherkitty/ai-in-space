@@ -5,6 +5,8 @@
   import { designAnalyticsContext, initAnalytics, trackPageView } from './lib/analytics';
   import { designs, generateDesign, randomSeed, randomSeedDistinctFrom, remixCopy, type Design } from './lib/designs';
   import { localizeDesign, t, type Locale } from './lib/i18n';
+  import { materializedDesignForPath } from './lib/materialized-designs';
+  import { materializedPageForDesignId, materializedPageForPath } from './lib/materialized-pages';
 
   type View = 'landing' | 'gallery';
   let view: View = 'landing';
@@ -14,6 +16,7 @@
   let lastTrackedLocation = '';
   let remixCursor = randomSeed();
   let locale: Locale = 'en';
+  let materializedPath: string | undefined;
   $: localizedActive = localizeDesign(active, locale);
   $: localizedDesigns = designs.map((design) => localizeDesign(design, locale));
 
@@ -35,6 +38,7 @@
   function syncRoute() {
     requestAnimationFrame(() => window.scrollTo({ top: 0 }));
     const hash = window.location.hash;
+    materializedPath = undefined;
     if (hash === '#/gallery') {
       view = 'gallery';
       isMix = false;
@@ -42,6 +46,15 @@
     }
     if (hash.startsWith('#/v/')) {
       const id = hash.slice(4);
+      const stablePage = materializedPageForDesignId(id);
+      if (stablePage) {
+        active = materializedDesignForPath(stablePage.path)!;
+        materializedPath = stablePage.path;
+        view = 'landing';
+        isMix = false;
+        window.history.replaceState({}, '', `${stablePage.path}${window.location.search}`);
+        return;
+      }
       active = designs.find((design) => design.id === id) ?? randomGeneratedDesign();
       view = 'landing';
       isMix = active.generated ?? false;
@@ -72,6 +85,14 @@
       isMix = true;
       return;
     }
+    const stableDesign = materializedDesignForPath(window.location.pathname);
+    if (stableDesign) {
+      active = stableDesign;
+      materializedPath = materializedPageForPath(window.location.pathname)?.path;
+      view = 'landing';
+      isMix = false;
+      return;
+    }
     active = randomGeneratedDesign();
     view = 'landing';
     isMix = true;
@@ -96,6 +117,11 @@
   }
 
   function open(design: Design) {
+    const stablePage = materializedPageForDesignId(design.id);
+    if (stablePage) {
+      window.location.assign(stablePage.path);
+      return;
+    }
     window.location.hash = `/v/${design.id}`;
     window.scrollTo({ top: 0 });
   }
@@ -155,10 +181,14 @@
   }
 
   function canonicalShareUrl(): string {
-    const url = new URL(window.location.href);
+    const url = materializedPath
+      ? new URL(materializedPath, window.location.origin)
+      : new URL(window.location.href);
     url.search = '';
     if (locale === 'ru') url.searchParams.set('lang', 'ru');
-    if (active.generated && active.seed !== undefined) {
+    if (materializedPath) {
+      url.hash = '';
+    } else if (active.generated && active.seed !== undefined) {
       url.hash = `/g/${active.seed}/${active.copySeed ?? active.seed}`;
     } else if (active.copySeed !== undefined) {
       url.hash = `/c/${active.id}/${active.copySeed}`;
