@@ -50,7 +50,7 @@
       .summary { max-width: 36ch; margin: 1.85rem 0 0; color: rgba(221, 231, 241, .56); font-size: clamp(.78rem, 1vw, .96rem); line-height: 1.8; }
       .actions { display: flex; align-items: center; gap: clamp(1.4rem, 3.1vw, 3.2rem); margin-top: 2rem; }
       .button { display: inline-flex; align-items: center; justify-content: space-between; gap: 2.3rem; min-width: 245px; padding: 1.03rem 1.45rem; border: 1px solid rgba(206, 226, 244, .42); border-radius: 15px; font-family: "AIS Mono", monospace; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; transition: border-color .2s ease, background .2s ease; }
-      .video-link { display: inline-flex; align-items: center; gap: .75rem; color: rgba(235, 243, 250, .86); font-family: "AIS Mono", monospace; font-size: .63rem; letter-spacing: .15em; text-transform: uppercase; white-space: nowrap; }
+      .video-link { display: inline-flex; align-items: center; gap: .75rem; padding: 0; border: 0; color: rgba(235, 243, 250, .86); background: transparent; font-family: "AIS Mono", monospace; font-size: .63rem; letter-spacing: .15em; text-transform: uppercase; white-space: nowrap; cursor: pointer; }
       .play { display: inline-grid; width: 21px; height: 21px; place-items: center; border: 1px solid rgba(220, 238, 252, .72); border-radius: 50%; font-size: .5rem; }
       .stats { display: grid; grid-template-columns: repeat(3, minmax(170px, 210px)); gap: 1.3rem; margin: clamp(58px, 8vh, 105px) 0 34px clamp(36px, 4.7vw, 76px); }
       .stat { min-height: 184px; padding: 1.55rem 1.8rem; border: 1px solid rgba(192, 216, 238, .14); border-radius: 14px; background: linear-gradient(145deg, rgba(8, 17, 27, .34), rgba(2, 7, 13, .7)); backdrop-filter: blur(5px); }
@@ -61,6 +61,16 @@
       .scroll-cue i { width: 2px; height: 38px; background: linear-gradient(#fff, rgba(255, 255, 255, .2)); box-shadow: 0 0 10px rgba(199, 227, 255, .3); }
       .scroll-cue::before, .scroll-cue::after { content: "✦"; font-size: .7rem; }
       .scroll-cue::after { opacity: .45; transform: scale(.55); }
+      .video-dialog { width: min(1080px, calc(100vw - 48px)); padding: 0; overflow: hidden; border: 1px solid rgba(190, 222, 249, .34); border-radius: 18px; color: #eef7ff; background: #02070d; box-shadow: 0 30px 100px rgba(0, 0, 0, .76), 0 0 80px rgba(57, 161, 245, .12); }
+      .video-dialog::backdrop { background: rgba(0, 4, 9, .84); backdrop-filter: blur(12px); }
+      .film-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.2rem; border-bottom: 1px solid rgba(190, 222, 249, .15); }
+      .film-header div { display: grid; gap: .2rem; }
+      .film-header small { color: #7dbbe9; font-family: "AIS Mono", monospace; font-size: .56rem; letter-spacing: .18em; text-transform: uppercase; }
+      .film-header h2 { margin: 0; font-family: "AIS Display", sans-serif; font-size: 1rem; font-weight: 450; letter-spacing: .08em; }
+      .film-close { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid rgba(202, 228, 249, .25); border-radius: 50%; color: #eaf6ff; background: transparent; font-size: 1.2rem; cursor: pointer; }
+      .film-close:hover { border-color: rgba(210, 235, 255, .65); background: rgba(124, 194, 246, .08); }
+      .video-dialog video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; object-fit: cover; }
+      .film-note { margin: 0; padding: .85rem 1.2rem 1rem; color: rgba(217, 233, 246, .58); font-size: .72rem; line-height: 1.5; }
       .content { display: grid; grid-template-columns: .75fr 1.25fr; gap: clamp(3rem, 8vw, 9rem); padding: clamp(5rem, 10vw, 10rem) clamp(2rem, 8vw, 9rem); border-top: 1px solid rgba(192, 216, 238, .12); background: radial-gradient(circle at 72% 38%, #0a1b2d, #02060b 43%); }
       .eyebrow { margin: 0; color: #9ecdf5; font-family: "AIS Mono", monospace; font-size: .67rem; letter-spacing: .2em; text-transform: uppercase; }
       .content h2 { margin: .9rem 0 0; font-family: "AIS Display", sans-serif; font-size: clamp(2.7rem, 5vw, 5.5rem); font-weight: 350; letter-spacing: -.04em; line-height: .95; }
@@ -130,7 +140,7 @@
         <p class="summary">Advancing AI technologies to explore, understand, and shape the future of space.</p>
         <div class="actions">
           <a class="button" href="#technology">Explore the future <span aria-hidden="true">→</span></a>
-          <a class="video-link" href="#applications"><span class="play" aria-hidden="true">▶</span> Watch video</a>
+          <button class="video-link" id="video-trigger" type="button" aria-haspopup="dialog" aria-controls="mission-film"><span class="play" aria-hidden="true">▶</span> Watch video</button>
         </div>
       </main>
       <div class="stats" aria-label="Mission statistics">
@@ -149,6 +159,17 @@
       </div>
       <a class="scroll-cue" href="#technology" aria-label="Continue to technology"><i></i></a>
     </section>
+    <dialog class="video-dialog" id="mission-film" aria-labelledby="film-title">
+      <header class="film-header">
+        <div><small>AI discovery film / 00:05</small><h2 id="film-title">Intelligence beyond boundaries</h2></div>
+        <button class="film-close" type="button" aria-label="Close video">×</button>
+      </header>
+      <video controls muted playsinline preload="metadata" poster="{{ORBITAL_EARTH_ASSET}}">
+        <source src="{{AI_DISCOVERY_VIDEO}}" type="video/mp4" />
+        Your browser does not support embedded video.
+      </video>
+      <p class="film-note">A bright visual study of artificial intelligence turning complex signals into new patterns, ideas, and discoveries—with space as its horizon.</p>
+    </dialog>
     <section class="content" id="technology" aria-labelledby="technology-title">
       <div>
         <p class="eyebrow">Mission architecture / 01</p>
@@ -160,5 +181,22 @@
         <article id="about"><small>03 / DISCOVERY</small><h3>Understand</h3><p>Connect faint patterns across missions, models, environments, and time.</p></article>
       </div>
     </section>
+    <script>
+      const filmDialog = document.querySelector('#mission-film');
+      const filmTrigger = document.querySelector('#video-trigger');
+      const filmClose = filmDialog.querySelector('.film-close');
+      const filmVideo = filmDialog.querySelector('video');
+
+      filmTrigger.addEventListener('click', () => {
+        filmDialog.showModal();
+        filmVideo.currentTime = 0;
+        filmVideo.play().catch(() => {});
+      });
+      filmClose.addEventListener('click', () => filmDialog.close());
+      filmDialog.addEventListener('click', (event) => {
+        if (event.target === filmDialog) filmDialog.close();
+      });
+      filmDialog.addEventListener('close', () => filmVideo.pause());
+    </script>
   </body>
 </html>
