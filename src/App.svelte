@@ -3,7 +3,7 @@
   import Gallery from './lib/Gallery.svelte';
   import Landing from './lib/Landing.svelte';
   import { designAnalyticsContext, initAnalytics, trackPageView } from './lib/analytics';
-  import { crazyMix, designs, generateDesign, randomSeed, remixCopy, type Design } from './lib/designs';
+  import { designs, generateDesign, randomSeed, randomSeedDistinctFrom, remixCopy, type Design } from './lib/designs';
   import { localizeDesign, t, type Locale } from './lib/i18n';
 
   type View = 'landing' | 'gallery';
@@ -18,6 +18,11 @@
   $: localizedDesigns = designs.map((design) => localizeDesign(design, locale));
 
   const REMIX_STEP = 0x9e3779b9;
+
+  function randomGeneratedDesign(): Design {
+    const seed = randomSeed();
+    return generateDesign(seed, undefined, randomSeedDistinctFrom(seed));
+  }
 
   $: if (analyticsReady && typeof window !== 'undefined' && window.location.href !== lastTrackedLocation) {
     lastTrackedLocation = window.location.href;
@@ -37,7 +42,7 @@
     }
     if (hash.startsWith('#/v/')) {
       const id = hash.slice(4);
-      active = designs.find((design) => design.id === id) ?? generateDesign(randomSeed());
+      active = designs.find((design) => design.id === id) ?? randomGeneratedDesign();
       view = 'landing';
       isMix = active.generated ?? false;
       return;
@@ -62,12 +67,12 @@
       return;
     }
     if (hash === '#/mix') {
-      active = crazyMix();
+      active = randomGeneratedDesign();
       view = 'landing';
       isMix = true;
       return;
     }
-    active = generateDesign(randomSeed());
+    active = randomGeneratedDesign();
     view = 'landing';
     isMix = true;
   }
@@ -110,10 +115,10 @@
   function launchRemix() {
     const seed = nextRemixSeed();
     const previousSlogan = `${active.title} ${active.titleLine2}`;
-    let copySeed = seed;
+    let copySeed = randomSeedDistinctFrom(seed, active.copySeed);
     let candidate = generateDesign(seed, undefined, copySeed);
     for (let attempt = 0; attempt < 8 && `${candidate.title} ${candidate.titleLine2}` === previousSlogan; attempt += 1) {
-      copySeed = (copySeed + REMIX_STEP) >>> 0 || REMIX_STEP;
+      copySeed = randomSeedDistinctFrom(seed, active.copySeed, copySeed);
       candidate = generateDesign(seed, undefined, copySeed);
     }
     active = candidate;
@@ -129,12 +134,12 @@
   function changeCopy() {
     const previousSlogan = `${active.title} ${active.titleLine2}`;
     const base = designs.find((design) => design.id === active.id) ?? active;
-    let copySeed = randomSeed();
+    let copySeed = randomSeedDistinctFrom(active.seed, active.copySeed);
     let candidate = active.generated && active.seed
       ? generateDesign(active.seed, undefined, copySeed)
       : remixCopy(base, copySeed);
     for (let attempt = 0; attempt < 8 && `${candidate.title} ${candidate.titleLine2}` === previousSlogan; attempt += 1) {
-      copySeed = randomSeed();
+      copySeed = randomSeedDistinctFrom(active.seed, active.copySeed, copySeed);
       candidate = active.generated && active.seed
         ? generateDesign(active.seed, undefined, copySeed)
         : remixCopy(base, copySeed);
