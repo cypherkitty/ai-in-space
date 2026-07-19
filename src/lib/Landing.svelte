@@ -126,8 +126,9 @@
 <svelte:window onkeydown={(event) => event.key === 'Escape' && signupOpen && closeSignup()} />
 
 <div
-  class={`site layout-${design.layout} treatment-${design.treatment ?? 'native'} texture-${design.texture ?? 'grid'} scene-${design.sceneAlign ?? 'center'}`}
+  class={`site layout-${design.layout} treatment-${design.treatment ?? 'native'} texture-${design.texture ?? 'grid'} scene-${design.sceneAlign ?? 'center'} exposure-${design.exposureBand ?? 'deep'}`}
   class:generated={design.generated}
+  data-exposure={design.exposureBand ?? 'deep'}
   style={`--accent:${design.accent};--accent2:${design.accent2};--bg:${design.bg};--text:${design.text};--muted:${design.muted};--panel:${design.panel};--scene:url(${design.scene})`}
 >
   <section class="hero" aria-labelledby="hero-title" aria-hidden={signupOpen} inert={signupOpen}>
@@ -568,6 +569,11 @@
   .layout-signalstack .story-grid > div { margin-left: 48%; }
   .layout-signalstack .principles { border: 0; gap: .5rem; transform: rotate(-1deg); }
   .layout-signalstack .principles article, .layout-signalstack .principles article + article { padding: 2rem; border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent); background: color-mix(in srgb, var(--accent) 4%, transparent); }
+
+  .site.exposure-graphite .scene { opacity: .82; filter: saturate(.78) contrast(.96); }
+  .site.exposure-dusk .scene { opacity: .72; filter: saturate(.64) contrast(.92); }
+  .site.exposure-dusk .grain { opacity: .018; }
+  .site.exposure-graphite .summary, .site.exposure-dusk .summary { color: color-mix(in srgb, var(--text) 78%, var(--muted)); text-shadow: 0 2px 18px var(--bg), 0 0 4px var(--bg); }
 
   /* Telemetry is a composition layer of its own: dock, asymmetric pair, stack, rail, scatter, or single instrument. */
   .widgets.telemetry-dock { left: 50%; right: auto; bottom: 2rem; width: min(88vw, 980px); max-width: none; justify-content: center; transform: translateX(-50%); }

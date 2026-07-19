@@ -31,6 +31,8 @@ jobs:
         run: npm run check
       - name: Audit slogan distance
         run: npm run audit:slogans
+      - name: Audit exposure and contrast
+        run: npm run audit:exposure
       - name: Build
         run: npm run build
       - name: Configure Pages

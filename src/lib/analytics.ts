@@ -53,6 +53,8 @@ export function designAnalyticsContext(design: Design): AnalyticsParams {
     design_id: design.id,
     design_layout: design.layout,
     design_source: design.generated ? 'generated' : 'curated',
-    design_visual: design.visual
+    design_visual: design.visual,
+    design_exposure: design.exposureBand ?? 'deep',
+    design_exposure_amount: design.exposure
   };
 }
