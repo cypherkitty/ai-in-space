@@ -147,7 +147,19 @@
     <LayoutChrome layout={design.layout} />
 
     <header class="topbar">
-      <button class="brand-button" type="button" onclick={onGallery}><Brand /></button>
+      <div class="brand-channel">
+        <button class="brand-button" type="button" onclick={onGallery}><Brand /></button>
+        <div class="design-tools" aria-label="Generative design controls">
+          <button class="signal-control" type="button" onclick={() => runExperience('alternate_signal', onShuffle)} aria-label="Receive alternate signal">
+            <span class="signal-status"><i></i> Alternate signal</span>
+            <strong>New interface <b aria-hidden="true">↻</b></strong>
+          </button>
+          <div class="design-utilities">
+            <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label="Open design gallery">All {designCount}</button>
+            <button type="button" onclick={() => runExperience('remix', onMix)} class:active={isMix} aria-label="Generate a widget mix">Remix</button>
+          </div>
+        </div>
+      </div>
       <nav aria-label="Primary">
         <button type="button" onclick={scrollToStory}>Mission</button>
         <button type="button" onclick={scrollToStory}>Technology</button>
@@ -162,16 +174,6 @@
     <main class="hero-copy">
       <div class="transmission-rail">
         <div class="edition"><span>{design.index}</span><i></i><span>{design.name}</span></div>
-        <div class="design-tools" aria-label="Generative design controls">
-          <button class="signal-control" type="button" onclick={() => runExperience('alternate_signal', onShuffle)} aria-label="Receive alternate signal">
-            <span class="signal-status"><i></i> Alternate signal</span>
-            <strong>New interface <b aria-hidden="true">↻</b></strong>
-          </button>
-          <div class="design-utilities">
-            <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label="Open design gallery">All {designCount}</button>
-            <button type="button" onclick={() => runExperience('remix', onMix)} class:active={isMix} aria-label="Generate a widget mix">Remix</button>
-          </div>
-        </div>
       </div>
       <p class="kicker">{design.kicker}</p>
       <h1 id="hero-title"><span>{design.title}</span><span>{design.titleLine2}</span></h1>
@@ -274,7 +276,9 @@
   .texture-scan .grid-lines { opacity: .12; background-image: repeating-linear-gradient(0deg, transparent 0 6px, color-mix(in srgb, var(--accent) 10%, transparent) 6px 7px); background-size: auto; }
   .topbar { position: absolute; z-index: 10; top: 0; left: 0; right: 0; height: 104px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 clamp(1.25rem, 4.5vw, 5rem); border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent); }
   .brand-button, nav button, .explore, .design-tools button { border: 0; background: transparent; cursor: pointer; }
+  .brand-channel { position: relative; z-index: 2; justify-self: start; }
   .brand-button { justify-self: start; padding: 0; }
+  .brand-channel > .design-tools { position: absolute; top: calc(100% + 1.8rem); left: 0; width: min(316px, 72vw); }
   nav { display: flex; gap: clamp(1rem, 3.5vw, 3.7rem); }
   nav button, .explore { color: var(--muted); font-family: var(--font-mono); font-size: .61rem; letter-spacing: .18em; text-transform: uppercase; transition: color .2s; }
   nav button:hover, .explore:hover { color: var(--text); }
@@ -288,7 +292,7 @@
   .mission-cta.compact:hover { color: var(--bg); border-color: var(--accent); background: var(--accent); }
   .mission-cta.compact:hover small, .mission-cta.compact:hover strong, .mission-cta.compact:hover b { color: var(--bg); }
   .mission-cta.compact:hover b { transform: translate(2px, -2px); }
-  .transmission-rail { position: absolute; z-index: 6; left: 0; bottom: calc(100% + 1.15rem); display: flex; align-items: flex-start; flex-direction: column; gap: .55rem; width: min(500px, 82vw); }
+  .transmission-rail { position: absolute; z-index: 6; left: 0; bottom: calc(100% + 1.15rem); width: min(500px, 82vw); }
   .edition { display: flex; flex: 0 0 auto; align-items: center; gap: .65rem; color: var(--muted); font-family: var(--font-mono); font-size: .55rem; letter-spacing: .16em; text-transform: uppercase; }
   .edition i { display: block; width: 40px; border-top: 1px solid currentColor; }
   .hero-copy { position: absolute; z-index: 5; left: clamp(1.25rem, 7vw, 7.5rem); top: 27%; width: min(540px, 48vw); }
@@ -685,6 +689,7 @@
     nav { display: none; }
     .transmission-rail { left: 0; width: min(500px, calc(100vw - 2.5rem)); }
     .transmission-rail .edition { display: none; }
+    .brand-channel > .design-tools { width: min(340px, calc(100vw - 2.5rem)); }
     .hero-copy, .layout-console .hero-copy, .layout-atlas .hero-copy, .layout-horizon .hero-copy, .layout-aperture .hero-copy, .layout-zenith .hero-copy, .layout-broadcast .hero-copy, .layout-ledger .hero-copy { left: 1.25rem; top: 22%; width: calc(100vw - 2.5rem); transform: none; text-align: left; }
     h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1 { font-size: clamp(3.4rem, 10.5vw, 6rem); }
     .layout-broadcast h1 { font-size: clamp(3.35rem, 9.3vw, 5.6rem); }
