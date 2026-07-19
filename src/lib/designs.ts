@@ -12,6 +12,7 @@ import gravityLensPreview from './assets/previews/gravity-lens-preview.jpg';
 import oceanWorldPreview from './assets/previews/ocean-world-preview.jpg';
 import solarSailPreview from './assets/previews/solar-sail-preview.jpg';
 import farObservatoryPreview from './assets/previews/far-observatory-preview.jpg';
+import { copyPacks, type CopyPack } from './slogans';
 
 export type Layout =
   | 'origin'
@@ -307,35 +308,6 @@ const scenePreviews = new Map([
 
 export const previewSceneFor = (scene: string): string => scenePreviews.get(scene) ?? scene;
 
-type CopyPack = Pick<Design, 'kicker' | 'title' | 'titleLine2' | 'summary' | 'action'>;
-
-const copyPacks: CopyPack[] = [
-  { kicker: 'Observation begins with attention', title: 'Make distance', titleLine2: 'observable', summary: 'Patient systems reveal structure in signals that arrive faint, late, and incomplete.', action: 'See the field' },
-  { kicker: 'A machine can learn to look', title: 'Teach machines', titleLine2: 'to wonder', summary: 'Useful intelligence starts by knowing the difference between an answer and a better question.', action: 'Open the inquiry' },
-  { kicker: 'Field note / the work continues', title: 'The sky', titleLine2: 'is unfinished', summary: 'Every observation changes the map and gives the next mission somewhere new to begin.', action: 'Read the notes' },
-  { kicker: 'Quiet evidence / live', title: 'Notice', titleLine2: 'what waits', summary: 'We build instruments for the patterns that only appear when nothing is rushed.', action: 'Begin observing' },
-  { kicker: 'Autonomy across distance', title: 'Farther out.', titleLine2: 'Clearer in.', summary: 'Reasoning at the edge makes each transmission smaller, sharper, and more useful.', action: 'Follow the signal' },
-  { kicker: 'Listening is a technical discipline', title: 'Let silence', titleLine2: 'become evidence', summary: 'Absence has structure. The right model can tell quiet from empty.', action: 'Inspect the signal' },
-  { kicker: 'A living index of elsewhere', title: 'A map', titleLine2: 'that keeps learning', summary: 'Observations remain connected as instruments, missions, and hypotheses evolve.', action: 'Enter the atlas' },
-  { kicker: 'Mission systems / delay tolerant', title: 'Build for', titleLine2: 'the long delay', summary: 'When Earth cannot answer in time, bounded intelligence keeps the work moving.', action: 'View the system' },
-  { kicker: 'Detection threshold / 0.04', title: 'Find the', titleLine2: 'almost invisible', summary: 'The most important discovery may begin as a difference too small to trust at first glance.', action: 'Examine the trace' },
-  { kicker: 'Signals are only the beginning', title: 'Turn signals', titleLine2: 'into questions', summary: 'A good observatory does more than collect. It helps a team decide what deserves another look.', action: 'Ask what follows' },
-  { kicker: 'Shared context / one observable world', title: 'One sky.', titleLine2: 'More context.', summary: 'A common intelligence layer lets distant missions contribute to the same evolving picture.', action: 'Connect the field' },
-  { kicker: 'Local inference / orbital time', title: 'Reason at', titleLine2: 'orbital speed', summary: 'Models close to the instrument can protect the moments that matter before they pass.', action: 'See the runtime' },
-  { kicker: 'Continuous survey / night side', title: 'Keep watch', titleLine2: 'beyond daylight', summary: 'Autonomous observation carries the research forward through every communications window.', action: 'Track the survey' },
-  { kicker: 'From observation to intent', title: 'Where data', titleLine2: 'becomes direction', summary: 'Evidence becomes useful when scientists can trace how it changed the next decision.', action: 'Follow the path' },
-  { kicker: 'Decision support / deep field', title: 'See earlier.', titleLine2: 'Decide better.', summary: 'Faster recognition leaves more time for the careful human judgment that follows.', action: 'Review the model' },
-  { kicker: 'Tools for unhurried discovery', title: 'Machines for', titleLine2: 'patient science', summary: 'The goal is not instant certainty. It is disciplined attention at impossible scale.', action: 'Meet the instruments' },
-  { kicker: 'Carrier analysis / adaptive', title: 'Listen past', titleLine2: 'the noise', summary: 'Separate the unusual from the accidental without pretending uncertainty has disappeared.', action: 'Tune the relay' },
-  { kicker: 'Protocol / uncertainty remains', title: 'Leave room', titleLine2: 'for the unknown', summary: 'A trustworthy system preserves ambiguity instead of smoothing it into a convenient answer.', action: 'Read the protocol' },
-  { kicker: 'Research principle / 01', title: 'Observe first.', titleLine2: 'Assume less.', summary: 'Better models begin with evidence that remains inspectable, contestable, and alive.', action: 'Explore the method' },
-  { kicker: 'Progress measured in clarity', title: 'A quieter', titleLine2: 'kind of progress', summary: 'Not louder predictions. Better context, clearer limits, and decisions a team can understand.', action: 'See the approach' },
-  { kicker: 'Photon archive / faint source', title: 'Learn from', titleLine2: 'the faintest light', summary: 'Very old light still carries new information when every trace can be compared in context.', action: 'Open the archive' },
-  { kicker: 'Intelligence belongs in context', title: 'Intelligence', titleLine2: 'with a horizon', summary: 'Models should know where their view ends and where another instrument must take over.', action: 'Find the boundary' },
-  { kicker: 'Inquiry survives the distance', title: 'Keep asking', titleLine2: 'from farther away', summary: 'Exploration advances when missions can form useful next questions before Earth replies.', action: 'Continue outward' },
-  { kicker: 'The useful output is curiosity', title: 'Not answers.', titleLine2: 'Better questions.', summary: 'We design intelligence to expand scientific judgment, not to perform certainty.', action: 'Start a question' }
-];
-
 const storySlogans = [
   'The next observation changes the map.',
   'Distance changes what intelligence must become.',
@@ -578,7 +550,12 @@ const selectCopy = (copySeed: number, layout: Layout): CopyPack => {
   const compact = layout === 'origin' || layout === 'console' || layout === 'aperture' || layout === 'ledger' || layout === 'triptych' || layout === 'command';
   const medium = layout === 'split' || layout === 'diagonal' || layout === 'broadcast' || layout === 'timeline' || layout === 'specimen' || layout === 'signalstack';
   const maxLength = compact ? 28 : medium ? 34 : 46;
-  const compatible = copyPacks.filter((copy) => `${copy.title} ${copy.titleLine2}`.length <= maxLength);
+  const maxLineLength = compact ? 14 : medium ? 18 : 24;
+  const compatible = copyPacks.filter((copy) =>
+    `${copy.title} ${copy.titleLine2}`.length <= maxLength
+    && copy.title.length <= maxLineLength
+    && copy.titleLine2.length <= maxLineLength
+  );
   return seededPick(random, compatible.length ? compatible : copyPacks);
 };
 

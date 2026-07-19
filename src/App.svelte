@@ -95,10 +95,17 @@
 
   function launchRemix() {
     const seed = nextRemixSeed();
-    active = generateDesign(seed);
+    const previousSlogan = `${active.title} ${active.titleLine2}`;
+    let copySeed = seed;
+    let candidate = generateDesign(seed, undefined, copySeed);
+    for (let attempt = 0; attempt < 8 && `${candidate.title} ${candidate.titleLine2}` === previousSlogan; attempt += 1) {
+      copySeed = (copySeed + REMIX_STEP) >>> 0 || REMIX_STEP;
+      candidate = generateDesign(seed, undefined, copySeed);
+    }
+    active = candidate;
     view = 'landing';
     isMix = true;
-    window.history.pushState({}, '', `${window.location.pathname}${window.location.search}#/g/${seed}`);
+    window.history.pushState({}, '', `${window.location.pathname}${window.location.search}#/g/${seed}/${copySeed}`);
     window.scrollTo({ top: 0 });
   }
 
@@ -106,7 +113,18 @@
   const mix = launchRemix;
 
   function changeCopy() {
-    const copySeed = randomSeed();
+    const previousSlogan = `${active.title} ${active.titleLine2}`;
+    const base = designs.find((design) => design.id === active.id) ?? active;
+    let copySeed = randomSeed();
+    let candidate = active.generated && active.seed
+      ? generateDesign(active.seed, undefined, copySeed)
+      : remixCopy(base, copySeed);
+    for (let attempt = 0; attempt < 8 && `${candidate.title} ${candidate.titleLine2}` === previousSlogan; attempt += 1) {
+      copySeed = randomSeed();
+      candidate = active.generated && active.seed
+        ? generateDesign(active.seed, undefined, copySeed)
+        : remixCopy(base, copySeed);
+    }
     window.location.hash = active.generated && active.seed
       ? `/g/${active.seed}/${copySeed}`
       : `/c/${active.id}/${copySeed}`;
