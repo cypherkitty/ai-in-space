@@ -1,7 +1,7 @@
 <script lang="ts">
   import Brand from './Brand.svelte';
   import { designAnalyticsContext, trackEvent } from './analytics';
-  import { previewSceneFor, type Design } from './designs';
+  import { previewSceneFor, sceneCount, type Design } from './designs';
   export let designs: Design[];
   export let onOpen: (design: Design) => void;
   export let onRandom: () => void;
@@ -38,7 +38,7 @@
   <section class="intro">
     <p>Design atlas / {designs.length} transmissions</p>
     <h1>One system.<br /><em>Millions of skies.</em></h1>
-    <div class="intro-note"><span>Coherent by design</span><p>{curatedCount} art-direction families constrain the generator. {generatedCount} saved signals demonstrate the range without sacrificing the shared visual language.</p></div>
+    <div class="intro-note"><span>Coherent by design</span><p>{curatedCount} art-direction families × {sceneCount} visual worlds constrain the generator. Intelligence changes form—from instrument to ecosystem—without losing the shared visual language.</p></div>
   </section>
 
   <nav class="filters" aria-label="Design atlas filters">
