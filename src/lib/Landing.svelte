@@ -250,6 +250,7 @@
 
 <style>
   .site { --font-display: 'Space Grotesk Variable', sans-serif; --font-body: 'Manrope Variable', sans-serif; --font-mono: 'IBM Plex Mono', monospace; color: var(--text); background: var(--bg); }
+  .site::before, .site::after { pointer-events: none; }
   button { color: inherit; font: inherit; }
   .hero { position: relative; min-height: max(720px, 100svh); overflow: hidden; isolation: isolate; background: var(--bg); }
   .scene, .grain, .grid-lines { position: absolute; inset: 0; pointer-events: none; }
