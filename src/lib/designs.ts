@@ -70,7 +70,6 @@ export interface Design {
   text: string;
   muted: string;
   panel: string;
-  tone?: 'light' | 'dark';
   kicker: string;
   title: string;
   titleLine2: string;
@@ -116,7 +115,7 @@ export const curatedDesigns: Design[] = [
   {
     id: 'lunar-signal', index: '02', name: 'Lunar Signal', note: 'Quiet intelligence', layout: 'editorial', scene: farObservatory,
     visual: 'orbit',
-    accent: '#72f7db', accent2: '#dffcf7', bg: '#e9ece8', text: '#101615', muted: '#596965', panel: 'rgba(236, 241, 237, .74)', tone: 'light',
+    accent: '#72f7db', accent2: '#cfe5de', bg: '#131816', text: '#e0e7e3', muted: '#82908a', panel: 'rgba(20, 29, 26, .82)',
     kicker: 'Field note 021 / autonomous science', title: 'A signal', titleLine2: 'learns to listen',
     summary: 'We build systems that notice the faint evidence hidden inside very large silences.', action: 'Read field notes', widgets: ['archive', 'anomaly'], stats: [['12k', 'ice spectra', 'indexed'], ['0.04', 'false signal', 'ratio'], ['06', 'outer moon', 'models']]
   },
@@ -165,7 +164,7 @@ export const curatedDesigns: Design[] = [
   {
     id: 'pale-machine', index: '09', name: 'Pale Machine', note: 'Lunar modernism', layout: 'atlas', scene: ringWorld,
     visual: 'orbit',
-    accent: '#0f6d61', accent2: '#111815', bg: '#e7e9e4', text: '#121714', muted: '#5f6963', panel: 'rgba(242, 244, 239, .82)', tone: 'light',
+    accent: '#62b7aa', accent2: '#c6d0ca', bg: '#1a1c1b', text: '#e3e6e3', muted: '#8b9690', panel: 'rgba(27, 32, 30, .88)',
     kicker: 'An operating system for elsewhere', title: 'Built for', titleLine2: 'the quiet',
     summary: 'Tools for scientists and machines working at the edge of what can be known.', action: 'See the system', widgets: ['memory', 'archive'], stats: [['03', 'research', 'programs'], ['128', 'edge model', 'cores'], ['1.0', 'shared', 'protocol']]
   },
@@ -228,7 +227,7 @@ export const curatedDesigns: Design[] = [
   {
     id: 'specimen-forty-six', index: '18', name: 'Specimen Forty-Six', note: 'Scientific dossier', layout: 'specimen', scene: gravityLens,
     visual: 'orbit',
-    accent: '#145f52', accent2: '#13221d', bg: '#e8eadf', text: '#101713', muted: '#627068', panel: 'rgba(244, 245, 236, .88)', tone: 'light',
+    accent: '#73b7a7', accent2: '#cbd4cf', bg: '#171a18', text: '#e1e5e2', muted: '#87918b', panel: 'rgba(24, 30, 27, .9)',
     kicker: 'Object 46 / evidence dossier', title: 'Study the', titleLine2: 'exception',
     summary: 'A single anomaly becomes a living dossier: image, context, disagreement, and the next test.', action: 'Open the dossier', widgets: ['archive', 'anomaly'], stats: [['046', 'candidate', 'object'], ['7σ', 'signal', 'strength'], ['12', 'review', 'passes']]
   },
@@ -597,8 +596,7 @@ export function generateDesign(seed: number, catalogIndex?: number, copySeed = s
   const random = seededRandom(seed);
   const base = seededPick(random, curatedDesigns);
   const rules = familyRules[base.layout];
-  const sameTonePalettes = curatedDesigns.filter((design) => (design.tone ?? 'dark') === (base.tone ?? 'dark'));
-  const palette = random() < 0.68 ? base : seededPick(random, sameTonePalettes);
+  const palette = random() < 0.68 ? base : seededPick(random, curatedDesigns);
   const copy = selectCopy(copySeed, base.layout);
   const visual = seededPick(random, rules.visuals);
   const copyLength = `${copy.title} ${copy.titleLine2}`.length;
@@ -623,7 +621,6 @@ export function generateDesign(seed: number, catalogIndex?: number, copySeed = s
     text: palette.text,
     muted: palette.muted,
     panel: palette.panel,
-    tone: palette.tone,
     kicker: copy.kicker,
     title: copy.title,
     titleLine2: copy.titleLine2,

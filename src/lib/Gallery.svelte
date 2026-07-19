@@ -53,7 +53,6 @@
         type="button"
         data-design-id={design.id}
         class:feature={filter === 'curated' ? i === 0 || i === 3 || i === 8 || design.id === 'gravity-well' || design.id === 'three-body' || design.id === 'constellation-engine' || design.id === 'periapsis-control' : i % 13 === 0}
-        class:light={design.tone === 'light'}
         class={`design-card preview-${design.layout}`}
         style={`--accent:${design.accent};--accent2:${design.accent2};--bg:${design.bg};--text:${design.text};--muted:${design.muted};--scene:url(${previewSceneFor(design.scene)})`}
         onclick={() => openDesign(design)}
@@ -181,7 +180,6 @@
   .preview-signalstack .preview-orbit { right: 5%; opacity: .42; }
   .preview-signalstack .preview::before { content: '91.40 MHZ — CARRIER LOCKED — PATTERN 06'; position: absolute; z-index: 2; left: 0; right: 0; top: 63%; padding: .45rem 5%; border-block: 1px solid color-mix(in srgb,var(--accent) 30%,transparent); color: var(--accent); font-family: var(--font-mono); font-size: .4rem; letter-spacing: .14em; }
 
-  .light .preview-bg { mix-blend-mode: multiply; }
   .card-meta { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem 1.5rem; background: #0b0e10; border-top: 1px solid #24282c; }
   .card-meta > span { color: var(--accent); font-family: var(--font-mono); font-size: .55rem; }
   .card-meta div { display: flex; flex-direction: column; gap: .2rem; }
