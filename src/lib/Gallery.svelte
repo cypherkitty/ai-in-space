@@ -52,6 +52,7 @@
       <button
         type="button"
         data-design-id={design.id}
+        data-exposure={design.exposureBand ?? 'deep'}
         class:feature={filter === 'curated' ? i === 0 || i === 3 || i === 8 || design.id === 'gravity-well' || design.id === 'three-body' || design.id === 'constellation-engine' || design.id === 'periapsis-control' : i % 13 === 0}
         class={`design-card preview-${design.layout}`}
         style={`--accent:${design.accent};--accent2:${design.accent2};--bg:${design.bg};--text:${design.text};--muted:${design.muted};--scene:url(${previewSceneFor(design.scene)})`}

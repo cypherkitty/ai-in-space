@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "audit:slogans": "tsx scripts/audit-slogans.ts"
+    "audit:slogans": "tsx scripts/audit-slogans.ts",
+    "audit:exposure": "tsx scripts/audit-exposure.ts"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^6.2.1",

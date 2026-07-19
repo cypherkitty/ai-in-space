@@ -13,6 +13,7 @@ import oceanWorldPreview from './assets/previews/ocean-world-preview.jpg';
 import solarSailPreview from './assets/previews/solar-sail-preview.jpg';
 import farObservatoryPreview from './assets/previews/far-observatory-preview.jpg';
 import { copyPacks, type CopyPack } from './slogans';
+import { applyExposure, exposureForSeed, type ExposureBand } from './exposure';
 
 export type Layout =
   | 'origin'
@@ -85,6 +86,8 @@ export interface Design {
   treatment?: TitleTreatment;
   texture?: Texture;
   sceneAlign?: SceneAlign;
+  exposure?: number;
+  exposureBand?: ExposureBand;
 }
 
 export type ResearchPrinciple = {
@@ -116,7 +119,7 @@ export const curatedDesigns: Design[] = [
   {
     id: 'lunar-signal', index: '02', name: 'Lunar Signal', note: 'Quiet intelligence', layout: 'editorial', scene: farObservatory,
     visual: 'orbit',
-    accent: '#72f7db', accent2: '#cfe5de', bg: '#131816', text: '#e0e7e3', muted: '#82908a', panel: 'rgba(20, 29, 26, .82)',
+    accent: '#8df9e2', accent2: '#e0e9e5', bg: '#303735', text: '#f0f3f1', muted: '#b4beb9', panel: 'rgba(18, 25, 23, .78)', exposure: .16, exposureBand: 'graphite',
     kicker: 'Field note 021 / autonomous science', title: 'A signal', titleLine2: 'learns to listen',
     summary: 'We build systems that notice the faint evidence hidden inside very large silences.', action: 'Read field notes', widgets: ['archive', 'anomaly'], stats: [['12k', 'ice spectra', 'indexed'], ['0.04', 'false signal', 'ratio'], ['06', 'outer moon', 'models']]
   },
@@ -165,7 +168,7 @@ export const curatedDesigns: Design[] = [
   {
     id: 'pale-machine', index: '09', name: 'Pale Machine', note: 'Lunar modernism', layout: 'atlas', scene: ringWorld,
     visual: 'orbit',
-    accent: '#62b7aa', accent2: '#c6d0ca', bg: '#1a1c1b', text: '#e3e6e3', muted: '#8b9690', panel: 'rgba(27, 32, 30, .88)',
+    accent: '#91dace', accent2: '#e3e7e5', bg: '#3a3d3b', text: '#f2f3f2', muted: '#b9c0bc', panel: 'rgba(24, 28, 26, .8)', exposure: .2, exposureBand: 'graphite',
     kicker: 'An operating system for elsewhere', title: 'Built for', titleLine2: 'the quiet',
     summary: 'Tools for scientists and machines working at the edge of what can be known.', action: 'See the system', widgets: ['memory', 'archive'], stats: [['03', 'research', 'programs'], ['128', 'edge model', 'cores'], ['1.0', 'shared', 'protocol']]
   },
@@ -228,7 +231,7 @@ export const curatedDesigns: Design[] = [
   {
     id: 'specimen-forty-six', index: '18', name: 'Specimen Forty-Six', note: 'Scientific dossier', layout: 'specimen', scene: gravityLens,
     visual: 'orbit',
-    accent: '#73b7a7', accent2: '#cbd4cf', bg: '#171a18', text: '#e1e5e2', muted: '#87918b', panel: 'rgba(24, 30, 27, .9)',
+    accent: '#9ad5c7', accent2: '#e0e6e2', bg: '#323834', text: '#f0f2f1', muted: '#b1bbb5', panel: 'rgba(23, 28, 25, .82)', exposure: .18, exposureBand: 'graphite',
     kicker: 'Object 46 / evidence dossier', title: 'Study the', titleLine2: 'exception',
     summary: 'A single anomaly becomes a living dossier: image, context, disagreement, and the next test.', action: 'Open the dossier', widgets: ['archive', 'anomaly'], stats: [['046', 'candidate', 'object'], ['7σ', 'signal', 'strength'], ['12', 'review', 'passes']]
   },
@@ -574,6 +577,8 @@ export function generateDesign(seed: number, catalogIndex?: number, copySeed = s
   const base = seededPick(random, curatedDesigns);
   const rules = familyRules[base.layout];
   const palette = random() < 0.68 ? base : seededPick(random, curatedDesigns);
+  const exposureSpec = exposureForSeed(seed);
+  const exposedPalette = applyExposure(palette, exposureSpec);
   const copy = selectCopy(copySeed, base.layout);
   const visual = seededPick(random, rules.visuals);
   const copyLength = `${copy.title} ${copy.titleLine2}`.length;
@@ -586,18 +591,20 @@ export function generateDesign(seed: number, catalogIndex?: number, copySeed = s
     id: `signal-${seed.toString(36)}`,
     index: catalogIndex ? `G${catalogIndex.toString().padStart(2, '0')}` : `R${(seed % 100).toString().padStart(2, '0')}`,
     name: `${prefix} ${suffix}`,
-    note: `${base.name} family · ${visual} core`,
+    note: `${base.name} family · ${visual} core · ${exposureSpec.label}`,
     generated: true,
     seed,
     copySeed,
     visual,
     scene: seededPick(random, scenes),
-    accent: palette.accent,
-    accent2: palette.accent2,
-    bg: palette.bg,
-    text: palette.text,
-    muted: palette.muted,
-    panel: palette.panel,
+    accent: exposedPalette.accent,
+    accent2: exposedPalette.accent2,
+    bg: exposedPalette.bg,
+    text: exposedPalette.text,
+    muted: exposedPalette.muted,
+    panel: exposedPalette.panel,
+    exposure: exposedPalette.exposure,
+    exposureBand: exposedPalette.exposureBand,
     kicker: copy.kicker,
     title: copy.title,
     titleLine2: copy.titleLine2,
