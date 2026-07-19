@@ -97,6 +97,7 @@ export type WidgetName =
 export type TitleTreatment = 'native' | 'outline' | 'editorial' | 'mono';
 export type Texture = 'grid' | 'scan' | 'grain' | 'clean';
 export type SceneAlign = 'left' | 'center' | 'right';
+export type HeroComposition = 'native' | 'cinema' | 'masthead' | 'viewport' | 'island' | 'magazine' | 'index' | 'horizon-strip';
 
 export interface Design {
   id: string;
@@ -126,6 +127,7 @@ export interface Design {
   treatment?: TitleTreatment;
   texture?: Texture;
   sceneAlign?: SceneAlign;
+  composition?: HeroComposition;
   exposure?: number;
   exposureBand?: ExposureBand;
 }
@@ -707,7 +709,8 @@ export function generateDesign(seed: number, catalogIndex?: number, copySeed = s
     stats: seededPick(random, curatedDesigns).stats,
     treatment: seededPick(random, treatmentPool.length ? treatmentPool : ['native']),
     texture: seededPick(random, rules.textures),
-    sceneAlign: seededPick(random, rules.alignments)
+    sceneAlign: seededPick(random, rules.alignments),
+    composition: seededPick(random, ['native', 'cinema', 'masthead', 'viewport', 'island', 'magazine', 'index', 'horizon-strip'] as const)
   };
 }
 
