@@ -157,15 +157,140 @@ const newSloganRows: SloganRow[] = [
   ['The future', 'needs better instruments', 'Next capability / design active', 'New questions become reachable when sensing, context, and judgment are designed as one system.']
 ];
 
+const additionalSloganRows: SloganRow[] = [
+  // Cosmic cognition
+  ['Give the cosmos', 'a second reader', 'Parallel interpretation / sky open', 'Machine perception can revisit familiar observations and notice relationships that escaped the first reading.'],
+  ['Turn wonder', 'into coordinates', 'Curiosity vector / destination forming', 'A compelling mystery becomes actionable when its shape can guide the next precise observation.'],
+  ['Train attention', 'on the infinite', 'Perception engine / scale unbounded', 'Intelligence helps finite teams remain attentive across a universe of simultaneous events.'],
+  ['Let the sky', 'challenge the model', 'Reality check / forecast exposed', 'Every observation is an opportunity for the universe to correct what the system expected.'],
+  ['Grow insight', 'between the stars', 'Distributed cognition / nodes awake', 'Distant instruments become more capable when their separate perspectives contribute to one inquiry.'],
+  ['Teach the telescope', 'to reconsider', 'Second-look protocol / active', 'A thoughtful instrument can return to evidence when a new context changes its meaning.'],
+  ['Make perception', 'travel farther', 'Remote intelligence / aperture extended', 'The reach of an observatory grows when interpretation can operate wherever the photons arrive.'],
+  ['Give deep space', 'a working memory', 'Long-range context / state preserved', 'Persistent reasoning allows distant missions to build knowledge instead of repeatedly beginning again.'],
+  ['Ask more', 'of every photon', 'Information yield / spectrum unlocked', 'Careful inference draws several testable clues from light that once supported only one measurement.'],
+  ['Let intelligence', 'meet the sublime', 'Cognitive frontier / awe retained', 'Powerful analysis can deepen wonder by revealing how much structure remains beyond explanation.'],
+
+  // Instruments and interfaces
+  ['Build an instrument', 'that notices back', 'Responsive optics / attention returned', 'The observatory adapts its focus when the field presents something more valuable than the plan anticipated.'],
+  ['Make the dashboard', 'part of discovery', 'Interface science / hypotheses visible', 'A good display helps researchers form connections rather than merely monitor machinery.'],
+  ['Turn calibration', 'into confidence', 'Reference cycle / trust renewed', 'Continuous self-checks make every ambitious conclusion easier to examine and defend.'],
+  ['Design controls', 'for the unexpected', 'Adaptive console / options ready', 'Interfaces should remain useful when the event on screen has no familiar operating procedure.'],
+  ['Let sensors', 'compare notes', 'Instrument dialogue / agreement tested', 'Independent measurements strengthen one another by exposing both consensus and productive disagreement.'],
+  ['Put context', 'inside the lens', 'Observation frame / history embedded', 'Each image becomes richer when the circumstances of its capture remain inseparable from it.'],
+  ['Make every pixel', 'accountable', 'Imaging chain / origin traceable', 'Researchers can follow a visual claim through processing and back to the detector that received it.'],
+  ['Tune the system', 'to possibility', 'Search posture / discovery weighted', 'The instrument balances known targets with enough flexibility to recognize an unplanned opportunity.'],
+  ['Shape data', 'for human eyes', 'Legibility layer / meaning surfaced', 'Complex evidence becomes actionable when its structure is presented without hiding its uncertainty.'],
+  ['Let the console', 'invite dissent', 'Review interface / alternatives present', 'The strongest interpretation shares the screen with credible reasons it might still be wrong.'],
+
+  // Collective science
+  ['Many instruments', 'one conversation', 'Federated science / channel shared', 'Observatories with different strengths can contribute evidence without surrendering their individual perspective.'],
+  ['Connect the experts', 'to the edge', 'Research link / distance collapsed', 'Specialist judgment can shape onboard priorities even when direct control is impossible.'],
+  ['Give every mission', 'a common language', 'Semantic relay / concepts aligned', 'Shared descriptions allow discoveries from unlike instruments to become comparable.'],
+  ['Let teams', 'inherit momentum', 'Knowledge handoff / inquiry continuous', 'New researchers can continue the reasoning behind a mission instead of reconstructing it from fragments.'],
+  ['Make discovery', 'a shared orbit', 'Collaborative cycle / evidence circulating', 'Ideas improve as observations move repeatedly between instruments, models, and people.'],
+  ['Bring distant labs', 'to one table', 'Joint analysis / viewpoints synchronized', 'Distributed researchers can examine the same evidence while preserving the detail each discipline needs.'],
+  ['Turn disagreement', 'into resolution', 'Scientific debate / test designed', 'Conflicting interpretations become a blueprint for the measurement that can separate them.'],
+  ['Let expertise', 'cross the vacuum', 'Operational knowledge / uplink durable', 'Human insight becomes a reusable capability that travels with the mission.'],
+  ['Build consensus', 'from independent views', 'Multi-array result / overlap measured', 'Agreement means more when separate methods arrive there without sharing the same blind spots.'],
+  ['Keep collaboration', 'in the telemetry', 'Team context / decisions attached', 'The record preserves who questioned, revised, and strengthened each important conclusion.'],
+
+  // Positive futures
+  ['Open a brighter', 'age of inquiry', 'Discovery horizon / access expanding', 'Better tools can place ambitious scientific questions within reach of many more people.'],
+  ['Prepare tomorrow', 'for sharper sight', 'Future aperture / systems ready', 'We build today so the next generation can measure phenomena we can only imagine.'],
+  ['Let knowledge', 'travel outward', 'Learning mission / frontier growing', 'Every expedition carries the accumulated care of earlier research into a new environment.'],
+  ['Build optimism', 'from evidence', 'Progress signal / claims grounded', 'Hope becomes durable when it is supported by discoveries people can inspect together.'],
+  ['Give curiosity', 'more sky', 'Open science / reach extended', 'Accessible intelligence can widen participation in the work of understanding the universe.'],
+  ['Turn discovery', 'into stewardship', 'Knowledge to care / planet connected', 'What we learn beyond Earth can sharpen how thoughtfully we understand and protect home.'],
+  ['Make exploration', 'a renewable idea', 'Mission cycle / insight reinvested', 'Each answer should create capabilities and questions that make the next expedition possible.'],
+  ['Carry hope', 'with the hardware', 'Purpose payload / future aboard', 'A spacecraft is also a promise that patient cooperation can reach beyond present limits.'],
+  ['Build the future', 'with open eyes', 'Forward design / consequences visible', 'Ambition becomes trustworthy when progress includes reflection, evidence, and responsibility.'],
+  ['Let the frontier', 'belong to everyone', 'Shared universe / access widening', 'The value of exploration grows when its tools and discoveries invite broad participation.'],
+
+  // Life and living systems
+  ['Look for life', 'without assuming Earth', 'Biology search / definitions flexible', 'The widest search recognizes organization and adaptation before demanding familiar chemistry.'],
+  ['Let chemistry', 'tell its own story', 'Molecular ecology / pathways traced', 'Networks of reactions can reveal whether an environment is merely active or persistently alive.'],
+  ['Find habitats', 'inside extremes', 'Survival envelope / niches mapped', 'Conditions that appear hostile at one scale may shelter possibility at another.'],
+  ['Read a biosphere', 'in reflected light', 'Living spectrum / seasonal pulse', 'Subtle recurring changes can expose a planet whose surface and atmosphere evolve together.'],
+  ['Ask the ocean', 'what it remembers', 'Subsurface chemistry / cycles retained', 'Dissolved materials may preserve a long record of energy, geology, and possible biology.'],
+  ['Listen for', 'metabolic weather', 'Atmosphere balance / life considered', 'Persistent chemical imbalance can hint at processes continually reshaping a distant world.'],
+  ['Map the places', 'where life could begin', 'Habitability atlas / pathways ranked', 'Evidence from stars, rocks, water, and time can focus the search without narrowing imagination.'],
+  ['Let alien nature', 'stay alien', 'Novel biology / assumptions suspended', 'Discovery starts by respecting forms of organization that do not fit terrestrial categories.'],
+  ['Follow energy', 'toward possibility', 'Habitability flow / gradients measured', 'Where usable energy persists, complex chemistry gains room to organize and endure.'],
+  ['Search gently', 'for living worlds', 'Planetary care / contact restrained', 'Exploration can pursue transformative knowledge while protecting the environments it hopes to understand.'],
+
+  // Fundamental physics
+  ['Let gravity', 'draw the hidden', 'Curved light / mass revealed', 'Distorted backgrounds turn invisible structure into a measurable architecture.'],
+  ['Measure the universe', 'between ticks', 'Precision clock / spacetime sampled', 'Tiny differences in time can expose motion, gravity, and physics across enormous distances.'],
+  ['Read the vacuum', 'for fingerprints', 'Quantum field / fluctuation study', 'Apparent emptiness may carry subtle signatures of the laws shaping everything within it.'],
+  ['Find the rule', 'inside the exception', 'Physics anomaly / theory under test', 'A stubborn mismatch can point toward a more complete description of nature.'],
+  ['Use light', 'as a ruler', 'Interferometric span / distance resolved', 'Phase and timing transform photons into measurements of extraordinary precision.'],
+  ['Watch spacetime', 'carry a message', 'Gravity wave / event arriving', 'Ripples in geometry preserve the final motion of objects that emit almost no light.'],
+  ['Turn symmetry', 'toward experiment', 'Invariant search / prediction sharpened', 'Elegant mathematical patterns become science when they specify what an instrument should observe.'],
+  ['Let precision', 'open new worlds', 'Measurement frontier / errors shrinking', 'Reducing uncertainty can reveal entire classes of phenomena hidden inside yesterday’s noise.'],
+  ['Ask matter', 'how it began', 'Origin study / particles compared', 'The composition of distant environments retains clues from the earliest transformations of the cosmos.'],
+  ['Make the invisible', 'leave evidence', 'Indirect detection / effects collected', 'What cannot be seen directly can still be known through the changes it produces around it.'],
+
+  // Computation and learning
+  ['Let models', 'learn in public', 'Inspectable training / revisions shown', 'Scientific intelligence earns trust when its changing assumptions remain open to examination.'],
+  ['Compute less', 'understand more', 'Efficient inference / relevance first', 'Focused reasoning can reduce energy and complexity while preserving what matters scientifically.'],
+  ['Make every update', 'earn its place', 'Learning gate / evidence required', 'The system changes its beliefs only when new observations provide a traceable reason.'],
+  ['Teach models', 'to design the next test', 'Inquiry corpus / reasoning expanded', 'Models become better research partners when they learn how uncertainty creates the next experiment.'],
+  ['Let algorithms', 'practice restraint', 'Bounded action / thresholds explicit', 'Knowing when not to classify or intervene is a core capability, not a failure.'],
+  ['Turn raw streams', 'into quiet insight', 'Edge pipeline / relevance distilled', 'Continuous computation can surface rare meaningful changes without demanding continuous human attention.'],
+  ['Make learning', 'survive deployment', 'Adaptive flight / safeguards intact', 'Models can improve in operation while preserving tested boundaries and a recoverable history.'],
+  ['Give inference', 'a memory of causes', 'Causal context / correlations challenged', 'Reasoning becomes more useful when it distinguishes association from mechanisms a mission can test.'],
+  ['Let small models', 'reach big questions', 'Compact intelligence / purpose tuned', 'Efficient systems designed around a mission can outperform general complexity where resources are scarce.'],
+  ['Build intelligence', 'that stays curious', 'Learning posture / closure delayed', 'A capable model keeps searching for disconfirming evidence after finding a plausible explanation.'],
+
+  // Exploration modes
+  ['Sail on', 'the pressure of light', 'Photon drive / trajectory opening', 'A nearly weightless push can carry patient instruments toward destinations beyond conventional fuel.'],
+  ['Meet the comet', 'before sunrise', 'Intercept course / volatile history', 'Early arrival can observe ancient material as warmth begins to transform it.'],
+  ['Send a swarm', 'instead of a monument', 'Distributed probes / resilience gained', 'Many modest explorers can cover more possibilities and continue when individual units fail.'],
+  ['Land where', 'the map is incomplete', 'Terrain inference / descent adaptive', 'Onboard perception can choose a safe scientific destination from conditions revealed during arrival.'],
+  ['Explore the shadow', 'as a resource', 'Cold region / pristine record', 'Places untouched by sunlight may preserve materials and histories lost elsewhere.'],
+  ['Turn flybys', 'into encounters', 'Rapid passage / attention compressed', 'Fast local reasoning helps a brief crossing produce a deliberate sequence of discoveries.'],
+  ['Let orbit', 'become a laboratory', 'Microgravity platform / experiments linked', 'Repeated access to changing conditions makes the path itself an instrument.'],
+  ['Build routes', 'through changing worlds', 'Dynamic navigation / terrain alive', 'Explorers can revise motion as weather, ice, dust, and light reshape the environment.'],
+  ['Send patience', 'past the heliopause', 'Interstellar precursor / decades embraced', 'Long-lived systems can transform time from an obstacle into the foundation of a new scale of science.'],
+  ['Let robots', 'prepare the welcome', 'Remote construction / habitat forming', 'Autonomous builders can create safe, useful infrastructure before people make the journey.'],
+
+  // Responsibility and trust
+  ['Make power', 'easy to question', 'Governance layer / review built in', 'Capability remains accountable when people can inspect, challenge, and redirect its use.'],
+  ['Let safety', 'shape the ambition', 'Mission ethics / constraints creative', 'Thoughtful boundaries can inspire designs that are both more responsible and more resilient.'],
+  ['Protect the worlds', 'we hope to know', 'Planetary protocol / contamination blocked', 'Scientific care begins by preserving the integrity of places before interpreting them.'],
+  ['Keep agency', 'with the explorers', 'Human direction / automation aligned', 'Technology expands what teams can accomplish while leaving purpose and judgment in human hands.'],
+  ['Make transparency', 'mission critical', 'Operational logic / inspection ready', 'Clear reasoning paths help teams respond safely when systems and environments surprise one another.'],
+  ['Design for', 'a graceful refusal', 'Safety boundary / no-go legible', 'A trustworthy machine can decline an unsafe action and explain the constraint that stopped it.'],
+  ['Let values', 'reach the frontier', 'Ethical payload / choices encoded', 'Distance should not separate autonomous action from the principles guiding the mission.'],
+  ['Preserve choice', 'under automation', 'Decision space / options maintained', 'Good assistance clarifies alternatives instead of quietly collapsing them into one path.'],
+  ['Keep discovery', 'worthy of trust', 'Scientific integrity / methods visible', 'Extraordinary results gain strength through reproducibility, candor, and patient verification.'],
+  ['Build systems', 'that welcome oversight', 'Review channel / authority shared', 'Accountability works best when it is an ordinary operating feature rather than an emergency addition.'],
+
+  // Poetic field notes
+  ['There is more', 'inside the quiet', 'Low signal / attention deepening', 'Careful observation finds texture where hurried instruments report only absence.'],
+  ['Let distance', 'change the question', 'Far field / perspective transformed', 'A remote viewpoint can reveal relationships that disappear when everything feels close.'],
+  ['Follow the glow', 'around the answer', 'Peripheral evidence / context bright', 'The surrounding traces often explain more than the obvious center of an event.'],
+  ['Listen until', 'the pattern breathes', 'Rhythm search / cadence emerging', 'Long attention allows irregular events to reveal the timing that connects them.'],
+  ['Make a home', 'for unfinished ideas', 'Research habitat / drafts alive', 'Early interpretations deserve space to evolve before they are judged as conclusions.'],
+  ['Let the stars', 'remain surprising', 'Open forecast / novelty protected', 'Prediction should sharpen observation without deciding in advance what the universe may contain.'],
+  ['Carry a question', 'into the dark', 'Inquiry beacon / course steady', 'A precise unknown can guide exploration more faithfully than a premature answer.'],
+  ['Find tomorrow', 'in ancient light', 'Deep archive / future insight', 'Old photons can unlock new science when examined with instruments their sources never imagined.'],
+  ['Give the night', 'another meaning', 'Interpretation shift / field renewed', 'Each new way of seeing transforms darkness from a limit into a source of information.'],
+  ['Leave the universe', 'more interesting', 'Discovery ethic / wonder multiplied', 'The best intelligence does not shrink mystery; it reveals richer questions within it.']
+];
+
 const actions = ['Explore the field', 'Open the inquiry', 'Follow the evidence', 'Enter the system', 'Read the mission'];
 
-export const newCopyPacks: CopyPack[] = newSloganRows.map(([title, titleLine2, kicker, summary], index) => ({
+const toCopyPacks = (rows: SloganRow[], actionOffset = 0): CopyPack[] => rows.map(([title, titleLine2, kicker, summary], index) => ({
   kicker,
   title,
   titleLine2,
   summary,
-  action: actions[index % actions.length]!
+  action: actions[(index + actionOffset) % actions.length]!
 }));
+
+export const additionalCopyPacks: CopyPack[] = toCopyPacks(additionalSloganRows, newSloganRows.length);
+export const newCopyPacks: CopyPack[] = [...toCopyPacks(newSloganRows), ...additionalCopyPacks];
 
 export const copyPacks: CopyPack[] = [...originalCopyPacks, ...newCopyPacks];
 

@@ -1,7 +1,7 @@
-import { auditSlogans, copyPacks, newCopyPacks } from '../src/lib/slogans.ts';
+import { additionalCopyPacks, auditSlogans, compareSlogans, copyPacks, newCopyPacks } from '../src/lib/slogans.ts';
 
 const audit = auditSlogans();
-const expectedNewSlogans = 100;
+const expectedNewSlogans = 200;
 
 console.log(`Slogan library: ${audit.count} total / ${newCopyPacks.length} new`);
 console.log(`Required lexical distance: ${audit.minimumDistance.toFixed(2)}`);
@@ -33,6 +33,20 @@ if (audit.collisions.length > 0) {
     `"${collision.left}" vs "${collision.right}" (distance ${collision.distance.toFixed(3)})`
   ).join('\n');
   throw new Error(`Slogan distance audit failed:\n${details}`);
+}
+
+const priorPacks = copyPacks.slice(0, -additionalCopyPacks.length);
+const additionalComparisons = additionalCopyPacks.flatMap((pack, index) => [
+  ...priorPacks.map((prior) => compareSlogans(pack, prior)),
+  ...additionalCopyPacks.slice(index + 1).map((later) => compareSlogans(pack, later))
+]);
+const additionalMinimumDistance = 0.58;
+const additionalCollisions = additionalComparisons.filter(({ distance }) => distance < additionalMinimumDistance);
+if (additionalCollisions.length > 0) {
+  const details = additionalCollisions.map((collision) =>
+    `"${collision.left}" vs "${collision.right}" (distance ${collision.distance.toFixed(3)})`
+  ).join('\n');
+  throw new Error(`Additional slogan distance audit failed:\n${details}`);
 }
 
 console.log('Slogan distance audit passed.');
