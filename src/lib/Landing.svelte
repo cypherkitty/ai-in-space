@@ -7,6 +7,7 @@
   import Widget from './Widget.svelte';
   import { designAnalyticsContext, trackEvent } from './analytics';
   import { researchPrinciplesFor, type Design, type HeroComposition, type Layout, type WidgetName } from './designs';
+  import { localizedPrinciples, t, type Locale } from './i18n';
 
   export let design: Design;
   export let designCount = 61;
@@ -15,6 +16,8 @@
   export let onCopy: () => void;
   export let onMix: () => void;
   export let onGallery: () => void;
+  export let locale: Locale = 'en';
+  export let onLocaleChange: (locale: Locale) => void;
 
   const scrollToStory = () => document.querySelector('.story')?.scrollIntoView({ behavior: 'smooth' });
   let signupOpen = false;
@@ -83,7 +86,7 @@
     return index === 0 ? 'panel' as const : index === 1 ? 'cut' as const : 'ghost' as const;
   };
 
-  $: principles = researchPrinciplesFor(design);
+  $: principles = localizedPrinciples(design, locale, researchPrinciplesFor(design));
   $: telemetry = telemetryFor(design);
   $: telemetryWidgets = telemetry === 'focus'
     ? design.widgets.slice(0, 1)
@@ -144,31 +147,34 @@
 >
   <section class="hero" aria-labelledby="hero-title" aria-hidden={signupOpen} inert={signupOpen}>
     <div class="scene"></div><div class="grain"></div><div class="grid-lines"></div>
-    <LayoutChrome layout={design.layout} />
+    <LayoutChrome layout={design.layout} {locale} />
 
     <header class="topbar">
       <div class="brand-channel">
         <button class="brand-button" type="button" onclick={onGallery}><Brand /></button>
-        <div class="design-tools" aria-label="Generative design controls">
-          <button class="signal-control" type="button" onclick={() => runExperience('alternate_signal', onShuffle)} aria-label="Receive alternate signal">
-            <span class="signal-status"><i></i> Alternate signal</span>
-            <strong>New interface <b aria-hidden="true">↻</b></strong>
+        <div class="design-tools" aria-label={t(locale, 'newInterface')}>
+          <button class="signal-control" type="button" onclick={() => runExperience('alternate_signal', onShuffle)} aria-label={t(locale, 'alternate')}>
+            <span class="signal-status"><i></i> {t(locale, 'alternate')}</span>
+            <strong>{t(locale, 'newInterface')} <b aria-hidden="true">↻</b></strong>
           </button>
           <div class="design-utilities">
-            <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label="Open design gallery">All {designCount}</button>
-            <button type="button" onclick={() => runExperience('remix', onMix)} class:active={isMix} aria-label="Generate a widget mix">Remix</button>
+            <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label={t(locale, 'atlas')}>{t(locale, 'all')} {designCount}</button>
+            <button type="button" onclick={() => runExperience('remix', onMix)} class:active={isMix}>{t(locale, 'remix')}</button>
           </div>
         </div>
       </div>
       <nav aria-label="Primary">
-        <button type="button" onclick={scrollToStory}>Mission</button>
-        <button type="button" onclick={scrollToStory}>Technology</button>
-        <button type="button" onclick={scrollToStory}>Research</button>
+        <button type="button" onclick={scrollToStory}>{t(locale, 'mission')}</button>
+        <button type="button" onclick={scrollToStory}>{t(locale, 'technology')}</button>
+        <button type="button" onclick={scrollToStory}>{t(locale, 'research')}</button>
       </nav>
-      <button class="explore mission-cta compact" type="button" onclick={() => openSignup('header')}>
-        <span><small>Mission channel open</small><strong>Join the Mission</strong></span>
-        <b aria-hidden="true">↗</b>
-      </button>
+      <div class="header-controls">
+        <button class="locale-toggle" type="button" onclick={() => onLocaleChange(locale === 'en' ? 'ru' : 'en')}>{t(locale, 'language')}</button>
+        <button class="explore mission-cta compact" type="button" onclick={() => openSignup('header')}>
+          <span><small>{t(locale, 'missionOpen')}</small><strong>{t(locale, 'join')}</strong></span>
+          <b aria-hidden="true">↗</b>
+        </button>
+      </div>
     </header>
 
     <main class="hero-copy">
@@ -179,9 +185,9 @@
       <h1 id="hero-title"><span>{design.title}</span><span>{design.titleLine2}</span></h1>
       <p class="summary">{design.summary}</p>
       <div class="actions">
-        <button class="primary mission-cta" type="button" onclick={() => openSignup('hero')}>Join the Mission <span>→</span></button>
-        <button class="secondary-action" type="button" onclick={exploreResearch}>Explore the Research</button>
-        <button class="text-action" type="button" onclick={() => runExperience('new_message', onCopy)}><i>✎</i> New message</button>
+        <button class="primary mission-cta" type="button" onclick={() => openSignup('hero')}>{t(locale, 'join')} <span>→</span></button>
+        <button class="secondary-action" type="button" onclick={exploreResearch}>{t(locale, 'explore')}</button>
+        <button class="text-action" type="button" onclick={() => runExperience('new_message', onCopy)}><i>✎</i> {t(locale, 'newMessage')}</button>
       </div>
     </main>
 
@@ -193,26 +199,26 @@
       {/if}
     </div>
 
-    <aside class={`widgets telemetry-${telemetry}`} aria-label={`Mission telemetry / ${telemetry} composition`}>
+    <aside class={`widgets telemetry-${telemetry}`} aria-label={`${t(locale, 'telemetry')} / ${telemetry}`}>
       {#each telemetryWidgets as widget, i}
         <div class="widget-slot" class:secondary={i > 0}>
-          <Widget type={widget} {design} shell={shellFor(telemetry, widget, i)} />
+          <Widget type={widget} {design} {locale} shell={shellFor(telemetry, widget, i)} />
         </div>
       {/each}
     </aside>
 
     <div class="coordinate">41° 18′ 14″ N&nbsp;&nbsp; / &nbsp;&nbsp;72° 55′ 03″ W</div>
-    <div class="scroll-cue" aria-hidden="true"><span>Scroll to transmit</span><i></i></div>
+    <div class="scroll-cue" aria-hidden="true"><span>{t(locale, 'scroll')}</span><i></i></div>
 
   </section>
 
   <section bind:this={storySection} class="story" id="story" aria-labelledby="story-title" aria-hidden={signupOpen} inert={signupOpen}>
-    <p class="section-label">{design.index} / Working beyond Earth</p>
+    <p class="section-label">{design.index} / {t(locale, 'working')}</p>
     <div class="story-grid">
-      <h2 id="story-title">{design.storyTitle ?? 'The next observation changes the map.'}</h2>
+      <h2 id="story-title">{design.storyTitle ?? t(locale, 'storyFallback')}</h2>
       <div>
-        <p>Not replacing people. Extending what a small team can observe, compare, and decide when the answer is millions of kilometres away.</p>
-        <p>AI in Space develops legible, resilient systems for autonomous science, mission planning, and the discovery of patterns too faint for a hurried eye.</p>
+        <p>{t(locale, 'storyA')}</p>
+        <p>{t(locale, 'storyB')}</p>
       </div>
     </div>
     {#key `${design.id}-${design.copySeed ?? design.seed ?? 'curated'}`}
@@ -226,32 +232,32 @@
         {/each}
       </div>
     {/key}
-    <footer><Brand /><p>INTELLIGENCE FOR ELSEWHERE<br />© 2031 / EARTH</p></footer>
+    <footer><Brand /><p>{t(locale, 'footer')}<br />© 2031 / EARTH</p></footer>
   </section>
 
   {#if signupOpen}
     <div class="signup-layer" role="presentation">
-      <button class="signup-backdrop" type="button" aria-label="Close signup form" onclick={closeSignup}></button>
+      <button class="signup-backdrop" type="button" aria-label={t(locale, 'close')} onclick={closeSignup}></button>
       <div class="signup-dialog" role="dialog" aria-modal="true" aria-labelledby="signup-title" aria-describedby="signup-copy">
-        <button class="signup-close" type="button" aria-label="Close signup form" onclick={closeSignup}>×</button>
-        <p class="signup-label"><i></i> Mission channel / open</p>
+        <button class="signup-close" type="button" aria-label={t(locale, 'close')} onclick={closeSignup}>×</button>
+        <p class="signup-label"><i></i> {t(locale, 'channel')}</p>
         {#if signupSent}
           <div class="signup-success" aria-live="polite">
-            <span>Transmission received</span>
-            <h2 id="signup-title">You’re on the manifest.</h2>
-            <p id="signup-copy">The next meaningful signal will find its way to <strong>{signupEmail}</strong>.</p>
-            <button type="button" onclick={closeSignup}>Return to the mission →</button>
+            <span>{t(locale, 'received')}</span>
+            <h2 id="signup-title">{t(locale, 'manifest')}</h2>
+            <p id="signup-copy">{t(locale, 'nextSignal')} <strong>{signupEmail}</strong>.</p>
+            <button type="button" onclick={closeSignup}>{t(locale, 'returnMission')} →</button>
           </div>
         {:else}
-          <h2 id="signup-title">Join the Mission</h2>
-          <p id="signup-copy">Receive occasional transmissions from AI in Space. No noise—only meaningful updates.</p>
+          <h2 id="signup-title">{t(locale, 'join')}</h2>
+          <p id="signup-copy">{t(locale, 'signupCopy')}</p>
           <form onsubmit={(event) => { event.preventDefault(); submitSignup(); }}>
-            <label for="mission-email">Your email</label>
+            <label for="mission-email">{t(locale, 'email')}</label>
             <div class="signup-field">
               <input bind:this={emailInput} bind:value={signupEmail} id="mission-email" name="email" type="email" autocomplete="email" placeholder="you@earth.system" required />
-              <button type="submit">Join <span>→</span></button>
+              <button type="submit">{t(locale, 'submit')} <span>→</span></button>
             </div>
-            <small>Project updates · Research notes · Launch announcements</small>
+            <small>{t(locale, 'signupMeta')}</small>
           </form>
         {/if}
       </div>
@@ -279,6 +285,9 @@
   .brand-channel { position: relative; z-index: 2; justify-self: start; }
   .brand-button { justify-self: start; padding: 0; }
   .brand-channel > .design-tools { position: absolute; top: calc(100% + 1.8rem); left: 0; width: min(316px, 72vw); }
+  .header-controls { justify-self: end; display: flex; align-items: center; gap: .6rem; }
+  .locale-toggle { padding: .55rem .65rem; border: 0; background: transparent; color: var(--muted); font-family: var(--font-mono); font-size: .48rem; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
+  .locale-toggle:hover { color: var(--accent); }
   nav { display: flex; gap: clamp(1rem, 3.5vw, 3.7rem); }
   nav button, .explore { color: var(--muted); font-family: var(--font-mono); font-size: .61rem; letter-spacing: .18em; text-transform: uppercase; transition: color .2s; }
   nav button:hover, .explore:hover { color: var(--text); }
@@ -740,6 +749,7 @@
     .mission-cta.compact small { display: none; }
     .mission-cta.compact strong { font-size: .46rem; letter-spacing: .08em; }
     .mission-cta.compact b { display: none; }
+    .locale-toggle { padding-inline: .25rem; font-size: .42rem; }
     .hero-copy { top: 24%; }
     h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1, .layout-triptych h1, .layout-timeline h1, .layout-specimen h1, .layout-constellation h1, .layout-command h1, .layout-signalstack h1 { font-size: clamp(3.25rem, 17vw, 5.2rem); line-height: .87; }
     .actions { align-items: flex-start; flex-direction: column; gap: .9rem; }

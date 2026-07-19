@@ -1,33 +1,35 @@
 <script lang="ts">
   import type { Layout } from './designs';
+  import type { Locale } from './i18n';
 
   export let layout: Layout;
+  export let locale: Locale = 'en';
 </script>
 
 {#if layout === 'triptych'}
   <div class="layout-chrome triptych-chrome" aria-hidden="true">
-    <span>01 / QUESTION</span><span>02 / OBSERVATION</span><span>03 / VERDICT</span>
+    <span>01 / {locale === 'ru' ? 'ВОПРОС' : 'QUESTION'}</span><span>02 / {locale === 'ru' ? 'НАБЛЮДЕНИЕ' : 'OBSERVATION'}</span><span>03 / {locale === 'ru' ? 'ВЫВОД' : 'VERDICT'}</span>
   </div>
 {:else if layout === 'timeline'}
   <div class="layout-chrome timeline-chrome" aria-hidden="true">
-    <span><i></i>DEPARTURE</span><span><i></i>CRUISE</span><span><i></i>INFERENCE</span><span><i></i>RETURN</span>
+    <span><i></i>{locale === 'ru' ? 'СТАРТ' : 'DEPARTURE'}</span><span><i></i>{locale === 'ru' ? 'ПОЛЁТ' : 'CRUISE'}</span><span><i></i>{locale === 'ru' ? 'ВЫВОД' : 'INFERENCE'}</span><span><i></i>{locale === 'ru' ? 'ВОЗВРАТ' : 'RETURN'}</span>
   </div>
 {:else if layout === 'specimen'}
   <div class="layout-chrome specimen-chrome" aria-hidden="true">
-    <strong>46</strong><span>ANOMALOUS OBJECT<br />EVIDENCE PLATE</span><i></i>
+    <strong>46</strong><span>{locale === 'ru' ? 'АНОМАЛЬНЫЙ ОБЪЕКТ' : 'ANOMALOUS OBJECT'}<br />{locale === 'ru' ? 'КАРТА ДАННЫХ' : 'EVIDENCE PLATE'}</span><i></i>
   </div>
 {:else if layout === 'constellation'}
   <div class="layout-chrome constellation-chrome" aria-hidden="true">
-    <i></i><i></i><i></i><i></i><i></i><i></i><span>SHARED CONTEXT / 81 NODES</span>
+    <i></i><i></i><i></i><i></i><i></i><i></i><span>{locale === 'ru' ? 'ОБЩИЙ КОНТЕКСТ / 81 УЗЕЛ' : 'SHARED CONTEXT / 81 NODES'}</span>
   </div>
 {:else if layout === 'command'}
   <div class="layout-chrome command-chrome" aria-hidden="true">
-    <span>FLIGHT / AIS-20</span><span>UPLINK<br /><b>STABLE</b></span><span>EDGE MODEL<br /><b>NOMINAL</b></span><span>DECISION WINDOW<br /><b>04:22:18</b></span>
+    <span>{locale === 'ru' ? 'ПОЛЁТ' : 'FLIGHT'} / AIS-20</span><span>{locale === 'ru' ? 'КАНАЛ' : 'UPLINK'}<br /><b>{locale === 'ru' ? 'СТАБИЛЕН' : 'STABLE'}</b></span><span>{locale === 'ru' ? 'МОДЕЛЬ' : 'EDGE MODEL'}<br /><b>{locale === 'ru' ? 'НОРМА' : 'NOMINAL'}</b></span><span>{locale === 'ru' ? 'ОКНО РЕШЕНИЯ' : 'DECISION WINDOW'}<br /><b>04:22:18</b></span>
   </div>
 {:else if layout === 'signalstack'}
   <div class="layout-chrome signalstack-chrome" aria-hidden="true">
-    <span>91.40 MHZ — CARRIER LOCKED — PATTERN 06 —</span>
-    <span>TRANSMISSION LAYER / PHASE / NOISE / INTENT</span>
+    <span>91.40 MHZ — {locale === 'ru' ? 'НЕСУЩАЯ ЗАХВАЧЕНА — ПАТТЕРН 06' : 'CARRIER LOCKED — PATTERN 06'} —</span>
+    <span>{locale === 'ru' ? 'СЛОЙ ПЕРЕДАЧИ / ФАЗА / ШУМ / НАМЕРЕНИЕ' : 'TRANSMISSION LAYER / PHASE / NOISE / INTENT'}</span>
     <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
   </div>
 {/if}
