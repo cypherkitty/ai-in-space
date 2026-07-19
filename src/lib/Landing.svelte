@@ -455,7 +455,7 @@
   .layout-aperture .art.neural { top: 19%; right: 7%; width: min(50vw, 700px); height: min(58vw, 650px); opacity: .62; }
 
   .layout-zenith .scene { background-image: linear-gradient(180deg, var(--bg) 0 10%, color-mix(in srgb, var(--bg) 54%, transparent) 38%, transparent 68%), var(--scene); background-position: center bottom; }
-  .layout-zenith .hero-copy { left: 50%; top: 17%; width: min(960px, 78vw); text-align: center; transform: translateX(-50%); }
+  .layout-zenith .hero-copy { left: 50%; top: 19%; width: min(960px, 78vw); text-align: center; transform: translateX(-50%); }
   .layout-zenith h1 { font-size: clamp(4.5rem, 9vw, 9.5rem); line-height: .8; }
   .layout-zenith .summary { margin-inline: auto; }
   .layout-zenith .actions { justify-content: center; }
@@ -524,7 +524,7 @@
 
   .layout-constellation .scene { background-image: radial-gradient(circle at center, transparent 0 18%, color-mix(in srgb, var(--bg) 35%, transparent) 42%, var(--bg) 82%), var(--scene); background-position: center; opacity: .5; filter: saturate(.6); }
   .layout-constellation .grid-lines { mask-image: radial-gradient(circle at center, #000, transparent 68%); }
-  .layout-constellation .hero-copy { left: 50%; top: 16%; width: min(1120px, 88vw); text-align: center; transform: translateX(-50%); }
+  .layout-constellation .hero-copy { left: 50%; top: 19%; width: min(1120px, 88vw); text-align: center; transform: translateX(-50%); }
   .layout-constellation h1 { font-size: clamp(4.2rem, 8.8vw, 9.8rem); line-height: .8; }
   .layout-constellation .summary { margin-inline: auto; }
   .layout-constellation .actions { justify-content: center; }
@@ -616,12 +616,14 @@
   }
 
   @media (max-width: 900px) {
+    .hero { min-height: 900px; }
     .topbar { height: 82px; grid-template-columns: 1fr auto; }
     nav { display: none; }
     .transmission-rail { left: 1.25rem; top: 94px; max-width: calc(100vw - 2.5rem); }
     .transmission-rail .edition { display: none; }
     .hero-copy, .layout-console .hero-copy, .layout-atlas .hero-copy, .layout-horizon .hero-copy, .layout-aperture .hero-copy, .layout-zenith .hero-copy, .layout-broadcast .hero-copy, .layout-ledger .hero-copy { left: 1.25rem; top: 22%; width: calc(100vw - 2.5rem); transform: none; text-align: left; }
-    h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1 { font-size: clamp(3.6rem, 14vw, 7rem); }
+    h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1 { font-size: clamp(3.4rem, 10.5vw, 6rem); }
+    .layout-broadcast h1 { font-size: clamp(3.35rem, 9.3vw, 5.6rem); }
     .summary { max-width: 34ch; }
     .art { right: -8rem; top: 35%; opacity: .35; }
     .art.neural, .layout-monolith .art.neural, .layout-terminal .art.neural { top: 27%; left: auto; right: -35%; width: 115vw; height: 115vw; transform: none; opacity: .5; }
@@ -640,7 +642,7 @@
     .scroll-cue, .coordinate { display: none; }
     .story-grid { grid-template-columns: 1fr; margin: 4rem 0 5rem; }
     .layout-triptych .hero-copy, .layout-timeline .hero-copy, .layout-specimen .hero-copy, .layout-constellation .hero-copy, .layout-command .hero-copy, .layout-signalstack .hero-copy { left: 1.25rem; top: 20%; width: calc(100vw - 2.5rem); text-align: left; transform: none; }
-    .layout-triptych h1, .layout-timeline h1, .layout-specimen h1, .layout-constellation h1, .layout-command h1, .layout-signalstack h1 { display: block; font-size: clamp(3.6rem, 14vw, 7rem); }
+    .layout-triptych h1, .layout-timeline h1, .layout-specimen h1, .layout-constellation h1, .layout-command h1, .layout-signalstack h1 { display: block; font-size: clamp(3.4rem, 10.5vw, 6rem); }
     .layout-timeline .summary, .layout-timeline .actions, .layout-signalstack .summary, .layout-signalstack .actions { margin-left: 0; }
     .layout-constellation .summary { margin-left: 0; }
     .layout-constellation .actions { justify-content: flex-start; }
