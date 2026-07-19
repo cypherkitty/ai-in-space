@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "audit:slogans": "tsx scripts/audit-slogans.ts",
+    "audit:slogans": "tsx scripts/audit-slogans.ts && tsx scripts/audit-localized-slogans.ts",
     "audit:exposure": "tsx scripts/audit-exposure.ts"
   },
   "devDependencies": {

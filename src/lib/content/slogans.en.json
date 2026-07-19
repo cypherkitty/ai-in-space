@@ -1,0 +1,1570 @@
+[
+  {
+    "kicker": "Observation begins with attention",
+    "title": "Make distance",
+    "titleLine2": "observable",
+    "summary": "Patient systems reveal structure in signals that arrive faint, late, and incomplete.",
+    "action": "See the field"
+  },
+  {
+    "kicker": "A machine can learn to look",
+    "title": "Teach machines",
+    "titleLine2": "to wonder",
+    "summary": "Useful intelligence starts by knowing the difference between an answer and a better question.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Field note / the work continues",
+    "title": "The sky",
+    "titleLine2": "is unfinished",
+    "summary": "Every observation changes the map and gives the next mission somewhere new to begin.",
+    "action": "Read the notes"
+  },
+  {
+    "kicker": "Quiet evidence / live",
+    "title": "Notice",
+    "titleLine2": "what waits",
+    "summary": "We build instruments for the patterns that only appear when nothing is rushed.",
+    "action": "Begin observing"
+  },
+  {
+    "kicker": "Autonomy across distance",
+    "title": "Farther out.",
+    "titleLine2": "Clearer in.",
+    "summary": "Reasoning at the edge makes each transmission smaller, sharper, and more useful.",
+    "action": "Follow the signal"
+  },
+  {
+    "kicker": "Listening is a technical discipline",
+    "title": "Let silence",
+    "titleLine2": "become evidence",
+    "summary": "Absence has structure. The right model can tell quiet from empty.",
+    "action": "Inspect the signal"
+  },
+  {
+    "kicker": "A living index of elsewhere",
+    "title": "A map",
+    "titleLine2": "that keeps learning",
+    "summary": "Observations remain connected as instruments, missions, and hypotheses evolve.",
+    "action": "Enter the atlas"
+  },
+  {
+    "kicker": "Mission systems / delay tolerant",
+    "title": "Build for",
+    "titleLine2": "the long delay",
+    "summary": "When Earth cannot answer in time, bounded intelligence keeps the work moving.",
+    "action": "View the system"
+  },
+  {
+    "kicker": "Detection threshold / 0.04",
+    "title": "Find the",
+    "titleLine2": "almost invisible",
+    "summary": "The most important discovery may begin as a difference too small to trust at first glance.",
+    "action": "Examine the trace"
+  },
+  {
+    "kicker": "Signals are only the beginning",
+    "title": "Turn signals",
+    "titleLine2": "into questions",
+    "summary": "A good observatory does more than collect. It helps a team decide what deserves another look.",
+    "action": "Ask what follows"
+  },
+  {
+    "kicker": "Shared context / one observable world",
+    "title": "One sky.",
+    "titleLine2": "More context.",
+    "summary": "A common intelligence layer lets distant missions contribute to the same evolving picture.",
+    "action": "Connect the field"
+  },
+  {
+    "kicker": "Local inference / orbital time",
+    "title": "Reason at",
+    "titleLine2": "orbital speed",
+    "summary": "Models close to the instrument can protect the moments that matter before they pass.",
+    "action": "See the runtime"
+  },
+  {
+    "kicker": "Continuous survey / night side",
+    "title": "Keep watch",
+    "titleLine2": "beyond daylight",
+    "summary": "Autonomous observation carries the research forward through every communications window.",
+    "action": "Track the survey"
+  },
+  {
+    "kicker": "From observation to intent",
+    "title": "Where data",
+    "titleLine2": "becomes direction",
+    "summary": "Evidence becomes useful when scientists can trace how it changed the next decision.",
+    "action": "Follow the path"
+  },
+  {
+    "kicker": "Decision support / deep field",
+    "title": "See earlier.",
+    "titleLine2": "Decide better.",
+    "summary": "Faster recognition leaves more time for the careful human judgment that follows.",
+    "action": "Review the model"
+  },
+  {
+    "kicker": "Tools for unhurried discovery",
+    "title": "Machines for",
+    "titleLine2": "patient science",
+    "summary": "The goal is not instant certainty. It is disciplined attention at impossible scale.",
+    "action": "Meet the instruments"
+  },
+  {
+    "kicker": "Carrier analysis / adaptive",
+    "title": "Listen past",
+    "titleLine2": "the noise",
+    "summary": "Separate the unusual from the accidental without pretending uncertainty has disappeared.",
+    "action": "Tune the relay"
+  },
+  {
+    "kicker": "Protocol / uncertainty remains",
+    "title": "Leave room",
+    "titleLine2": "for the unknown",
+    "summary": "A trustworthy system preserves ambiguity instead of smoothing it into a convenient answer.",
+    "action": "Read the protocol"
+  },
+  {
+    "kicker": "Research principle / 01",
+    "title": "Observe first.",
+    "titleLine2": "Assume less.",
+    "summary": "Better models begin with evidence that remains inspectable, contestable, and alive.",
+    "action": "Explore the method"
+  },
+  {
+    "kicker": "Progress measured in clarity",
+    "title": "A quieter",
+    "titleLine2": "kind of progress",
+    "summary": "Not louder predictions. Better context, clearer limits, and decisions a team can understand.",
+    "action": "See the approach"
+  },
+  {
+    "kicker": "Photon archive / faint source",
+    "title": "Learn from",
+    "titleLine2": "the faintest light",
+    "summary": "Very old light still carries new information when every trace can be compared in context.",
+    "action": "Open the archive"
+  },
+  {
+    "kicker": "Intelligence belongs in context",
+    "title": "Intelligence",
+    "titleLine2": "with a horizon",
+    "summary": "Models should know where their view ends and where another instrument must take over.",
+    "action": "Find the boundary"
+  },
+  {
+    "kicker": "Inquiry survives the distance",
+    "title": "Keep asking",
+    "titleLine2": "from farther away",
+    "summary": "Exploration advances when missions can form useful next questions before Earth replies.",
+    "action": "Continue outward"
+  },
+  {
+    "kicker": "The useful output is curiosity",
+    "title": "Not answers.",
+    "titleLine2": "Better questions.",
+    "summary": "We design intelligence to expand scientific judgment, not to perform certainty.",
+    "action": "Start a question"
+  },
+  {
+    "kicker": "Transient survey / capture open",
+    "title": "Catch the light",
+    "titleLine2": "before it fades",
+    "summary": "Fast phenomena deserve instruments that can recognize a fleeting event before it becomes history.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Repeat pass / context retained",
+    "title": "Let the orbit",
+    "titleLine2": "finish the thought",
+    "summary": "Each return adds another angle, another condition, and a stronger reason to believe the pattern.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Confidence field / limits shown",
+    "title": "Give uncertainty",
+    "titleLine2": "a visible shape",
+    "summary": "We make doubt legible so a team can see where evidence ends and interpretation begins.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Residual light / structure search",
+    "title": "Find order",
+    "titleLine2": "in the afterglow",
+    "summary": "What remains after the bright event can reveal more than the event itself.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Night field / continuous comparison",
+    "title": "Watch the dark",
+    "titleLine2": "change its mind",
+    "summary": "Long observation turns an apparently empty frame into a record of subtle change.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Interval study / receiver steady",
+    "title": "Read the silence",
+    "titleLine2": "between pulses",
+    "summary": "The spacing around a signal may carry the structure the signal alone cannot explain.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Anomaly channel / unfiltered",
+    "title": "Make room",
+    "titleLine2": "for the strange",
+    "summary": "Discovery needs a place where unusual evidence can survive long enough to be examined.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Evidence path / inquiry active",
+    "title": "Follow the trace",
+    "titleLine2": "past certainty",
+    "summary": "A useful system keeps looking after the first explanation begins to feel comfortable.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Live comparison / archive linked",
+    "title": "Keep the evidence",
+    "titleLine2": "in motion",
+    "summary": "New observations should keep testing old conclusions instead of merely joining a pile.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Edge scan / parallax detected",
+    "title": "Ask the horizon",
+    "titleLine2": "what moved",
+    "summary": "Change becomes visible when the boundary of one observation is compared with the next.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Edge inference / world side",
+    "title": "Let distant worlds",
+    "titleLine2": "speak locally",
+    "summary": "Models near the instrument can translate raw conditions into useful evidence before contact returns.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Local reasoning / bounded mode",
+    "title": "Build judgment",
+    "titleLine2": "near the sensor",
+    "summary": "The shortest path from observation to a careful decision begins beside the data.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Round trip / autonomy active",
+    "title": "Think before",
+    "titleLine2": "the signal returns",
+    "summary": "A mission can protect its best opportunities while Earth is still waiting for the first transmission.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Flight compute / science loaded",
+    "title": "Put the model",
+    "titleLine2": "aboard",
+    "summary": "Bring enough intelligence with the instrument to recognize when the plan should change.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Downlink scarce / meaning first",
+    "title": "Send insight",
+    "titleLine2": "not the noise",
+    "summary": "Distill immense local data into the evidence and context a distant team can actually use.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Return channel / inquiry refined",
+    "title": "Leave Earth",
+    "titleLine2": "a clearer question",
+    "summary": "Good autonomy does not replace the team; it returns a more precise reason for the next command.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Delay model / operations ready",
+    "title": "Make latency",
+    "titleLine2": "part of the plan",
+    "summary": "Communication time becomes a design material when the mission knows how to work through it.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Instrument boundary / logic placed",
+    "title": "Decide where",
+    "titleLine2": "the data begins",
+    "summary": "Put the first careful judgment close enough to the event that nothing important is discarded.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Transmission frame / provenance intact",
+    "title": "Carry context",
+    "titleLine2": "across the void",
+    "summary": "A conclusion travels better when the observations, assumptions, and limits travel with it.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Contact window / science continues",
+    "title": "Work while",
+    "titleLine2": "the answer travels",
+    "summary": "Exploration should keep moving during the long interval between a question and its reply.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Uncertainty channel / nominal",
+    "title": "Doubt is",
+    "titleLine2": "useful telemetry",
+    "summary": "Confidence belongs beside every result, visible enough to influence the next move.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Review room / evidence first",
+    "title": "Certainty can",
+    "titleLine2": "wait outside",
+    "summary": "The system presents what happened before asking the data to support a finished story.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Model edge / boundary mapped",
+    "title": "Mark the limit",
+    "titleLine2": "then look beyond",
+    "summary": "Knowing exactly where an instrument becomes unreliable is the beginning of a better experiment.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Open classification / no forced label",
+    "title": "Let the unknown",
+    "titleLine2": "stay honest",
+    "summary": "Not every signal needs an immediate name; some need a protected place to remain unresolved.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Multiple hypotheses / still active",
+    "title": "Keep ambiguity",
+    "titleLine2": "on the screen",
+    "summary": "Competing explanations remain visible until the evidence earns a narrower view.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Audit path / full provenance",
+    "title": "Trust the trace",
+    "titleLine2": "not the shortcut",
+    "summary": "Every inference should lead back to the measurement that made it possible.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Knowledge boundary / reported",
+    "title": "Name what",
+    "titleLine2": "we cannot know",
+    "summary": "Explicit limits make the useful part of a result stronger, not weaker.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Confidence contour / rendered",
+    "title": "Give every answer",
+    "titleLine2": "an edge",
+    "summary": "A conclusion becomes safer when its valid range is as clear as its center.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Inquiry state / unresolved by design",
+    "title": "Hold the question",
+    "titleLine2": "open longer",
+    "summary": "Patient systems preserve promising uncertainty instead of closing it for convenience.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Verification pass / logic restrained",
+    "title": "Measure twice",
+    "titleLine2": "infer once",
+    "summary": "A second independent look is cheaper than building a mission around a persuasive mistake.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Route model / field updating",
+    "title": "Navigate by",
+    "titleLine2": "living maps",
+    "summary": "The path changes as new observations redraw what the mission knows about its surroundings.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Unplaced source / search expanding",
+    "title": "Chart what",
+    "titleLine2": "refuses coordinates",
+    "summary": "Some phenomena become useful only after the map admits that their location is still uncertain.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Trajectory study / evidence coupled",
+    "title": "Let the route",
+    "titleLine2": "learn forward",
+    "summary": "A mission can revise where it goes without losing why the earlier path made sense.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Navigation frame / history attached",
+    "title": "Cross the gap",
+    "titleLine2": "with context",
+    "summary": "Every correction becomes more reliable when it remembers the conditions that produced it.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Dynamic field / orientation stable",
+    "title": "A compass",
+    "titleLine2": "for changing skies",
+    "summary": "Intelligence helps a mission stay oriented when the environment will not hold still.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Time series / orbit resolved",
+    "title": "Map the motion",
+    "titleLine2": "not the moment",
+    "summary": "A single frame suggests; a connected sequence reveals what the system is becoming.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Live ephemeris / trace writing",
+    "title": "Draw the path",
+    "titleLine2": "as it happens",
+    "summary": "The mission records its changing route as evidence, not merely as a line between destinations.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Reference shift / object centered",
+    "title": "Orient around",
+    "titleLine2": "the anomaly",
+    "summary": "When something unexpected appears, the surrounding plan can become a new instrument for studying it.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Observation queue / value weighted",
+    "title": "Route attention",
+    "titleLine2": "where it matters",
+    "summary": "Limited time is spent on the measurements most capable of changing the picture.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Exploration field / next step visible",
+    "title": "Make the unknown",
+    "titleLine2": "navigable",
+    "summary": "We do not need a complete map to identify one careful direction forward.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Photon age / receiver present",
+    "title": "Yesterday's light",
+    "titleLine2": "arrives today",
+    "summary": "Every observation joins distant history to the instrument reading it now.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Duration channel / integrated",
+    "title": "Time is",
+    "titleLine2": "part of the sensor",
+    "summary": "How long we watch can matter as much as the wavelength or resolution we choose.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Long baseline / patience active",
+    "title": "Let slow signals",
+    "titleLine2": "become clear",
+    "summary": "Processes too gradual for a moment become legible when the system knows how to wait.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Comms dark / research uninterrupted",
+    "title": "Keep science",
+    "titleLine2": "between contacts",
+    "summary": "The mission continues testing and observing even when no conversation with Earth is possible.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Timing model / action deferred",
+    "title": "Wait well",
+    "titleLine2": "then move precisely",
+    "summary": "Restraint can preserve energy, attention, and the one observation that matters most.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Contact gap / state reconstructed",
+    "title": "Remember the",
+    "titleLine2": "missing hours",
+    "summary": "A resilient record makes the unseen interval part of the scientific story.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Deep time / comparison online",
+    "title": "Observe across",
+    "titleLine2": "impossible durations",
+    "summary": "Machines can hold attention across spans no individual observer could continuously inhabit.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Return orbit / comparison planned",
+    "title": "Make each pass",
+    "titleLine2": "count twice",
+    "summary": "Every revisit both measures the present and tests what the previous orbit seemed to show.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Cumulative survey / context growing",
+    "title": "The next orbit",
+    "titleLine2": "knows more",
+    "summary": "A returning instrument should arrive with every useful lesson from the last encounter.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Local event / capture protected",
+    "title": "Save the moment",
+    "titleLine2": "Earth will miss",
+    "summary": "Onboard recognition preserves short-lived evidence that cannot wait for permission.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Mission archive / context warm",
+    "title": "Memory makes",
+    "titleLine2": "distance useful",
+    "summary": "Stored observations turn separation in space and time into material for comparison.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Historical data / live query",
+    "title": "Give the archive",
+    "titleLine2": "a pulse",
+    "summary": "Past measurements become active participants whenever a new signal resembles an old mystery.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Sparse sequence / relation found",
+    "title": "Connect events",
+    "titleLine2": "across the quiet",
+    "summary": "Long silence does not break the story when the system can preserve and compare its edges.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Conflict log / evidence retained",
+    "title": "Keep every",
+    "titleLine2": "useful contradiction",
+    "summary": "Disagreement between instruments can be the clue that reveals a hidden condition.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Prior observations / present focus",
+    "title": "Let history",
+    "titleLine2": "sharpen the now",
+    "summary": "What happened before helps the mission choose which detail deserves resolution today.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Versioned evidence / conclusions open",
+    "title": "Build a record",
+    "titleLine2": "that can disagree",
+    "summary": "A trustworthy archive keeps the observations that challenge its current interpretation.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Decision log / intent attached",
+    "title": "Store the why",
+    "titleLine2": "beside the what",
+    "summary": "Data remains useful longer when future teams can recover the question behind it.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Knowledge relay / handoff ready",
+    "title": "Make context",
+    "titleLine2": "survive the mission",
+    "summary": "The next instrument should inherit more than files; it should inherit the reasoning around them.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Science packet / limits included",
+    "title": "Return with",
+    "titleLine2": "the whole story",
+    "summary": "Results arrive with their provenance, uncertainty, and the alternatives still under review.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Shared field / relations visible",
+    "title": "Nothing observed",
+    "titleLine2": "stands alone",
+    "summary": "Every signal gains meaning from the instruments, environments, and histories around it.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Outlier review / inquiry expanded",
+    "title": "Anomalies deserve",
+    "titleLine2": "better questions",
+    "summary": "The unusual becomes valuable when the next observation is designed to challenge it.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Unexpected source / trace locked",
+    "title": "Follow what",
+    "titleLine2": "should not be there",
+    "summary": "A disciplined pursuit of the impossible-looking result can separate discovery from error.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Candidate object / priority rising",
+    "title": "Let the outlier",
+    "titleLine2": "earn a mission",
+    "summary": "Repeated evidence can turn a statistical exception into a destination worth visiting.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Delta search / assumptions protected",
+    "title": "Chase the difference",
+    "titleLine2": "gently",
+    "summary": "Careful follow-up keeps a fragile anomaly from being erased by the method used to study it.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Review pass / observation renewed",
+    "title": "The strange result",
+    "titleLine2": "gets another orbit",
+    "summary": "A second encounter tests whether surprise belongs to the universe or the instrument.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Low confidence / inquiry target",
+    "title": "Start where",
+    "titleLine2": "the model hesitates",
+    "summary": "Uncertainty can point directly toward the observation with the highest scientific value.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Structure search / bias constrained",
+    "title": "Find the pattern",
+    "titleLine2": "without forcing it",
+    "summary": "The system compares possibilities while leaving enough room for a shape nobody predicted.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Candidate queue / status unresolved",
+    "title": "Keep the impossible",
+    "titleLine2": "under review",
+    "summary": "Rare explanations stay available until stronger evidence removes the need for them.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Residual field / next target",
+    "title": "Look where",
+    "titleLine2": "predictions break",
+    "summary": "The gap between expectation and measurement is often the most productive place to aim.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Anomaly protocol / repeatable",
+    "title": "Turn surprise",
+    "titleLine2": "into method",
+    "summary": "A strange observation becomes science when another instrument can test the same question.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Shared mission / roles clear",
+    "title": "Humans choose",
+    "titleLine2": "machines keep watch",
+    "summary": "Automation carries the long attention while people decide what the evidence should mean.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Decision support / human bound",
+    "title": "Extend judgment",
+    "titleLine2": "not authority",
+    "summary": "AI should widen the field a team can consider without pretending to own the decision.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Model card / boundary live",
+    "title": "Let tools",
+    "titleLine2": "show their limits",
+    "summary": "A useful instrument makes its uncertainty obvious at the moment it matters.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Research cycle / question driven",
+    "title": "Put curiosity",
+    "titleLine2": "in the loop",
+    "summary": "The system is designed to produce inspectable next questions, not merely faster outputs.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Inspectable logic / review open",
+    "title": "Build systems",
+    "titleLine2": "scientists can question",
+    "summary": "Every recommendation should withstand the person who asks how the evidence led there.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Team display / uncertainty common",
+    "title": "Share the view",
+    "titleLine2": "keep the doubt",
+    "summary": "Collaboration improves when everyone sees both the signal and the reasons it may be misleading.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Flight logic / audit ready",
+    "title": "Make autonomy",
+    "titleLine2": "answerable",
+    "summary": "Independent action remains traceable to its evidence, constraints, and intended scientific goal.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Human context / model connected",
+    "title": "Keep people",
+    "titleLine2": "inside the reasoning",
+    "summary": "The interface reveals choices and tradeoffs instead of hiding them behind a score.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Provenance stream / action recorded",
+    "title": "Let every decision",
+    "titleLine2": "leave a trail",
+    "summary": "Future teams can improve the mission because each move preserves the reasoning that shaped it.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Model range / boundary declared",
+    "title": "Intelligence should",
+    "titleLine2": "explain its horizon",
+    "summary": "The system states where its view stops before anyone mistakes a limit for a fact.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Ice shell / resonance study",
+    "title": "Oceans hide",
+    "titleLine2": "beneath quiet worlds",
+    "summary": "Subtle motion and chemistry can reveal a living system far below an apparently still surface.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Stellar climate / pattern forming",
+    "title": "Read weather",
+    "titleLine2": "on another sun",
+    "summary": "Changing light carries a record of storms, fields, and cycles on a star we cannot touch.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Subsurface array / echo return",
+    "title": "Listen under",
+    "titleLine2": "alien ice",
+    "summary": "Acoustic structure can turn a sealed ocean into a landscape of testable questions.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Lensing field / hidden structure",
+    "title": "Trace gravity",
+    "titleLine2": "without seeing mass",
+    "summary": "Light bending around darkness can map what no telescope can observe directly.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Occultation watch / atmosphere hinted",
+    "title": "Learn the night",
+    "titleLine2": "around a star",
+    "summary": "A brief dimming can expose rings, dust, weather, or a world passing through the beam.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Formation disk / particle path",
+    "title": "Follow dust",
+    "titleLine2": "into a new world",
+    "summary": "Small grains preserve the route from a cold cloud to a planetary system.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Atmosphere scan / seasons inferred",
+    "title": "Find climate",
+    "titleLine2": "in a spectrum",
+    "summary": "Repeated color shifts reveal how a distant world moves heat, clouds, and chemistry.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Orbital signatures / gravity visible",
+    "title": "Watch moons",
+    "titleLine2": "write on rings",
+    "summary": "Fine structures in a ring system record the pull of bodies too small or dark to see.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Molecular bands / source resolved",
+    "title": "Read chemistry",
+    "titleLine2": "at a distance",
+    "summary": "A narrow line of light can reveal the materials shaping an environment far beyond reach.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Transit window / gases detected",
+    "title": "Let starlight",
+    "titleLine2": "reveal an atmosphere",
+    "summary": "Filtered light turns a passing world into a remote laboratory for climate and composition.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Long mission / future reader",
+    "title": "Design for",
+    "titleLine2": "the unanswered century",
+    "summary": "Build tools whose evidence remains legible to teams and questions that do not yet exist.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Capability study / horizon two",
+    "title": "Build the instrument",
+    "titleLine2": "after next",
+    "summary": "Prepare the architecture for discoveries that will demand a sensor nobody planned to carry.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Research memory / reuse designed",
+    "title": "Give discovery",
+    "titleLine2": "a longer future",
+    "summary": "Data should remain ready for methods and hypotheses that arrive decades after collection.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Resilient inference / adversarial sky",
+    "title": "Make exploration",
+    "titleLine2": "hard to fool",
+    "summary": "Robust systems test the convenient explanation before spending a mission on it.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Unknown class / protocol open",
+    "title": "Prepare for",
+    "titleLine2": "evidence without precedent",
+    "summary": "The next important signal may not resemble anything the training archive already understands.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Living atlas / future compatible",
+    "title": "Let tomorrow",
+    "titleLine2": "revise the map",
+    "summary": "A useful model welcomes new evidence without erasing the path that led to the older view.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Novel signal / response restrained",
+    "title": "Create tools",
+    "titleLine2": "for first contact",
+    "summary": "Extraordinary evidence deserves interfaces built for patience, verification, and shared judgment.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Adaptive system / assumptions light",
+    "title": "Build softly",
+    "titleLine2": "for hard unknowns",
+    "summary": "Flexible instruments survive contact with environments that refuse our original categories.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Mission state / curiosity nominal",
+    "title": "Keep wonder",
+    "titleLine2": "operational",
+    "summary": "Ambition becomes useful when it is translated into precise observations a spacecraft can perform.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Next capability / design active",
+    "title": "The future",
+    "titleLine2": "needs better instruments",
+    "summary": "New questions become reachable when sensing, context, and judgment are designed as one system.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Parallel interpretation / sky open",
+    "title": "Give the cosmos",
+    "titleLine2": "a second reader",
+    "summary": "Machine perception can revisit familiar observations and notice relationships that escaped the first reading.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Curiosity vector / destination forming",
+    "title": "Turn wonder",
+    "titleLine2": "into coordinates",
+    "summary": "A compelling mystery becomes actionable when its shape can guide the next precise observation.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Perception engine / scale unbounded",
+    "title": "Train attention",
+    "titleLine2": "on the infinite",
+    "summary": "Intelligence helps finite teams remain attentive across a universe of simultaneous events.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Reality check / forecast exposed",
+    "title": "Let the sky",
+    "titleLine2": "challenge the model",
+    "summary": "Every observation is an opportunity for the universe to correct what the system expected.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Distributed cognition / nodes awake",
+    "title": "Grow insight",
+    "titleLine2": "between the stars",
+    "summary": "Distant instruments become more capable when their separate perspectives contribute to one inquiry.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Second-look protocol / active",
+    "title": "Teach the telescope",
+    "titleLine2": "to reconsider",
+    "summary": "A thoughtful instrument can return to evidence when a new context changes its meaning.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Remote intelligence / aperture extended",
+    "title": "Make perception",
+    "titleLine2": "travel farther",
+    "summary": "The reach of an observatory grows when interpretation can operate wherever the photons arrive.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Long-range context / state preserved",
+    "title": "Give deep space",
+    "titleLine2": "a working memory",
+    "summary": "Persistent reasoning allows distant missions to build knowledge instead of repeatedly beginning again.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Information yield / spectrum unlocked",
+    "title": "Ask more",
+    "titleLine2": "of every photon",
+    "summary": "Careful inference draws several testable clues from light that once supported only one measurement.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Cognitive frontier / awe retained",
+    "title": "Let intelligence",
+    "titleLine2": "meet the sublime",
+    "summary": "Powerful analysis can deepen wonder by revealing how much structure remains beyond explanation.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Responsive optics / attention returned",
+    "title": "Build an instrument",
+    "titleLine2": "that notices back",
+    "summary": "The observatory adapts its focus when the field presents something more valuable than the plan anticipated.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Interface science / hypotheses visible",
+    "title": "Make the dashboard",
+    "titleLine2": "part of discovery",
+    "summary": "A good display helps researchers form connections rather than merely monitor machinery.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Reference cycle / trust renewed",
+    "title": "Turn calibration",
+    "titleLine2": "into confidence",
+    "summary": "Continuous self-checks make every ambitious conclusion easier to examine and defend.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Adaptive console / options ready",
+    "title": "Design controls",
+    "titleLine2": "for the unexpected",
+    "summary": "Interfaces should remain useful when the event on screen has no familiar operating procedure.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Instrument dialogue / agreement tested",
+    "title": "Let sensors",
+    "titleLine2": "compare notes",
+    "summary": "Independent measurements strengthen one another by exposing both consensus and productive disagreement.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Observation frame / history embedded",
+    "title": "Put context",
+    "titleLine2": "inside the lens",
+    "summary": "Each image becomes richer when the circumstances of its capture remain inseparable from it.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Imaging chain / origin traceable",
+    "title": "Make every pixel",
+    "titleLine2": "accountable",
+    "summary": "Researchers can follow a visual claim through processing and back to the detector that received it.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Search posture / discovery weighted",
+    "title": "Tune the system",
+    "titleLine2": "to possibility",
+    "summary": "The instrument balances known targets with enough flexibility to recognize an unplanned opportunity.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Legibility layer / meaning surfaced",
+    "title": "Shape data",
+    "titleLine2": "for human eyes",
+    "summary": "Complex evidence becomes actionable when its structure is presented without hiding its uncertainty.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Review interface / alternatives present",
+    "title": "Let the console",
+    "titleLine2": "invite dissent",
+    "summary": "The strongest interpretation shares the screen with credible reasons it might still be wrong.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Federated science / channel shared",
+    "title": "Many instruments",
+    "titleLine2": "one conversation",
+    "summary": "Observatories with different strengths can contribute evidence without surrendering their individual perspective.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Research link / distance collapsed",
+    "title": "Connect the experts",
+    "titleLine2": "to the edge",
+    "summary": "Specialist judgment can shape onboard priorities even when direct control is impossible.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Semantic relay / concepts aligned",
+    "title": "Give every mission",
+    "titleLine2": "a common language",
+    "summary": "Shared descriptions allow discoveries from unlike instruments to become comparable.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Knowledge handoff / inquiry continuous",
+    "title": "Let teams",
+    "titleLine2": "inherit momentum",
+    "summary": "New researchers can continue the reasoning behind a mission instead of reconstructing it from fragments.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Collaborative cycle / evidence circulating",
+    "title": "Make discovery",
+    "titleLine2": "a shared orbit",
+    "summary": "Ideas improve as observations move repeatedly between instruments, models, and people.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Joint analysis / viewpoints synchronized",
+    "title": "Bring distant labs",
+    "titleLine2": "to one table",
+    "summary": "Distributed researchers can examine the same evidence while preserving the detail each discipline needs.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Scientific debate / test designed",
+    "title": "Turn disagreement",
+    "titleLine2": "into resolution",
+    "summary": "Conflicting interpretations become a blueprint for the measurement that can separate them.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Operational knowledge / uplink durable",
+    "title": "Let expertise",
+    "titleLine2": "cross the vacuum",
+    "summary": "Human insight becomes a reusable capability that travels with the mission.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Multi-array result / overlap measured",
+    "title": "Build consensus",
+    "titleLine2": "from independent views",
+    "summary": "Agreement means more when separate methods arrive there without sharing the same blind spots.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Team context / decisions attached",
+    "title": "Keep collaboration",
+    "titleLine2": "in the telemetry",
+    "summary": "The record preserves who questioned, revised, and strengthened each important conclusion.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Discovery horizon / access expanding",
+    "title": "Open a brighter",
+    "titleLine2": "age of inquiry",
+    "summary": "Better tools can place ambitious scientific questions within reach of many more people.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Future aperture / systems ready",
+    "title": "Prepare tomorrow",
+    "titleLine2": "for sharper sight",
+    "summary": "We build today so the next generation can measure phenomena we can only imagine.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Learning mission / frontier growing",
+    "title": "Let knowledge",
+    "titleLine2": "travel outward",
+    "summary": "Every expedition carries the accumulated care of earlier research into a new environment.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Progress signal / claims grounded",
+    "title": "Build optimism",
+    "titleLine2": "from evidence",
+    "summary": "Hope becomes durable when it is supported by discoveries people can inspect together.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Open science / reach extended",
+    "title": "Give curiosity",
+    "titleLine2": "more sky",
+    "summary": "Accessible intelligence can widen participation in the work of understanding the universe.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Knowledge to care / planet connected",
+    "title": "Turn discovery",
+    "titleLine2": "into stewardship",
+    "summary": "What we learn beyond Earth can sharpen how thoughtfully we understand and protect home.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Mission cycle / insight reinvested",
+    "title": "Make exploration",
+    "titleLine2": "a renewable idea",
+    "summary": "Each answer should create capabilities and questions that make the next expedition possible.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Purpose payload / future aboard",
+    "title": "Carry hope",
+    "titleLine2": "with the hardware",
+    "summary": "A spacecraft is also a promise that patient cooperation can reach beyond present limits.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Forward design / consequences visible",
+    "title": "Build the future",
+    "titleLine2": "with open eyes",
+    "summary": "Ambition becomes trustworthy when progress includes reflection, evidence, and responsibility.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Shared universe / access widening",
+    "title": "Let the frontier",
+    "titleLine2": "belong to everyone",
+    "summary": "The value of exploration grows when its tools and discoveries invite broad participation.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Biology search / definitions flexible",
+    "title": "Look for life",
+    "titleLine2": "without assuming Earth",
+    "summary": "The widest search recognizes organization and adaptation before demanding familiar chemistry.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Molecular ecology / pathways traced",
+    "title": "Let chemistry",
+    "titleLine2": "tell its own story",
+    "summary": "Networks of reactions can reveal whether an environment is merely active or persistently alive.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Survival envelope / niches mapped",
+    "title": "Find habitats",
+    "titleLine2": "inside extremes",
+    "summary": "Conditions that appear hostile at one scale may shelter possibility at another.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Living spectrum / seasonal pulse",
+    "title": "Read a biosphere",
+    "titleLine2": "in reflected light",
+    "summary": "Subtle recurring changes can expose a planet whose surface and atmosphere evolve together.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Subsurface chemistry / cycles retained",
+    "title": "Ask the ocean",
+    "titleLine2": "what it remembers",
+    "summary": "Dissolved materials may preserve a long record of energy, geology, and possible biology.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Atmosphere balance / life considered",
+    "title": "Listen for",
+    "titleLine2": "metabolic weather",
+    "summary": "Persistent chemical imbalance can hint at processes continually reshaping a distant world.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Habitability atlas / pathways ranked",
+    "title": "Map the places",
+    "titleLine2": "where life could begin",
+    "summary": "Evidence from stars, rocks, water, and time can focus the search without narrowing imagination.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Novel biology / assumptions suspended",
+    "title": "Let alien nature",
+    "titleLine2": "stay alien",
+    "summary": "Discovery starts by respecting forms of organization that do not fit terrestrial categories.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Habitability flow / gradients measured",
+    "title": "Follow energy",
+    "titleLine2": "toward possibility",
+    "summary": "Where usable energy persists, complex chemistry gains room to organize and endure.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Planetary care / contact restrained",
+    "title": "Search gently",
+    "titleLine2": "for living worlds",
+    "summary": "Exploration can pursue transformative knowledge while protecting the environments it hopes to understand.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Curved light / mass revealed",
+    "title": "Let gravity",
+    "titleLine2": "draw the hidden",
+    "summary": "Distorted backgrounds turn invisible structure into a measurable architecture.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Precision clock / spacetime sampled",
+    "title": "Measure the universe",
+    "titleLine2": "between ticks",
+    "summary": "Tiny differences in time can expose motion, gravity, and physics across enormous distances.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Quantum field / fluctuation study",
+    "title": "Read the vacuum",
+    "titleLine2": "for fingerprints",
+    "summary": "Apparent emptiness may carry subtle signatures of the laws shaping everything within it.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Physics anomaly / theory under test",
+    "title": "Find the rule",
+    "titleLine2": "inside the exception",
+    "summary": "A stubborn mismatch can point toward a more complete description of nature.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Interferometric span / distance resolved",
+    "title": "Use light",
+    "titleLine2": "as a ruler",
+    "summary": "Phase and timing transform photons into measurements of extraordinary precision.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Gravity wave / event arriving",
+    "title": "Watch spacetime",
+    "titleLine2": "carry a message",
+    "summary": "Ripples in geometry preserve the final motion of objects that emit almost no light.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Invariant search / prediction sharpened",
+    "title": "Turn symmetry",
+    "titleLine2": "toward experiment",
+    "summary": "Elegant mathematical patterns become science when they specify what an instrument should observe.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Measurement frontier / errors shrinking",
+    "title": "Let precision",
+    "titleLine2": "open new worlds",
+    "summary": "Reducing uncertainty can reveal entire classes of phenomena hidden inside yesterday’s noise.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Origin study / particles compared",
+    "title": "Ask matter",
+    "titleLine2": "how it began",
+    "summary": "The composition of distant environments retains clues from the earliest transformations of the cosmos.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Indirect detection / effects collected",
+    "title": "Make the invisible",
+    "titleLine2": "leave evidence",
+    "summary": "What cannot be seen directly can still be known through the changes it produces around it.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Inspectable training / revisions shown",
+    "title": "Let models",
+    "titleLine2": "learn in public",
+    "summary": "Scientific intelligence earns trust when its changing assumptions remain open to examination.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Efficient inference / relevance first",
+    "title": "Compute less",
+    "titleLine2": "understand more",
+    "summary": "Focused reasoning can reduce energy and complexity while preserving what matters scientifically.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Learning gate / evidence required",
+    "title": "Make every update",
+    "titleLine2": "earn its place",
+    "summary": "The system changes its beliefs only when new observations provide a traceable reason.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Inquiry corpus / reasoning expanded",
+    "title": "Teach models",
+    "titleLine2": "to design the next test",
+    "summary": "Models become better research partners when they learn how uncertainty creates the next experiment.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Bounded action / thresholds explicit",
+    "title": "Let algorithms",
+    "titleLine2": "practice restraint",
+    "summary": "Knowing when not to classify or intervene is a core capability, not a failure.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Edge pipeline / relevance distilled",
+    "title": "Turn raw streams",
+    "titleLine2": "into quiet insight",
+    "summary": "Continuous computation can surface rare meaningful changes without demanding continuous human attention.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Adaptive flight / safeguards intact",
+    "title": "Make learning",
+    "titleLine2": "survive deployment",
+    "summary": "Models can improve in operation while preserving tested boundaries and a recoverable history.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Causal context / correlations challenged",
+    "title": "Give inference",
+    "titleLine2": "a memory of causes",
+    "summary": "Reasoning becomes more useful when it distinguishes association from mechanisms a mission can test.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Compact intelligence / purpose tuned",
+    "title": "Let small models",
+    "titleLine2": "reach big questions",
+    "summary": "Efficient systems designed around a mission can outperform general complexity where resources are scarce.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Learning posture / closure delayed",
+    "title": "Build intelligence",
+    "titleLine2": "that stays curious",
+    "summary": "A capable model keeps searching for disconfirming evidence after finding a plausible explanation.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Photon drive / trajectory opening",
+    "title": "Sail on",
+    "titleLine2": "the pressure of light",
+    "summary": "A nearly weightless push can carry patient instruments toward destinations beyond conventional fuel.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Intercept course / volatile history",
+    "title": "Meet the comet",
+    "titleLine2": "before sunrise",
+    "summary": "Early arrival can observe ancient material as warmth begins to transform it.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Distributed probes / resilience gained",
+    "title": "Send a swarm",
+    "titleLine2": "instead of a monument",
+    "summary": "Many modest explorers can cover more possibilities and continue when individual units fail.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Terrain inference / descent adaptive",
+    "title": "Land where",
+    "titleLine2": "the map is incomplete",
+    "summary": "Onboard perception can choose a safe scientific destination from conditions revealed during arrival.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Cold region / pristine record",
+    "title": "Explore the shadow",
+    "titleLine2": "as a resource",
+    "summary": "Places untouched by sunlight may preserve materials and histories lost elsewhere.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Rapid passage / attention compressed",
+    "title": "Turn flybys",
+    "titleLine2": "into encounters",
+    "summary": "Fast local reasoning helps a brief crossing produce a deliberate sequence of discoveries.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Microgravity platform / experiments linked",
+    "title": "Let orbit",
+    "titleLine2": "become a laboratory",
+    "summary": "Repeated access to changing conditions makes the path itself an instrument.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Dynamic navigation / terrain alive",
+    "title": "Build routes",
+    "titleLine2": "through changing worlds",
+    "summary": "Explorers can revise motion as weather, ice, dust, and light reshape the environment.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Interstellar precursor / decades embraced",
+    "title": "Send patience",
+    "titleLine2": "past the heliopause",
+    "summary": "Long-lived systems can transform time from an obstacle into the foundation of a new scale of science.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Remote construction / habitat forming",
+    "title": "Let robots",
+    "titleLine2": "prepare the welcome",
+    "summary": "Autonomous builders can create safe, useful infrastructure before people make the journey.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Governance layer / review built in",
+    "title": "Make power",
+    "titleLine2": "easy to question",
+    "summary": "Capability remains accountable when people can inspect, challenge, and redirect its use.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Mission ethics / constraints creative",
+    "title": "Let safety",
+    "titleLine2": "shape the ambition",
+    "summary": "Thoughtful boundaries can inspire designs that are both more responsible and more resilient.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Planetary protocol / contamination blocked",
+    "title": "Protect the worlds",
+    "titleLine2": "we hope to know",
+    "summary": "Scientific care begins by preserving the integrity of places before interpreting them.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Human direction / automation aligned",
+    "title": "Keep agency",
+    "titleLine2": "with the explorers",
+    "summary": "Technology expands what teams can accomplish while leaving purpose and judgment in human hands.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Operational logic / inspection ready",
+    "title": "Make transparency",
+    "titleLine2": "mission critical",
+    "summary": "Clear reasoning paths help teams respond safely when systems and environments surprise one another.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Safety boundary / no-go legible",
+    "title": "Design for",
+    "titleLine2": "a graceful refusal",
+    "summary": "A trustworthy machine can decline an unsafe action and explain the constraint that stopped it.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Ethical payload / choices encoded",
+    "title": "Let values",
+    "titleLine2": "reach the frontier",
+    "summary": "Distance should not separate autonomous action from the principles guiding the mission.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Decision space / options maintained",
+    "title": "Preserve choice",
+    "titleLine2": "under automation",
+    "summary": "Good assistance clarifies alternatives instead of quietly collapsing them into one path.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Scientific integrity / methods visible",
+    "title": "Keep discovery",
+    "titleLine2": "worthy of trust",
+    "summary": "Extraordinary results gain strength through reproducibility, candor, and patient verification.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Review channel / authority shared",
+    "title": "Build systems",
+    "titleLine2": "that welcome oversight",
+    "summary": "Accountability works best when it is an ordinary operating feature rather than an emergency addition.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Low signal / attention deepening",
+    "title": "There is more",
+    "titleLine2": "inside the quiet",
+    "summary": "Careful observation finds texture where hurried instruments report only absence.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Far field / perspective transformed",
+    "title": "Let distance",
+    "titleLine2": "change the question",
+    "summary": "A remote viewpoint can reveal relationships that disappear when everything feels close.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Peripheral evidence / context bright",
+    "title": "Follow the glow",
+    "titleLine2": "around the answer",
+    "summary": "The surrounding traces often explain more than the obvious center of an event.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Rhythm search / cadence emerging",
+    "title": "Listen until",
+    "titleLine2": "the pattern breathes",
+    "summary": "Long attention allows irregular events to reveal the timing that connects them.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Research habitat / drafts alive",
+    "title": "Make a home",
+    "titleLine2": "for unfinished ideas",
+    "summary": "Early interpretations deserve space to evolve before they are judged as conclusions.",
+    "action": "Read the mission"
+  },
+  {
+    "kicker": "Open forecast / novelty protected",
+    "title": "Let the stars",
+    "titleLine2": "remain surprising",
+    "summary": "Prediction should sharpen observation without deciding in advance what the universe may contain.",
+    "action": "Explore the field"
+  },
+  {
+    "kicker": "Inquiry beacon / course steady",
+    "title": "Carry a question",
+    "titleLine2": "into the dark",
+    "summary": "A precise unknown can guide exploration more faithfully than a premature answer.",
+    "action": "Open the inquiry"
+  },
+  {
+    "kicker": "Deep archive / future insight",
+    "title": "Find tomorrow",
+    "titleLine2": "in ancient light",
+    "summary": "Old photons can unlock new science when examined with instruments their sources never imagined.",
+    "action": "Follow the evidence"
+  },
+  {
+    "kicker": "Interpretation shift / field renewed",
+    "title": "Give the night",
+    "titleLine2": "another meaning",
+    "summary": "Each new way of seeing transforms darkness from a limit into a source of information.",
+    "action": "Enter the system"
+  },
+  {
+    "kicker": "Discovery ethic / wonder multiplied",
+    "title": "Leave the universe",
+    "titleLine2": "more interesting",
+    "summary": "The best intelligence does not shrink mystery; it reveals richer questions within it.",
+    "action": "Read the mission"
+  }
+]

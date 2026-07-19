@@ -4,7 +4,7 @@
 
   export let type: WidgetName;
   export let design: Design;
-  export let shell: 'panel' | 'cut' | 'ghost' | 'capsule' | 'dial' | 'strip' = 'panel';
+  export let shell: 'panel' | 'cut' | 'ghost' | 'capsule' | 'dial' | 'strip' | 'orb' | 'hex' | 'arc' | 'tag' | 'bare' = 'panel';
   export let locale: Locale = 'en';
   const tt = (value: string) => telemetryText(locale, value);
 
@@ -220,6 +220,17 @@
   .shell-dial header { padding-bottom: .55rem; }
   .shell-dial footer { margin-top: .55rem; font-size: .46rem; }
   .shell-dial .progress { margin: 1.35rem 0; }
+  .shell-orb { width: 270px; min-width: 270px; aspect-ratio: 1; display: grid; align-content: center; padding: 2.25rem; border-radius: 50%; border-color: color-mix(in srgb, var(--accent) 52%, transparent); background: radial-gradient(circle at 44% 38%, color-mix(in srgb, var(--accent) 10%, var(--panel)), color-mix(in srgb, var(--panel) 92%, transparent) 64%, transparent 65%), conic-gradient(from 205deg, transparent, color-mix(in srgb, var(--accent) 18%, transparent), transparent 72%); box-shadow: inset 0 0 0 1rem color-mix(in srgb, var(--accent) 2%, transparent), 0 0 50px color-mix(in srgb, var(--accent) 9%, transparent); }
+  .shell-orb header { padding-bottom: .55rem; }
+  .shell-orb footer { margin-top: .55rem; font-size: .45rem; }
+  .shell-orb .progress { margin: 1.2rem 0; }
+  .shell-hex { width: 300px; min-width: 260px; aspect-ratio: 1.18; display: grid; align-content: center; padding: 2rem 2.65rem; border: 0; clip-path: polygon(25% 0, 88% 0, 100% 50%, 83% 100%, 17% 100%, 0 50%); background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 13%, var(--panel)), var(--panel) 55%, color-mix(in srgb, var(--accent2) 7%, var(--panel))); }
+  .shell-hex::before { content: ''; position: absolute; inset: 7px; clip-path: inherit; border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent); pointer-events: none; }
+  .shell-arc { width: 300px; min-width: 260px; aspect-ratio: 1.42; display: grid; align-content: end; padding: 2.5rem 1.7rem 1.25rem; border-radius: 50% 50% 8px 8px / 72% 72% 8px 8px; border-color: color-mix(in srgb, var(--accent) 38%, transparent); background: radial-gradient(ellipse at 50% 16%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 48%), var(--panel); }
+  .shell-tag { width: 100%; min-width: 260px; padding-inline: 1.5rem 2.2rem; border: 0; clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 50%, calc(100% - 30px) 100%, 0 100%, 14px 50%); background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 14%, var(--panel)), var(--panel) 72%); }
+  .shell-tag::after { content: ''; position: absolute; right: 14px; top: 50%; width: 6px; height: 6px; border: 1px solid var(--accent); border-radius: 50%; transform: translateY(-50%); }
+  .shell-bare { min-width: 220px; padding: .7rem 0 .7rem 1.2rem; border: 0; border-left: 2px solid var(--accent); background: transparent; backdrop-filter: none; overflow: visible; }
+  .shell-bare::before { content: ''; position: absolute; left: -5px; top: 18%; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 14px var(--accent); }
   .shell-strip { width: 100%; height: 150px; min-width: 0; padding: .8rem 1rem; border-width: 1px 0; background: linear-gradient(90deg, color-mix(in srgb, var(--panel) 96%, transparent), color-mix(in srgb, var(--panel) 55%, transparent)); backdrop-filter: blur(8px); }
   .shell-strip header { padding-bottom: .5rem; }
   .shell-strip footer { margin-top: .5rem; }
@@ -278,11 +289,12 @@
   .archive-list time { color: var(--accent); }
   .archive-list i { width: 5px; height: 5px; border: 1px solid var(--accent); border-radius: 50%; }
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); min-width: min(620px, 90vw); padding: 0; }
+  .stats.shell-tag, .stats.shell-bare { width: 100%; min-width: 0; }
   .stat { min-height: 130px; padding: 1.1rem; display: flex; flex-direction: column; justify-content: flex-end; gap: .55rem; border-right: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
   .stat:last-child { border: 0; }
   .stat strong { font-family: var(--font-display); font-size: clamp(1.15rem, 2vw, 1.7rem); font-weight: 430; letter-spacing: .04em; }
   .stat span { color: var(--muted); line-height: 1.5; text-transform: uppercase; }
   @keyframes wave { to { transform: scaleY(.55); opacity: .35; } }
   @media (prefers-reduced-motion: reduce) { .wave i { animation: none; } }
-  @media (max-width: 700px) { .widget { min-width: 0; } .stats { min-width: 0; width: 100%; } .stat { min-height: 105px; padding: .75rem; } }
+  @media (max-width: 700px) { .widget { min-width: 0; } .shell-orb, .shell-dial { width: min(240px, 100%); min-width: 0; } .shell-hex, .shell-arc, .shell-tag { width: 100%; min-width: 0; } .stats { min-width: 0; width: 100%; } .stat { min-height: 105px; padding: .75rem; } }
 </style>

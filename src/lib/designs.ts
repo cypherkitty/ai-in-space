@@ -25,6 +25,16 @@ import spectralRemnant from './assets/spectral-remnant.jpg';
 import mirrorAssembly from './assets/mirror-assembly.jpg';
 import materialsGarden from './assets/materials-garden.jpg';
 import origamiProbes from './assets/origami-probes.jpg';
+import berlinSignalLab from './assets/berlin-signal-lab.jpg';
+import repairConstellation from './assets/repair-constellation.jpg';
+import civicModelCommons from './assets/civic-model-commons.jpg';
+import radioLightLoom from './assets/radio-light-loom.jpg';
+import rooftopClimateOrchestra from './assets/rooftop-climate-orchestra.jpg';
+import neuralMaterialsAtelier from './assets/neural-materials-atelier.jpg';
+import transitBallet from './assets/transit-ballet.jpg';
+import lunarPlanningCommons from './assets/lunar-planning-commons.jpg';
+import livingLightGarden from './assets/living-light-garden.jpg';
+import planetaryDataArchive from './assets/planetary-data-archive.jpg';
 import earthPreview from './assets/previews/orbital-earth-preview.jpg';
 import copperPreview from './assets/previews/copper-eclipse-preview.jpg';
 import ringWorldPreview from './assets/previews/ring-world-preview.jpg';
@@ -52,6 +62,16 @@ import spectralRemnantPreview from './assets/previews/spectral-remnant-preview.j
 import mirrorAssemblyPreview from './assets/previews/mirror-assembly-preview.jpg';
 import materialsGardenPreview from './assets/previews/materials-garden-preview.jpg';
 import origamiProbesPreview from './assets/previews/origami-probes-preview.jpg';
+import berlinSignalLabPreview from './assets/previews/berlin-signal-lab-preview.jpg';
+import repairConstellationPreview from './assets/previews/repair-constellation-preview.jpg';
+import civicModelCommonsPreview from './assets/previews/civic-model-commons-preview.jpg';
+import radioLightLoomPreview from './assets/previews/radio-light-loom-preview.jpg';
+import rooftopClimateOrchestraPreview from './assets/previews/rooftop-climate-orchestra-preview.jpg';
+import neuralMaterialsAtelierPreview from './assets/previews/neural-materials-atelier-preview.jpg';
+import transitBalletPreview from './assets/previews/transit-ballet-preview.jpg';
+import lunarPlanningCommonsPreview from './assets/previews/lunar-planning-commons-preview.jpg';
+import livingLightGardenPreview from './assets/previews/living-light-garden-preview.jpg';
+import planetaryDataArchivePreview from './assets/previews/planetary-data-archive-preview.jpg';
 import { copyPacks, type CopyPack } from './slogans';
 import { applyExposure, exposureForSeed, type ExposureBand } from './exposure';
 
@@ -59,7 +79,6 @@ export type Layout =
   | 'origin'
   | 'split'
   | 'editorial'
-  | 'console'
   | 'poster'
   | 'manifesto'
   | 'radar'
@@ -98,6 +117,7 @@ export type TitleTreatment = 'native' | 'outline' | 'editorial' | 'mono';
 export type Texture = 'grid' | 'scan' | 'grain' | 'clean';
 export type SceneAlign = 'left' | 'center' | 'right';
 export type HeroComposition = 'native' | 'cinema' | 'masthead' | 'viewport' | 'island' | 'magazine' | 'index' | 'horizon-strip';
+export type HeaderMode = 'bar' | 'immersive' | 'split' | 'floating';
 
 export interface Design {
   id: string;
@@ -128,6 +148,7 @@ export interface Design {
   texture?: Texture;
   sceneAlign?: SceneAlign;
   composition?: HeroComposition;
+  headerMode?: HeaderMode;
   exposure?: number;
   exposureBand?: ExposureBand;
 }
@@ -166,7 +187,7 @@ export const curatedDesigns: Design[] = [
     summary: 'We build systems that notice the faint evidence hidden inside very large silences.', action: 'Read field notes', widgets: ['archive', 'anomaly'], stats: [['12k', 'ice spectra', 'indexed'], ['0.04', 'false signal', 'ratio'], ['06', 'outer moon', 'models']]
   },
   {
-    id: 'astral-index', index: '03', name: 'Astral Index', note: 'Data as landscape', layout: 'console', scene: earth,
+    id: 'astral-index', index: '03', name: 'Astral Index', note: 'Data as landscape', layout: 'ledger', scene: earth,
     visual: 'neural',
     accent: '#b7ff5a', accent2: '#f2ffe2', bg: '#050805', text: '#efffe1', muted: '#86937c', panel: 'rgba(7, 13, 5, .78)',
     kicker: 'Index / deep field / live', title: 'Map more', titleLine2: 'than stars',
@@ -317,7 +338,6 @@ const familyRules: Record<Layout, FamilyRule> = {
   origin: { visuals: ['orbit'], treatments: ['native', 'outline'], textures: ['grid', 'grain'], alignments: ['center', 'right'], widgets: ['stats', 'orbit', 'coordinates', 'solar'] },
   split: { visuals: ['orbit'], treatments: ['native', 'outline'], textures: ['grain', 'clean'], alignments: ['center', 'right'], widgets: ['signal', 'spectrum', 'delay', 'mission'] },
   editorial: { visuals: ['orbit', 'neural'], treatments: ['native', 'editorial'], textures: ['grain', 'clean'], alignments: ['center', 'right'], widgets: ['quote', 'archive', 'anomaly', 'thermal'] },
-  console: { visuals: ['neural', 'orbit'], treatments: ['mono', 'native'], textures: ['grid', 'scan'], alignments: ['center', 'right'], widgets: ['coordinates', 'memory', 'archive', 'spectrum'] },
   poster: { visuals: ['orbit'], treatments: ['outline', 'native'], textures: ['grain', 'clean'], alignments: ['center', 'right'], widgets: ['mission', 'orbit', 'delay', 'signal'] },
   manifesto: { visuals: ['neural', 'orbit'], treatments: ['native', 'editorial'], textures: ['grain', 'clean'], alignments: ['center', 'right'], widgets: ['quote', 'anomaly', 'archive', 'memory'] },
   radar: { visuals: ['orbit', 'neural'], treatments: ['native', 'mono'], textures: ['grid', 'scan'], alignments: ['center', 'right'], widgets: ['anomaly', 'progress', 'coordinates', 'spectrum'] },
@@ -344,7 +364,6 @@ const compositionRules: Record<Layout, readonly HeroComposition[]> = {
   origin: ['native', 'viewport'],
   split: ['native', 'magazine'],
   editorial: ['native', 'island', 'cinema'],
-  console: ['native'],
   poster: ['native', 'viewport'],
   manifesto: ['native', 'cinema'],
   radar: ['native', 'viewport'],
@@ -394,7 +413,17 @@ const scenes = [
   spectralRemnant,
   mirrorAssembly,
   materialsGarden,
-  origamiProbes
+  origamiProbes,
+  berlinSignalLab,
+  repairConstellation,
+  civicModelCommons,
+  radioLightLoom,
+  rooftopClimateOrchestra,
+  neuralMaterialsAtelier,
+  transitBallet,
+  lunarPlanningCommons,
+  livingLightGarden,
+  planetaryDataArchive
 ];
 export const sceneCount = scenes.length;
 const scenePreviews = new Map([
@@ -424,7 +453,17 @@ const scenePreviews = new Map([
   [spectralRemnant, spectralRemnantPreview],
   [mirrorAssembly, mirrorAssemblyPreview],
   [materialsGarden, materialsGardenPreview],
-  [origamiProbes, origamiProbesPreview]
+  [origamiProbes, origamiProbesPreview],
+  [berlinSignalLab, berlinSignalLabPreview],
+  [repairConstellation, repairConstellationPreview],
+  [civicModelCommons, civicModelCommonsPreview],
+  [radioLightLoom, radioLightLoomPreview],
+  [rooftopClimateOrchestra, rooftopClimateOrchestraPreview],
+  [neuralMaterialsAtelier, neuralMaterialsAtelierPreview],
+  [transitBallet, transitBalletPreview],
+  [lunarPlanningCommons, lunarPlanningCommonsPreview],
+  [livingLightGarden, livingLightGardenPreview],
+  [planetaryDataArchive, planetaryDataArchivePreview]
 ]);
 
 export const previewSceneFor = (scene: string): string => scenePreviews.get(scene) ?? scene;
@@ -668,7 +707,7 @@ export function randomSeed(): number {
 
 const selectCopy = (copySeed: number, layout: Layout): CopyPack => {
   const random = seededRandom(copySeed ^ 0x9e3779b9);
-  const compact = layout === 'origin' || layout === 'console' || layout === 'aperture' || layout === 'ledger' || layout === 'triptych' || layout === 'command';
+  const compact = layout === 'origin' || layout === 'aperture' || layout === 'ledger' || layout === 'triptych' || layout === 'command';
   const medium = layout === 'split' || layout === 'diagonal' || layout === 'broadcast' || layout === 'timeline' || layout === 'specimen' || layout === 'signalstack';
   const maxLength = compact ? 28 : medium ? 34 : 46;
   const maxLineLength = compact ? 14 : medium ? 18 : 24;
@@ -683,6 +722,19 @@ const selectCopy = (copySeed: number, layout: Layout): CopyPack => {
 const selectStorySlogan = (copySeed: number): string => {
   const random = seededRandom(copySeed ^ 0x85ebca6b);
   return seededPick(random, storySlogans);
+};
+
+const headerModesFor = (layout: Layout): readonly HeaderMode[] => {
+  if (layout === 'manifesto' || layout === 'monolith' || layout === 'zenith' || layout === 'constellation' || layout === 'horizon') {
+    return ['immersive', 'immersive', 'split', 'floating', 'bar'];
+  }
+  if (layout === 'editorial' || layout === 'atlas' || layout === 'ledger' || layout === 'poster' || layout === 'broadcast' || layout === 'diagonal') {
+    return ['split', 'split', 'immersive', 'floating', 'bar'];
+  }
+  if (layout === 'triptych' || layout === 'specimen' || layout === 'command' || layout === 'aperture') {
+    return ['floating', 'floating', 'split', 'immersive', 'bar'];
+  }
+  return ['bar', 'immersive', 'split'];
 };
 
 export function remixCopy(design: Design, copySeed: number): Design {
@@ -737,7 +789,8 @@ export function generateDesign(seed: number, catalogIndex?: number, copySeed = s
     treatment: seededPick(random, treatmentPool.length ? treatmentPool : ['native']),
     texture: seededPick(random, rules.textures),
     sceneAlign: seededPick(random, rules.alignments),
-    composition: seededPick(random, compositionRules[base.layout])
+    composition: seededPick(random, compositionRules[base.layout]),
+    headerMode: seededPick(random, headerModesFor(base.layout))
   };
 }
 
