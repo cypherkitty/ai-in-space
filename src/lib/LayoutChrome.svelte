@@ -39,7 +39,7 @@
   .triptych-chrome span { padding: 0 1.25rem; border-right: 1px solid color-mix(in srgb, var(--text) 18%, transparent); color: var(--muted); font-size: .48rem; letter-spacing: .15em; }
   .triptych-chrome span:last-child { border-right: 0; }
 
-  .timeline-chrome { top: 46%; bottom: auto; left: 4.5vw; right: 4.5vw; height: 50px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); }
+  .timeline-chrome { top: 38%; bottom: auto; left: 4.5vw; right: 4.5vw; height: 50px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); }
   .timeline-chrome span { position: relative; padding-top: 1rem; color: var(--muted); font-size: .46rem; letter-spacing: .13em; }
   .timeline-chrome i { position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border: 1px solid var(--accent); border-radius: 50%; background: var(--bg); box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 55%, transparent); }
 
