@@ -65,7 +65,7 @@
   .command-chrome span { padding: .8rem 1rem; background: var(--bg); color: var(--muted); font-size: .45rem; line-height: 1.7; letter-spacing: .12em; }
   .command-chrome span:first-child { color: var(--accent); }
   .command-chrome b { color: var(--text); font-weight: 500; }
-  .command-chrome::after { content: 'AUTONOMY ENVELOPE / BOUNDED'; grid-column: 1 / -1; align-self: end; padding: .75rem 1rem; background: var(--bg); color: var(--muted); font-size: .43rem; letter-spacing: .15em; }
+  .command-chrome::after { content: 'AUTONOMY ENVELOPE / BOUNDED'; grid-column: 1 / -1; align-self: end; padding: .75rem 1rem; background: var(--bg); color: var(--muted); font-size: .43rem; letter-spacing: .15em; text-align: right; }
 
   .signalstack-chrome span { position: absolute; left: 0; right: 0; overflow: hidden; padding: .55rem 4.5vw; border-block: 1px solid color-mix(in srgb, var(--accent) 28%, transparent); background: color-mix(in srgb, var(--bg) 70%, transparent); color: var(--accent); font-size: .48rem; letter-spacing: .18em; white-space: nowrap; }
   .signalstack-chrome span:first-child { top: 17%; }

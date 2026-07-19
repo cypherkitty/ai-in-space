@@ -6,7 +6,7 @@
   import OrbitalArt from './OrbitalArt.svelte';
   import Widget from './Widget.svelte';
   import { designAnalyticsContext, trackEvent } from './analytics';
-  import { researchPrinciplesFor, type Design, type HeroComposition, type Layout, type WidgetName } from './designs';
+  import { researchPrinciplesFor, type Design, type HeaderMode, type HeroComposition, type Layout, type WidgetName } from './designs';
   import { localizedPrinciples, t, type Locale } from './i18n';
 
   export let design: Design;
@@ -28,9 +28,10 @@
   let storySection: HTMLElement;
   let shareState: 'idle' | 'copied' | 'failed' = 'idle';
   type TelemetryComposition = 'dock' | 'duo' | 'stack' | 'rail' | 'scatter' | 'focus';
+  type WidgetShell = 'panel' | 'cut' | 'ghost' | 'capsule' | 'dial' | 'strip' | 'orb' | 'hex' | 'arc' | 'tag' | 'bare';
 
   const telemetryByLayout: Record<Layout, TelemetryComposition> = {
-    origin: 'dock', split: 'stack', editorial: 'duo', console: 'rail', poster: 'focus', manifesto: 'scatter',
+    origin: 'dock', split: 'stack', editorial: 'duo', poster: 'focus', manifesto: 'scatter',
     radar: 'dock', diagonal: 'stack', monolith: 'duo', terminal: 'rail', atlas: 'focus', horizon: 'scatter',
     aperture: 'duo', zenith: 'dock', broadcast: 'stack', ledger: 'rail', triptych: 'stack', timeline: 'rail',
     specimen: 'focus', constellation: 'scatter', command: 'rail', signalstack: 'stack'
@@ -51,6 +52,27 @@
     'periapsis-control': 'stack'
   };
   const dialWidgets = new Set<WidgetName>(['anomaly', 'orbit', 'progress', 'thermal', 'delay']);
+  const nativeHeaderByLayout: Record<Layout, HeaderMode> = {
+    origin: 'bar', split: 'immersive', editorial: 'split', poster: 'split', manifesto: 'immersive', radar: 'bar',
+    diagonal: 'split', monolith: 'immersive', terminal: 'immersive', atlas: 'split', horizon: 'immersive',
+    aperture: 'floating', zenith: 'immersive', broadcast: 'split', ledger: 'split', triptych: 'floating',
+    timeline: 'immersive', specimen: 'floating', constellation: 'immersive', command: 'floating', signalstack: 'split'
+  };
+  const headlineCapacity: Record<Layout, number> = {
+    origin: 16, split: 15, editorial: 17, poster: 15, manifesto: 22, radar: 22, diagonal: 15,
+    monolith: 22, terminal: 17, atlas: 15, horizon: 14, aperture: 13, zenith: 22, broadcast: 14,
+    ledger: 12, triptych: 11, timeline: 20, specimen: 17, constellation: 22, command: 12, signalstack: 18
+  };
+
+  const visibleLength = (value: string): number => Array.from(value.replace(/\s+/g, ' ').trim()).length;
+  const scaleHeadline = (value: Design): number => {
+    const first = visibleLength(value.title);
+    const second = visibleLength(value.titleLine2);
+    const total = first + second;
+    const capacity = headlineCapacity[value.layout];
+    const scale = Math.min(1, capacity / Math.max(first, second, 1), (capacity * 2.15) / Math.max(total, 1));
+    return Math.round(Math.max(.5, scale) * 100);
+  };
 
   const telemetryHash = (value: string): number => {
     let result = 2166136261;
@@ -60,6 +82,9 @@
     }
     return result >>> 0;
   };
+  $: headerMode = design.headerMode ?? nativeHeaderByLayout[design.layout];
+  $: headlineScale = scaleHeadline(design);
+  $: headlineLeading = headlineScale < 70 ? 1.12 : headlineScale < 85 ? .98 : 'inherit';
 
   const telemetryFor = (value: Design): TelemetryComposition => {
     const primary = telemetryByLayout[value.layout];
@@ -79,13 +104,17 @@
     return options[telemetryHash(`${value.id}:${value.seed ?? 0}:telemetry`) % options.length]!;
   };
 
-  const shellFor = (composition: TelemetryComposition, widget: WidgetName, index: number) => {
-    if (composition === 'rail') return 'strip' as const;
-    if (composition === 'focus') return dialWidgets.has(widget) ? 'dial' as const : 'cut' as const;
-    if (composition === 'stack') return index === 0 ? 'cut' as const : 'ghost' as const;
-    if (composition === 'duo') return index === 1 && dialWidgets.has(widget) ? 'dial' as const : index === 0 ? 'cut' as const : 'capsule' as const;
-    if (composition === 'scatter') return dialWidgets.has(widget) ? 'dial' as const : index === 1 ? 'capsule' as const : 'ghost' as const;
-    return index === 0 ? 'panel' as const : index === 1 ? 'cut' as const : 'ghost' as const;
+  const shellFor = (composition: TelemetryComposition, widget: WidgetName, index: number): WidgetShell => {
+    if (widget === 'stats') return composition === 'focus' || composition === 'stack' ? 'tag' : 'bare';
+    const round = dialWidgets.has(widget);
+    const variant = telemetryHash(`${design.id}:${design.seed ?? 0}:${widget}:${index}:shape`);
+    const chooseShell = (values: readonly WidgetShell[]): WidgetShell => values[variant % values.length]!;
+    if (composition === 'rail') return index === 0 ? 'tag' : index === 1 ? (round ? 'arc' : 'bare') : 'bare';
+    if (composition === 'focus') return round ? chooseShell(['dial', 'orb']) : chooseShell(['hex', 'arc']);
+    if (composition === 'stack') return index === 0 ? (round ? 'orb' : 'hex') : index === 1 ? 'tag' : 'bare';
+    if (composition === 'duo') return index === 1 && round ? 'orb' : index === 0 ? chooseShell(['hex', 'tag']) : 'arc';
+    if (composition === 'scatter') return round ? chooseShell(['orb', 'dial', 'arc']) : chooseShell(['hex', 'arc', 'tag', 'bare']);
+    return round ? chooseShell(['orb', 'dial']) : index === 0 ? 'hex' : index === 1 ? 'tag' : 'bare';
   };
 
   $: principles = localizedPrinciples(design, locale, researchPrinciplesFor(design));
@@ -149,7 +178,7 @@
 <svelte:window onkeydown={(event) => event.key === 'Escape' && signupOpen && closeSignup()} />
 
 <div
-  class={`site layout-${design.layout} composition-${design.composition ?? 'native'} treatment-${design.treatment ?? 'native'} texture-${design.texture ?? 'grid'} scene-${design.sceneAlign ?? 'center'} exposure-${design.exposureBand ?? 'deep'}`}
+  class={`site locale-${locale} header-${headerMode} layout-${design.layout} composition-${design.composition ?? 'native'} treatment-${design.treatment ?? 'native'} texture-${design.texture ?? 'grid'} scene-${design.sceneAlign ?? 'center'} exposure-${design.exposureBand ?? 'deep'}`}
   class:generated={design.generated}
   data-exposure={design.exposureBand ?? 'deep'}
   style={`--accent:${design.accent};--accent2:${design.accent2};--bg:${design.bg};--text:${design.text};--muted:${design.muted};--panel:${design.panel};--scene:url(${design.scene})`}
@@ -192,7 +221,7 @@
         <div class="edition"><span>{design.index}</span><i></i><span>{design.name}</span></div>
       </div>
       <p class="kicker">{design.kicker}</p>
-      <h1 id="hero-title"><span>{design.title}</span><span>{design.titleLine2}</span></h1>
+      <h1 id="hero-title" style={`--headline-scale:${headlineScale}%;--headline-leading:${headlineLeading}`}><span>{design.title}</span><span>{design.titleLine2}</span></h1>
       <p class="summary">{design.summary}</p>
       <div class="actions">
         <button class="primary mission-cta" type="button" onclick={() => openSignup('hero')}>{t(locale, 'join')} <span>→</span></button>
@@ -205,7 +234,7 @@
       {#if design.visual === 'neural'}
         <NeuralCore accent={design.accent} accent2={design.accent2} />
       {:else}
-        <OrbitalArt kind={design.layout === 'console' || design.layout === 'atlas' ? 'grid' : design.layout === 'terminal' ? 'signal' : 'orbit'} />
+        <OrbitalArt kind={design.layout === 'atlas' ? 'grid' : design.layout === 'terminal' ? 'signal' : 'orbit'} />
       {/if}
     </div>
 
@@ -290,16 +319,16 @@
   .texture-clean .grain, .texture-clean .grid-lines { display: none; }
   .texture-grain .grid-lines { display: none; }
   .texture-scan .grid-lines { opacity: .12; background-image: repeating-linear-gradient(0deg, transparent 0 6px, color-mix(in srgb, var(--accent) 10%, transparent) 6px 7px); background-size: auto; }
-  .topbar { position: absolute; z-index: 10; top: 0; left: 0; right: 0; height: 104px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 clamp(1.25rem, 4.5vw, 5rem); border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent); }
+  .topbar { position: absolute; z-index: 10; top: 0; left: 0; right: 0; min-height: 132px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: .9rem clamp(1.25rem, 4.5vw, 5rem); border-bottom: 1px solid color-mix(in srgb, var(--text) 15%, transparent); background: linear-gradient(90deg, color-mix(in srgb, var(--bg) 94%, transparent), color-mix(in srgb, var(--bg) 78%, transparent) 52%, color-mix(in srgb, var(--bg) 88%, transparent)); box-shadow: 0 18px 45px -38px #000; backdrop-filter: blur(14px) saturate(.75); }
   .brand-button, nav button, .explore, .design-tools button { border: 0; background: transparent; cursor: pointer; }
-  .brand-channel { position: relative; z-index: 2; justify-self: start; }
+  .brand-channel { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: .72rem; justify-self: start; }
   .brand-button { justify-self: start; padding: 0; }
-  .brand-channel > .design-tools { position: absolute; top: calc(100% + 1.8rem); left: 0; width: min(390px, 82vw); }
+  .brand-channel > .design-tools { width: min(390px, 36vw); }
   .header-controls { justify-self: end; display: flex; align-items: center; gap: .6rem; }
-  .locale-toggle { padding: .55rem .65rem; border: 0; background: transparent; color: var(--muted); font-family: var(--font-mono); font-size: .48rem; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
+  .locale-toggle { padding: .55rem .65rem; border: 0; background: transparent; color: color-mix(in srgb, var(--text) 78%, var(--muted)); font-family: var(--font-mono); font-size: .48rem; font-weight: 520; letter-spacing: .1em; text-shadow: 0 1px 9px var(--bg); text-transform: uppercase; cursor: pointer; }
   .locale-toggle:hover { color: var(--accent); }
   nav { display: flex; gap: clamp(1rem, 3.5vw, 3.7rem); }
-  nav button, .explore { color: var(--muted); font-family: var(--font-mono); font-size: .61rem; letter-spacing: .18em; text-transform: uppercase; transition: color .2s; }
+  nav button, .explore { color: color-mix(in srgb, var(--text) 84%, var(--muted)); font-family: var(--font-mono); font-size: .61rem; font-weight: 520; letter-spacing: .18em; text-shadow: 0 1px 12px var(--bg), 0 0 3px var(--bg); text-transform: uppercase; transition: color .2s; }
   nav button:hover, .explore:hover { color: var(--text); }
   .explore { justify-self: end; padding: .75rem 1.1rem; border: 1px solid color-mix(in srgb, var(--text) 20%, transparent); border-radius: 99px; color: var(--text); }
   .explore span { margin-right: .5rem; }
@@ -317,26 +346,28 @@
   .hero-copy { position: absolute; z-index: 5; left: clamp(1.25rem, 7vw, 7.5rem); top: 27%; width: min(540px, 48vw); }
   .kicker { margin: 0 0 1.2rem; color: var(--accent); font-family: var(--font-mono); font-size: .62rem; letter-spacing: .23em; line-height: 1.5; text-transform: uppercase; }
   h1 { margin: 0; font-family: var(--font-display); font-size: clamp(3.7rem, 7.6vw, 8.3rem); font-weight: 390; letter-spacing: -.065em; line-height: .82; text-wrap: balance; text-shadow: 0 2px 28px color-mix(in srgb, var(--bg) 76%, transparent); }
-  h1 span { display: block; }
+  h1 span { display: block; font-size: var(--headline-scale, 100%); line-height: var(--headline-leading, inherit); }
   h1 span:nth-child(2) { color: var(--accent2); }
   .treatment-outline h1 span:nth-child(2) { color: transparent !important; -webkit-text-stroke: 1px var(--accent2); }
   .treatment-editorial h1 span:nth-child(2) { color: var(--accent2) !important; font-family: Georgia, serif; font-style: italic; font-weight: 400; }
   .treatment-mono h1 { font-family: var(--font-mono); letter-spacing: -.07em; }
   .summary { max-width: 41ch; margin: 1.55rem 0 0; color: color-mix(in srgb, var(--text) 76%, var(--muted)); font-size: clamp(.78rem, 1vw, .95rem); line-height: 1.75; text-shadow: 0 2px 16px var(--bg), 0 0 3px var(--bg); }
-  .actions { display: flex; align-items: center; gap: 1.5rem; margin-top: 1.8rem; }
+  .actions { position: relative; z-index: 7; display: inline-flex; max-width: min(100%, 760px); align-items: stretch; gap: 0; margin-top: 1.8rem; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: 3px; background: color-mix(in srgb, var(--bg) 88%, transparent); box-shadow: 0 18px 46px -34px #000; backdrop-filter: blur(14px); overflow: hidden; }
   .actions button { cursor: pointer; }
-  .primary { padding: .95rem 1.25rem; border: 1px solid var(--accent); border-radius: 2px; background: var(--accent); color: var(--bg); font-family: var(--font-mono); font-size: .59rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 0 32px -18px var(--accent); transition: .25s; }
+  .primary { min-width: max-content; padding: .95rem 1.25rem; border: 0; border-radius: 0; background: var(--accent); color: var(--bg); font-family: var(--font-mono); font-size: .59rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 0 32px -18px var(--accent); transition: .25s; white-space: nowrap; }
   .primary:hover { transform: translateY(-2px); box-shadow: 0 0 38px -10px var(--accent); }
   .primary span { margin-left: 1.5rem; }
-  .secondary-action { padding: .9rem 0; border: 0; border-bottom: 1px solid color-mix(in srgb, var(--text) 45%, transparent); background: transparent; color: var(--text); font-family: var(--font-mono); font-size: .57rem; letter-spacing: .11em; text-transform: uppercase; }
-  .secondary-action:hover { border-color: var(--accent); color: var(--accent); }
-  .text-action { border: 0; background: transparent; color: var(--muted); font-family: var(--font-mono); font-size: .57rem; letter-spacing: .12em; text-transform: uppercase; }
+  .secondary-action { padding: .9rem 1.15rem; border: 0; border-right: 1px solid color-mix(in srgb, var(--text) 14%, transparent); background: transparent; color: var(--text); font-family: var(--font-mono); font-size: .57rem; letter-spacing: .11em; text-transform: uppercase; white-space: nowrap; }
+  .secondary-action:hover { color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+  .text-action { padding: .7rem 1rem; border: 0; background: transparent; color: var(--muted); font-family: var(--font-mono); font-size: .57rem; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
   .text-action i { display: inline-grid; place-items: center; width: 1.45rem; height: 1.45rem; margin-right: .5rem; border: 1px solid currentColor; border-radius: 50%; font-style: normal; }
+  .locale-ru h1 { font-size: clamp(3.4rem, 6.15vw, 7.1rem); line-height: .86; }
+  .locale-ru .actions { max-width: min(100%, 840px); }
   .art { position: absolute; z-index: 1; right: 14%; top: 22%; opacity: .62; }
   .art.neural { top: 13%; right: 3%; width: min(62vw, 900px); height: min(72vw, 720px); opacity: .88; }
   .widgets { position: absolute; z-index: 4; left: clamp(1.25rem, 4.5vw, 5rem); bottom: 2.2rem; display: flex; align-items: end; gap: .75rem; max-width: calc(100vw - 10rem); }
   .widget-slot { display: block; min-width: 0; }
-  .widget-slot :global(.widget:not(.shell-dial)) { width: 100%; height: 100%; }
+  .widget-slot :global(.widget:not(.shell-dial):not(.shell-orb):not(.shell-hex):not(.shell-arc):not(.shell-bare)) { width: 100%; height: 100%; }
   .coordinate { position: absolute; right: 3rem; top: 50%; color: var(--muted); font-family: var(--font-mono); font-size: .48rem; letter-spacing: .12em; writing-mode: vertical-rl; }
   .scroll-cue { position: absolute; right: 4.5vw; bottom: 3rem; display: flex; align-items: center; gap: .8rem; color: var(--muted); font-family: var(--font-mono); font-size: .5rem; letter-spacing: .16em; text-transform: uppercase; transform: rotate(90deg); transform-origin: right bottom; }
   .scroll-cue i { width: 55px; border-top: 1px solid var(--accent); }
@@ -407,14 +438,6 @@
   .layout-editorial .widgets { bottom: 4rem; }
   .layout-editorial .art { display: none; }
 
-  .layout-console .hero { padding-left: 28vw; }
-  .layout-console .topbar { left: 25vw; }
-  .layout-console::before { content: 'AIS / INDEX\A\A 01  OBSERVATIONS\A 02  MODELS\A 03  MISSIONS\A 04  FIELD NOTES\A\A NETWORK: LIVE'; white-space: pre; position: absolute; z-index: 5; top: 0; bottom: 0; width: 25vw; padding: 9rem 2.4rem; border-right: 1px solid color-mix(in srgb, var(--accent) 24%, transparent); background: color-mix(in srgb, var(--bg) 88%, transparent); color: var(--muted); font-family: var(--font-mono); font-size: .6rem; line-height: 2.5; letter-spacing: .1em; }
-  .layout-console .hero-copy { left: 31vw; top: 23%; width: 46vw; }
-  .layout-console h1 { font-family: var(--font-mono); font-size: clamp(3rem, 6.5vw, 7rem); line-height: .92; letter-spacing: -.07em; }
-  .layout-console .widgets { left: 31vw; bottom: 3rem; }
-  .layout-console .art { right: 7%; top: 28%; opacity: .45; }
-  .layout-console .art.neural { top: 12%; right: 1%; width: min(68vw, 960px); opacity: .92; }
 
   .layout-manifesto .scene { opacity: .46; filter: grayscale(.25); background-position: 80% center; }
   .layout-manifesto .hero-copy { left: 50%; top: 50%; width: min(1000px, 80vw); text-align: center; transform: translate(-50%, -50%); }
@@ -618,7 +641,7 @@
   .widgets.telemetry-stack { left: auto; right: 3.5vw; top: 22%; bottom: auto; width: min(27vw, 360px); max-width: none; flex-direction: column; align-items: stretch; gap: .65rem; transform: none; }
   .telemetry-stack .widget-slot:nth-child(2) { width: 86%; margin-left: 14%; }
 
-  .widgets.telemetry-rail { left: 3vw; right: 3vw; top: auto; bottom: 1.5rem; width: auto; max-width: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); align-items: stretch; gap: 0; transform: none; }
+  .widgets.telemetry-rail { left: auto; right: 3vw; top: auto; bottom: 1.5rem; width: min(42vw, 680px); max-width: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); align-items: stretch; gap: 0; transform: none; }
   .telemetry-rail .widget-slot + .widget-slot { border-left: 1px solid color-mix(in srgb, var(--accent) 20%, transparent); }
 
   .widgets.telemetry-scatter { inset: 104px 0 0; width: auto; max-width: none; display: block; transform: none; pointer-events: none; }
@@ -633,6 +656,11 @@
   .layout-specimen .widgets.telemetry-focus { left: 7vw; right: auto; bottom: 4rem; }
   .layout-poster .widgets.telemetry-focus { right: 7vw; bottom: 5rem; }
   .layout-timeline .widgets.telemetry-focus { right: .5vw; width: min(24vw, 340px); }
+  .layout-manifesto .widgets.telemetry-focus,
+  .layout-radar .widgets.telemetry-focus,
+  .layout-monolith .widgets.telemetry-focus,
+  .layout-zenith .widgets.telemetry-focus,
+  .layout-constellation .widgets.telemetry-focus { top: 18%; bottom: auto; width: min(24vw, 330px); }
 
   /* Generated pages also vary their composition grammar. These modes deliberately
      override the family layout on wide screens so remixes change hierarchy, not
@@ -688,6 +716,65 @@
     .generated.composition-horizon-strip .summary { max-width: 48ch; }
     .generated.composition-horizon-strip .widgets { left: auto; right: 4vw; top: auto; bottom: 3rem; width: min(46vw, 640px); transform: none; }
     .generated.composition-horizon-strip .art { right: 18%; top: 45%; opacity: .52; }
+
+    /* Header composition is part of the image grammar. The protected bar is
+       only one mode; other pages let photography pass through or around it. */
+    .header-immersive .topbar {
+      border-bottom-color: color-mix(in srgb, var(--text) 8%, transparent);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 74%, transparent), color-mix(in srgb, var(--bg) 22%, transparent) 72%, transparent);
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+    .header-immersive .scene,
+    .header-split .scene,
+    .header-floating .scene { top: 0; }
+    .header-immersive nav,
+    .header-split nav {
+      padding: .62rem .85rem;
+      border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--bg) 38%, transparent);
+      backdrop-filter: blur(9px);
+    }
+    .header-split .topbar {
+      border-bottom-color: color-mix(in srgb, var(--text) 10%, transparent);
+      background: linear-gradient(90deg, color-mix(in srgb, var(--bg) 92%, transparent) 0 28%, color-mix(in srgb, var(--bg) 48%, transparent) 48%, color-mix(in srgb, var(--bg) 12%, transparent) 72%, color-mix(in srgb, var(--bg) 32%, transparent));
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+    .header-floating .topbar {
+      top: 1rem;
+      left: 2vw;
+      right: 2vw;
+      min-height: 112px;
+      padding-block: .7rem;
+      border: 1px solid color-mix(in srgb, var(--text) 17%, transparent);
+      border-radius: 6px;
+      background: color-mix(in srgb, var(--bg) 76%, transparent);
+      box-shadow: 0 22px 55px -38px #000;
+      backdrop-filter: blur(13px) saturate(.8);
+    }
+    .header-floating .brand-channel { flex-direction: row; align-items: center; gap: 1rem; }
+    .header-floating .brand-channel > .design-tools { width: min(360px, 31vw); }
+    .header-immersive.generated.composition-cinema .scene { inset: 0 0 31%; }
+    .header-split.generated.composition-magazine .scene { inset: 0 42% 0 0; }
+    .header-immersive.generated.composition-horizon-strip .scene { inset: 0 0 58%; background-position: center 28%; }
+
+    /* The conversion hierarchy stays stable even when the surrounding page
+       composition changes. Layout families may move the copy, never split or
+       absolutely position its controls. */
+    .hero-copy .actions {
+      position: relative;
+      left: auto;
+      top: auto;
+      width: auto;
+      align-items: stretch;
+      justify-content: flex-start;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 0;
+      margin-left: 0;
+    }
   }
 
   @media (min-width: 901px) {
@@ -704,22 +791,24 @@
 
   @media (max-width: 900px) {
     .hero { min-height: 900px; }
-    .topbar { height: 82px; grid-template-columns: 1fr auto; }
+    .locale-ru .hero { min-height: 1200px; }
+    .actions { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) 3.75rem; width: 100%; }
+    .actions button { min-width: 0; }
+    .text-action { padding-inline: .65rem; font-size: 0; }
+    .text-action i { margin-right: 0; }
+    .topbar { min-height: 126px; grid-template-columns: 1fr auto; }
     nav { display: none; }
     .transmission-rail { left: 0; width: min(500px, calc(100vw - 2.5rem)); }
     .transmission-rail .edition { display: none; }
     .brand-channel > .design-tools { width: min(390px, calc(100vw - 2.5rem)); }
-    .hero-copy, .layout-console .hero-copy, .layout-atlas .hero-copy, .layout-horizon .hero-copy, .layout-aperture .hero-copy, .layout-zenith .hero-copy, .layout-broadcast .hero-copy, .layout-ledger .hero-copy { left: 1.25rem; top: 22%; width: calc(100vw - 2.5rem); transform: none; text-align: left; }
-    h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1 { font-size: clamp(3.4rem, 10.5vw, 6rem); }
+    .hero-copy, .layout-atlas .hero-copy, .layout-horizon .hero-copy, .layout-aperture .hero-copy, .layout-zenith .hero-copy, .layout-broadcast .hero-copy, .layout-ledger .hero-copy { left: 1.25rem; top: 22%; width: calc(100vw - 2.5rem); transform: none; text-align: left; }
+    h1, .layout-split h1, .layout-poster h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1 { font-size: clamp(3.4rem, 10.5vw, 6rem); }
     .layout-broadcast h1 { font-size: clamp(3.35rem, 9.3vw, 5.6rem); }
     .summary { max-width: 34ch; }
     .art { right: -8rem; top: 35%; opacity: .35; }
     .art.neural, .layout-monolith .art.neural, .layout-terminal .art.neural { top: 27%; left: auto; right: -35%; width: 115vw; height: 115vw; transform: none; opacity: .5; }
-    .widgets, .layout-split .widgets, .layout-console .widgets, .layout-manifesto .widgets, .layout-poster .widgets, .layout-radar .widgets, .layout-diagonal .widgets, .layout-monolith .widgets, .layout-atlas .widgets, .layout-terminal .widgets, .layout-horizon .widgets, .layout-aperture .widgets, .layout-zenith .widgets, .layout-broadcast .widgets, .layout-ledger .widgets { left: 1.25rem; right: 1.25rem; bottom: 1.25rem; width: auto; max-width: none; transform: none; }
+    .widgets, .layout-split .widgets, .layout-manifesto .widgets, .layout-poster .widgets, .layout-radar .widgets, .layout-diagonal .widgets, .layout-monolith .widgets, .layout-atlas .widgets, .layout-terminal .widgets, .layout-horizon .widgets, .layout-aperture .widgets, .layout-zenith .widgets, .layout-broadcast .widgets, .layout-ledger .widgets { left: 1.25rem; right: 1.25rem; bottom: 1.25rem; width: auto; max-width: none; transform: none; }
     .widget-slot.secondary { display: none; }
-    .layout-console .hero { padding-left: 0; }
-    .layout-console .topbar { left: 0; }
-    .layout-console::before { display: none; }
     .layout-editorial .scene, .layout-atlas .scene { inset: 30% -30% 8% 52%; }
     .layout-aperture .scene { inset: 34% -30% 10% 45%; }
     .layout-ledger .scene { inset: 0; }
@@ -753,7 +842,12 @@
   @media (max-width: 600px) {
     .hero { min-height: 1160px; }
     .layout-signalstack .hero { min-height: 1200px; }
-    .topbar { padding-inline: 1.1rem; }
+    .topbar { min-height: 128px; align-items: start; padding: 1rem 1.1rem; }
+    .brand-channel { gap: .6rem; }
+    .brand-channel > .design-tools { width: min(350px, calc(100vw - 2.2rem)); }
+    .header-controls { padding-top: .05rem; }
+    .design-tools { grid-template-columns: minmax(0, 1fr) 112px; }
+    .signal-status { display: none; }
     .explore { padding: .65rem .75rem; font-size: .5rem; }
     .mission-cta.compact { gap: .5rem; }
     .mission-cta.compact small { display: none; }
@@ -761,8 +855,12 @@
     .mission-cta.compact b { display: none; }
     .locale-toggle { padding-inline: .25rem; font-size: .42rem; }
     .hero-copy { top: 24%; }
-    h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1, .layout-triptych h1, .layout-timeline h1, .layout-specimen h1, .layout-constellation h1, .layout-command h1, .layout-signalstack h1 { font-size: clamp(3.25rem, 17vw, 5.2rem); line-height: .87; }
-    .actions { align-items: flex-start; flex-direction: column; gap: .9rem; }
+    h1, .layout-split h1, .layout-poster h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1, .layout-triptych h1, .layout-timeline h1, .layout-specimen h1, .layout-constellation h1, .layout-command h1, .layout-signalstack h1 { font-size: clamp(3.25rem, 17vw, 5.2rem); line-height: .87; }
+    .actions { display: flex; width: 100%; align-items: stretch; flex-direction: column; gap: 0; border: 0; background: transparent; box-shadow: none; overflow: visible; }
+    .actions button { width: 100%; min-height: 3.25rem; text-align: left; }
+    .secondary-action, .text-action { padding-inline: 1rem; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-top: 0; background: color-mix(in srgb, var(--bg) 88%, transparent); }
+    .text-action { font-size: .57rem; }
+    .text-action i { margin-right: .5rem; }
     .primary { padding: .8rem 1rem; }
     .widgets { bottom: 2rem !important; }
     .design-tools { width: calc(100vw - 2.5rem); max-width: 380px; }
