@@ -18,6 +18,7 @@
   export let onGallery: () => void;
   export let locale: Locale = 'en';
   export let onLocaleChange: (locale: Locale) => void;
+  export let onShare: () => Promise<boolean>;
 
   const scrollToStory = () => document.querySelector('.story')?.scrollIntoView({ behavior: 'smooth' });
   let signupOpen = false;
@@ -25,6 +26,7 @@
   let signupEmail = '';
   let emailInput: HTMLInputElement;
   let storySection: HTMLElement;
+  let shareState: 'idle' | 'copied' | 'failed' = 'idle';
   type TelemetryComposition = 'dock' | 'duo' | 'stack' | 'rail' | 'scatter' | 'focus';
 
   const telemetryByLayout: Record<Layout, TelemetryComposition> = {
@@ -124,6 +126,13 @@
     action();
   }
 
+  async function shareDesign() {
+    const copied = await onShare();
+    shareState = copied ? 'copied' : 'failed';
+    trackEvent('share', { method: copied ? 'clipboard' : 'copy_failed', content_type: 'landing_design', ...analyticsContext() });
+    window.setTimeout(() => { shareState = 'idle'; }, 2200);
+  }
+
   onMount(() => {
     let researchSeen = false;
     const observer = new IntersectionObserver(([entry]) => {
@@ -160,6 +169,7 @@
           <div class="design-utilities">
             <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label={t(locale, 'atlas')}>{t(locale, 'all')} {designCount}</button>
             <button type="button" onclick={() => runExperience('remix', onMix)} class:active={isMix}>{t(locale, 'remix')}</button>
+            <button class:active={shareState === 'copied'} type="button" onclick={shareDesign}>{shareState === 'copied' ? t(locale, 'copied') : shareState === 'failed' ? t(locale, 'shareFailed') : t(locale, 'share')}</button>
           </div>
         </div>
       </div>
@@ -284,7 +294,7 @@
   .brand-button, nav button, .explore, .design-tools button { border: 0; background: transparent; cursor: pointer; }
   .brand-channel { position: relative; z-index: 2; justify-self: start; }
   .brand-button { justify-self: start; padding: 0; }
-  .brand-channel > .design-tools { position: absolute; top: calc(100% + 1.8rem); left: 0; width: min(316px, 72vw); }
+  .brand-channel > .design-tools { position: absolute; top: calc(100% + 1.8rem); left: 0; width: min(390px, 82vw); }
   .header-controls { justify-self: end; display: flex; align-items: center; gap: .6rem; }
   .locale-toggle { padding: .55rem .65rem; border: 0; background: transparent; color: var(--muted); font-family: var(--font-mono); font-size: .48rem; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
   .locale-toggle:hover { color: var(--accent); }
@@ -330,7 +340,7 @@
   .coordinate { position: absolute; right: 3rem; top: 50%; color: var(--muted); font-family: var(--font-mono); font-size: .48rem; letter-spacing: .12em; writing-mode: vertical-rl; }
   .scroll-cue { position: absolute; right: 4.5vw; bottom: 3rem; display: flex; align-items: center; gap: .8rem; color: var(--muted); font-family: var(--font-mono); font-size: .5rem; letter-spacing: .16em; text-transform: uppercase; transform: rotate(90deg); transform-origin: right bottom; }
   .scroll-cue i { width: 55px; border-top: 1px solid var(--accent); }
-  .design-tools { position: relative; width: min(316px, 30vw); display: grid; grid-template-columns: minmax(0, 1fr) 104px; margin: 0; border: 1px solid color-mix(in srgb, var(--text) 16%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--bg) 86%, transparent); box-shadow: 0 12px 36px -28px color-mix(in srgb, var(--accent) 72%, #000); backdrop-filter: blur(16px); overflow: hidden; }
+  .design-tools { position: relative; width: min(390px, 36vw); display: grid; grid-template-columns: minmax(0, 1fr) 135px; margin: 0; border: 1px solid color-mix(in srgb, var(--text) 16%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--bg) 86%, transparent); box-shadow: 0 12px 36px -28px color-mix(in srgb, var(--accent) 72%, #000); backdrop-filter: blur(16px); overflow: hidden; }
   .design-tools::before { content: ''; position: absolute; z-index: 1; top: -1px; left: 1rem; width: 44px; border-top: 2px solid var(--accent); }
   .signal-control { display: flex; min-width: 0; align-items: center; gap: .65rem; padding: .62rem .8rem; border: 0 !important; background: color-mix(in srgb, var(--accent) 4%, transparent) !important; text-align: left; transition: background .2s, transform .2s; }
   .signal-status { display: flex; align-items: center; gap: .5rem; color: var(--accent); font-family: var(--font-mono); font-size: .43rem; letter-spacing: .13em; text-transform: uppercase; }
@@ -339,7 +349,7 @@
   .signal-control strong b { color: var(--accent); font-size: .9rem; font-weight: 400; transition: transform .2s; }
   .signal-control:hover { background: color-mix(in srgb, var(--accent) 11%, transparent) !important; transform: translateX(2px); }
   .signal-control:hover strong b { transform: rotate(40deg); }
-  .design-utilities { display: grid; grid-template-columns: 42px 1fr; border-left: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
+  .design-utilities { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-left: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
   .design-utilities button { min-width: 0; padding: .35rem; color: var(--muted); font-family: var(--font-mono); font-size: .42rem; letter-spacing: .06em; text-transform: uppercase; }
   .design-utilities button + button { border-left: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
   .design-utilities button:hover, .design-utilities button.active { color: var(--bg); background: var(--accent); }
@@ -698,7 +708,7 @@
     nav { display: none; }
     .transmission-rail { left: 0; width: min(500px, calc(100vw - 2.5rem)); }
     .transmission-rail .edition { display: none; }
-    .brand-channel > .design-tools { width: min(340px, calc(100vw - 2.5rem)); }
+    .brand-channel > .design-tools { width: min(390px, calc(100vw - 2.5rem)); }
     .hero-copy, .layout-console .hero-copy, .layout-atlas .hero-copy, .layout-horizon .hero-copy, .layout-aperture .hero-copy, .layout-zenith .hero-copy, .layout-broadcast .hero-copy, .layout-ledger .hero-copy { left: 1.25rem; top: 22%; width: calc(100vw - 2.5rem); transform: none; text-align: left; }
     h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1 { font-size: clamp(3.4rem, 10.5vw, 6rem); }
     .layout-broadcast h1 { font-size: clamp(3.35rem, 9.3vw, 5.6rem); }
@@ -716,7 +726,7 @@
     .layout-manifesto .hero-copy, .layout-radar .hero-copy, .layout-monolith .hero-copy { left: 1.25rem; top: 20%; width: calc(100vw - 2.5rem); transform: none; text-align: left; }
     .layout-manifesto .summary, .layout-radar .summary, .layout-monolith .summary, .layout-zenith .summary { margin-left: 0; }
     .layout-manifesto .actions, .layout-radar .actions, .layout-monolith .actions, .layout-zenith .actions { justify-content: flex-start; }
-    .design-tools { width: min(340px, calc(100vw - 2.5rem)); }
+    .design-tools { width: min(390px, calc(100vw - 2.5rem)); }
     .scroll-cue, .coordinate { display: none; }
     .story-grid { grid-template-columns: 1fr; margin: 4rem 0 5rem; }
     .layout-triptych .hero-copy, .layout-timeline .hero-copy, .layout-specimen .hero-copy, .layout-constellation .hero-copy, .layout-command .hero-copy, .layout-signalstack .hero-copy { left: 1.25rem; top: 20%; width: calc(100vw - 2.5rem); text-align: left; transform: none; }

@@ -17,7 +17,8 @@ const messages = {
     transmissions: 'transmissions', atlasTitleA: 'One system.', atlasTitleB: 'Millions of skies.', coherent: 'Coherent by design',
     atlasCopy: 'Art-direction families and visual worlds constrain the generator. Intelligence changes form—from instrument to ecosystem—without losing the shared visual language.',
     curated: 'Curated', generated: 'Generated', generativeMix: 'Generative mix', generatorMeta: 'Layout × scene × palette × widgets', generate: 'Generate',
-    galleryFooterA: 'Choose what survives.', galleryFooterB: 'Everything else stays possible.', telemetry: 'Mission telemetry', language: 'Русский'
+    galleryFooterA: 'Choose what survives.', galleryFooterB: 'Everything else stays possible.', telemetry: 'Mission telemetry', language: 'Русский',
+    share: 'Share', copied: 'Copied', shareFailed: 'Copy URL'
   },
   ru: {
     mission: 'Миссия', technology: 'Технологии', research: 'Исследования', missionOpen: 'Канал миссии открыт', join: 'Стать частью миссии',
@@ -32,7 +33,8 @@ const messages = {
     transmissions: 'передач', atlasTitleA: 'Одна система.', atlasTitleB: 'Миллионы небес.', coherent: 'Цельность по замыслу',
     atlasCopy: 'Семейства арт-дирекшена и визуальные миры задают границы генератору. Интеллект меняет форму — от прибора до экосистемы — сохраняя общий визуальный язык.',
     curated: 'Отобранные', generated: 'Созданные', generativeMix: 'Генеративный микс', generatorMeta: 'Макет × сцена × палитра × виджеты', generate: 'Создать',
-    galleryFooterA: 'Выберите то, что останется.', galleryFooterB: 'Всё остальное всё ещё возможно.', telemetry: 'Телеметрия миссии', language: 'English'
+    galleryFooterA: 'Выберите то, что останется.', galleryFooterB: 'Всё остальное всё ещё возможно.', telemetry: 'Телеметрия миссии', language: 'English',
+    share: 'Ссылка', copied: 'Скопировано', shareFailed: 'Копировать URL'
   }
 } as const;
 
