@@ -8,6 +8,14 @@ const distDir = join(projectRoot, 'dist');
 const sourceHtml = await readFile(join(distDir, 'index.html'), 'utf8');
 const assetFiles = await readdir(join(distDir, 'assets'));
 
+const staticLandingPages = [
+  {
+    path: '/landing/orbital-zero/',
+    canonicalUrl: 'https://ai-in.space/landing/orbital-zero/',
+    template: join(projectRoot, 'static-pages/orbital-zero/index.html')
+  }
+] as const;
+
 function replaceOnce(html: string, pattern: RegExp, replacement: string, label: string): string {
   if (!pattern.test(html)) throw new Error(`Could not find ${label} in built index.html`);
   return html.replace(pattern, replacement);
@@ -65,7 +73,34 @@ for (const page of materializedPages) {
   await writeFile(outputPath, html);
 }
 
-const sitemapUrls = ['https://ai-in.space/', ...materializedPages.map((page) => page.canonicalUrl)];
+function findAsset(prefix: string, suffix: string, exclude = ''): string {
+  const asset = assetFiles.find((name) => name.startsWith(prefix) && name.endsWith(suffix) && (!exclude || !name.includes(exclude)));
+  if (!asset) throw new Error(`Could not find built asset matching ${prefix}*${suffix}`);
+  return asset;
+}
+
+for (const page of staticLandingPages) {
+  const outputPath = join(distDir, page.path, 'index.html');
+  const orbitalEarth = findAsset('orbital-earth-', '.jpg', '-preview-');
+  const replacements = new Map([
+    ['{{ORBITAL_EARTH_ASSET}}', `../../assets/${orbitalEarth}`],
+    ['{{ORBITAL_EARTH_SOCIAL_URL}}', `https://ai-in.space/assets/${orbitalEarth}`],
+    ['{{SPACE_GROTESK_FONT}}', `../../assets/${findAsset('space-grotesk-latin-wght-normal-', '.woff2')}`],
+    ['{{IBM_PLEX_MONO_FONT}}', `../../assets/${findAsset('ibm-plex-mono-latin-400-normal-', '.woff2')}`],
+    ['{{MANROPE_FONT}}', `../../assets/${findAsset('manrope-latin-wght-normal-', '.woff2')}`]
+  ]);
+  let html = await readFile(page.template, 'utf8');
+  for (const [token, value] of replacements) html = html.replaceAll(token, value);
+  if (/\{\{[A-Z0-9_]+\}\}/.test(html)) throw new Error(`Unresolved template token in ${page.template}`);
+  await mkdir(dirname(outputPath), { recursive: true });
+  await writeFile(outputPath, html);
+}
+
+const sitemapUrls = [
+  'https://ai-in.space/',
+  ...materializedPages.map((page) => page.canonicalUrl),
+  ...staticLandingPages.map((page) => page.canonicalUrl)
+];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${sitemapUrls.map((url) => `  <url>\n    <loc>${url}</loc>\n  </url>`).join('\n')}
@@ -73,4 +108,4 @@ ${sitemapUrls.map((url) => `  <url>\n    <loc>${url}</loc>\n  </url>`).join('\n'
 `;
 await writeFile(join(distDir, 'sitemap.xml'), sitemap);
 
-console.log(`Materialized ${materializedPages.length} stable page and ${sitemapUrls.length} sitemap URLs.`);
+console.log(`Materialized ${materializedPages.length} app page, ${staticLandingPages.length} static landing page, and ${sitemapUrls.length} sitemap URLs.`);
