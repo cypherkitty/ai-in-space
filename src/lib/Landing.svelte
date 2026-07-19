@@ -159,18 +159,22 @@
         <button class="secondary-action" type="button" onclick={exploreResearch}>Explore the Research</button>
         <button class="text-action" type="button" onclick={() => runExperience('new_message', onCopy)}><i>✎</i> New message</button>
       </div>
-      <div class="design-tools" aria-label="Generative design controls">
-        <button class="signal-control" type="button" onclick={() => runExperience('alternate_signal', onShuffle)} aria-label="Receive alternate signal">
-          <span class="signal-status"><i></i> Alternate signal available</span>
-          <strong>Receive a new interface <b aria-hidden="true">↻</b></strong>
-          <small>Every transmission retunes the page.</small>
-        </button>
-        <div class="design-utilities">
-          <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label="Open design gallery">All {designCount}</button>
-          <button type="button" onclick={() => runExperience('remix', onMix)} class:active={isMix} aria-label="Generate a widget mix">Remix</button>
-        </div>
-      </div>
     </main>
+
+    <div class="design-tools" aria-label="Generative design controls">
+      <button class="signal-control" type="button" onclick={() => runExperience('alternate_signal', onShuffle)} aria-label="Receive alternate signal">
+        <span class="signal-status"><i></i> Alternate signal available</span>
+        <strong>Receive a new interface <b aria-hidden="true">↻</b></strong>
+        <small>Every transmission retunes the page.</small>
+      </button>
+      <div class="design-utilities">
+        <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label="Open design gallery">All {designCount}</button>
+        <button type="button" onclick={() => runExperience('remix', onMix)} class:active={isMix} aria-label="Generate a widget mix">Remix</button>
+      </div>
+      <button class="signal-edge-tab" type="button" onclick={() => runExperience('alternate_signal_tab', onShuffle)} aria-label="Receive alternate signal">
+        <i></i><span>Alt signal</span>
+      </button>
+    </div>
 
     <div class:neural={design.visual === 'neural'} class="art">
       {#if design.visual === 'neural'}
@@ -304,7 +308,8 @@
   .coordinate { position: absolute; right: 3rem; top: 50%; color: var(--muted); font-family: var(--font-mono); font-size: .48rem; letter-spacing: .12em; writing-mode: vertical-rl; }
   .scroll-cue { position: absolute; right: 4.5vw; bottom: 3rem; display: flex; align-items: center; gap: .8rem; color: var(--muted); font-family: var(--font-mono); font-size: .5rem; letter-spacing: .16em; text-transform: uppercase; transform: rotate(90deg); transform-origin: right bottom; }
   .scroll-cue i { width: 55px; border-top: 1px solid var(--accent); }
-  .design-tools { position: relative; z-index: 5; width: min(380px, 100%); display: grid; grid-template-columns: minmax(0, 1fr) 64px; margin-top: 1.15rem; border: 1px solid color-mix(in srgb, var(--text) 16%, transparent); border-radius: 7px; background: color-mix(in srgb, var(--bg) 72%, transparent); box-shadow: 0 16px 48px -30px color-mix(in srgb, var(--accent) 60%, #000); backdrop-filter: blur(18px); overflow: hidden; }
+  .design-tools { position: absolute; z-index: 6; left: 0; top: 58%; width: min(340px, 29vw); display: grid; grid-template-columns: minmax(0, 1fr) 64px; margin: 0; border: 1px solid color-mix(in srgb, var(--text) 16%, transparent); border-left: 0; border-radius: 0 7px 7px 0; background: color-mix(in srgb, var(--bg) 82%, transparent); box-shadow: 14px 16px 48px -30px color-mix(in srgb, var(--accent) 60%, #000); backdrop-filter: blur(18px); transform: translateX(-100%); transition: transform .3s cubic-bezier(.2,.75,.15,1); }
+  .design-tools:hover, .design-tools:focus-within { transform: translateX(0); }
   .design-tools::before { content: ''; position: absolute; z-index: 1; top: -1px; left: 1rem; width: 44px; border-top: 2px solid var(--accent); }
   .signal-control { display: grid; gap: .28rem; min-width: 0; padding: .72rem .85rem .68rem; border: 0 !important; background: color-mix(in srgb, var(--accent) 4%, transparent) !important; text-align: left; transition: background .2s, transform .2s; }
   .signal-status { display: flex; align-items: center; gap: .5rem; color: var(--accent); font-family: var(--font-mono); font-size: .43rem; letter-spacing: .13em; text-transform: uppercase; }
@@ -318,6 +323,9 @@
   .design-utilities button { min-width: 0; padding: .35rem; color: var(--muted); font-family: var(--font-mono); font-size: .42rem; letter-spacing: .06em; text-transform: uppercase; }
   .design-utilities button + button { border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
   .design-utilities button:hover, .design-utilities button.active { color: var(--bg); background: var(--accent); }
+  .signal-edge-tab { position: absolute; left: 100%; top: -1px; bottom: -1px; width: 44px; display: flex; align-items: center; justify-content: center; gap: .5rem; border: 1px solid color-mix(in srgb, var(--text) 18%, transparent) !important; border-left: 0 !important; border-radius: 0 7px 7px 0; color: var(--accent); background: color-mix(in srgb, var(--bg) 86%, transparent) !important; box-shadow: 12px 8px 32px -24px var(--accent); backdrop-filter: blur(18px); }
+  .signal-edge-tab span { font-family: var(--font-mono); font-size: .42rem; letter-spacing: .13em; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); }
+  .signal-edge-tab i { width: 6px; height: 6px; flex: 0 0 auto; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: signal-pulse 2s ease-in-out infinite; }
 
   .signup-layer { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 1.25rem; }
   .signup-backdrop { position: absolute; inset: 0; border: 0; background: color-mix(in srgb, #000 72%, transparent); backdrop-filter: blur(12px); cursor: pointer; }
@@ -498,7 +506,6 @@
   .layout-timeline h1 span:last-child { font-family: Georgia, serif; font-style: italic; }
   .layout-timeline .summary { margin-left: 41%; }
   .layout-timeline .actions { margin-left: 41%; }
-  .layout-timeline .design-tools { width: min(380px, 59%); margin-left: 41%; }
   .layout-timeline .widgets { left: auto; right: 4.5vw; top: 18%; bottom: auto; }
   .layout-timeline .art { left: 50%; right: auto; top: 8%; opacity: .28; }
   .layout-timeline .coordinate, .layout-timeline .scroll-cue { display: none; }
@@ -527,7 +534,6 @@
   .layout-constellation h1 { font-size: clamp(4.2rem, 8.8vw, 9.8rem); line-height: .8; }
   .layout-constellation .summary { margin-inline: auto; }
   .layout-constellation .actions { justify-content: center; }
-  .layout-manifesto .design-tools, .layout-radar .design-tools, .layout-monolith .design-tools, .layout-zenith .design-tools, .layout-constellation .design-tools { margin-inline: auto; }
   .layout-constellation .widgets { left: auto; right: 4vw; bottom: 3rem; }
   .layout-constellation .art.neural { left: 50%; right: auto; top: 25%; width: min(60vw, 820px); transform: translateX(-50%); opacity: .48; }
   .layout-constellation .coordinate, .layout-constellation .scroll-cue { display: none; }
@@ -562,7 +568,6 @@
   .layout-signalstack .summary, .layout-signalstack .actions { margin-left: 7vw; }
   .layout-signalstack .widgets { left: auto; right: 4vw; top: 28%; bottom: auto; width: 24vw; max-width: none; flex-direction: column; }
   .layout-signalstack .art.neural { left: auto; right: 3%; top: 17%; width: 48vw; opacity: .45; }
-  .layout-signalstack .design-tools { margin-left: 7vw; }
   .layout-signalstack .coordinate, .layout-signalstack .scroll-cue { display: none; }
   .layout-signalstack .story-grid { grid-template-columns: 1fr; }
   .layout-signalstack .story h2 { max-width: 18ch; font-family: var(--font-mono); text-transform: uppercase; }
@@ -635,13 +640,12 @@
     .layout-manifesto .hero-copy, .layout-radar .hero-copy, .layout-monolith .hero-copy { left: 1.25rem; top: 20%; width: calc(100vw - 2.5rem); transform: none; text-align: left; }
     .layout-manifesto .summary, .layout-radar .summary, .layout-monolith .summary, .layout-zenith .summary { margin-left: 0; }
     .layout-manifesto .actions, .layout-radar .actions, .layout-monolith .actions, .layout-zenith .actions { justify-content: flex-start; }
-    .design-tools { width: min(380px, 100%); }
+    .design-tools { left: 0; top: 61%; width: min(340px, 58vw); }
     .scroll-cue, .coordinate { display: none; }
     .story-grid { grid-template-columns: 1fr; margin: 4rem 0 5rem; }
     .layout-triptych .hero-copy, .layout-timeline .hero-copy, .layout-specimen .hero-copy, .layout-constellation .hero-copy, .layout-command .hero-copy, .layout-signalstack .hero-copy { left: 1.25rem; top: 20%; width: calc(100vw - 2.5rem); text-align: left; transform: none; }
     .layout-triptych h1, .layout-timeline h1, .layout-specimen h1, .layout-constellation h1, .layout-command h1, .layout-signalstack h1 { display: block; font-size: clamp(3.6rem, 14vw, 7rem); }
     .layout-timeline .summary, .layout-timeline .actions, .layout-signalstack .summary, .layout-signalstack .actions { margin-left: 0; }
-    .layout-timeline .design-tools, .layout-signalstack .design-tools { width: min(380px, 100%); margin-left: 0; }
     .layout-constellation .summary { margin-left: 0; }
     .layout-constellation .actions { justify-content: flex-start; }
     .layout-signalstack h1 span:last-child { transform: none; }
@@ -675,7 +679,7 @@
     .actions { align-items: flex-start; flex-direction: column; gap: .9rem; }
     .primary { padding: .8rem 1rem; }
     .widgets { bottom: 2rem !important; }
-    .design-tools { width: 100%; margin-top: 1rem; }
+    .design-tools { left: 0; top: 64%; width: calc(100vw - 2.5rem); max-width: 380px; }
     .story { padding-top: 5rem; }
     .story-grid { gap: 2rem; }
     .principles { grid-template-columns: 1fr; }
