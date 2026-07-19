@@ -338,6 +338,33 @@ const familyRules: Record<Layout, FamilyRule> = {
   signalstack: { visuals: ['neural', 'orbit'], treatments: ['outline', 'mono'], textures: ['scan', 'grain'], alignments: ['center', 'right'], widgets: ['signal', 'spectrum', 'delay', 'coordinates'] }
 };
 
+// Composition is a layout grammar, not another unrestricted random layer. Each
+// base family gets only the structures that preserve its hierarchy and identity.
+const compositionRules: Record<Layout, readonly HeroComposition[]> = {
+  origin: ['native', 'viewport'],
+  split: ['native', 'magazine'],
+  editorial: ['native', 'island', 'cinema'],
+  console: ['native'],
+  poster: ['native', 'viewport'],
+  manifesto: ['native', 'cinema'],
+  radar: ['native', 'viewport'],
+  diagonal: ['native', 'viewport'],
+  monolith: ['native', 'island', 'cinema'],
+  terminal: ['native'],
+  atlas: ['native', 'viewport'],
+  horizon: ['native', 'cinema'],
+  aperture: ['native', 'viewport'],
+  zenith: ['native', 'cinema'],
+  broadcast: ['native', 'magazine'],
+  ledger: ['native', 'index'],
+  triptych: ['native', 'masthead'],
+  timeline: ['native', 'horizon-strip'],
+  specimen: ['native', 'magazine'],
+  constellation: ['native', 'magazine'],
+  command: ['native', 'masthead'],
+  signalstack: ['native', 'viewport']
+};
+
 const generatedPrefixes = ['Aster', 'Silent', 'Far', 'Helio', 'Signal', 'Nova', 'Liminal', 'Outer', 'Vector', 'Echo'];
 const generatedSuffixes = ['Memory', 'Relay', 'Atlas', 'Engine', 'Survey', 'Protocol', 'Horizon', 'Field', 'Archive', 'Dawn'];
 const scenes = [
@@ -710,7 +737,7 @@ export function generateDesign(seed: number, catalogIndex?: number, copySeed = s
     treatment: seededPick(random, treatmentPool.length ? treatmentPool : ['native']),
     texture: seededPick(random, rules.textures),
     sceneAlign: seededPick(random, rules.alignments),
-    composition: seededPick(random, ['native', 'cinema', 'masthead', 'viewport', 'island', 'magazine', 'index', 'horizon-strip'] as const)
+    composition: seededPick(random, compositionRules[base.layout])
   };
 }
 

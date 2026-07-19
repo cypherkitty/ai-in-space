@@ -6,7 +6,7 @@
   import OrbitalArt from './OrbitalArt.svelte';
   import Widget from './Widget.svelte';
   import { designAnalyticsContext, trackEvent } from './analytics';
-  import { researchPrinciplesFor, type Design, type Layout, type WidgetName } from './designs';
+  import { researchPrinciplesFor, type Design, type HeroComposition, type Layout, type WidgetName } from './designs';
 
   export let design: Design;
   export let designCount = 61;
@@ -59,6 +59,17 @@
   const telemetryFor = (value: Design): TelemetryComposition => {
     const primary = telemetryByLayout[value.layout];
     if (!value.generated) return curatedTelemetryOverrides[value.id] ?? primary;
+    const structuredTelemetry: Partial<Record<HeroComposition, TelemetryComposition>> = {
+      cinema: 'focus',
+      masthead: 'focus',
+      viewport: 'focus',
+      island: 'focus',
+      magazine: 'duo',
+      index: 'focus',
+      'horizon-strip': 'duo'
+    };
+    const composed = structuredTelemetry[value.composition ?? 'native'];
+    if (composed) return composed;
     const options = telemetryVariations[primary];
     return options[telemetryHash(`${value.id}:${value.seed ?? 0}:telemetry`) % options.length]!;
   };
