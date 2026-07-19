@@ -74,7 +74,8 @@
 
   onMount(() => {
     const savedLocale = window.localStorage.getItem('ai-in-space-locale');
-    locale = savedLocale === 'ru' ? 'ru' : 'en';
+    const linkedLocale = new URL(window.location.href).searchParams.get('lang');
+    locale = linkedLocale === 'ru' ? 'ru' : linkedLocale === 'en' ? 'en' : savedLocale === 'ru' ? 'ru' : 'en';
     document.documentElement.lang = locale;
     initAnalytics();
     syncRoute();
@@ -147,6 +148,39 @@
   function randomRoot() {
     launchRemix();
   }
+
+  function canonicalShareUrl(): string {
+    const url = new URL(window.location.href);
+    url.search = '';
+    if (locale === 'ru') url.searchParams.set('lang', 'ru');
+    if (active.generated && active.seed !== undefined) {
+      url.hash = `/g/${active.seed}/${active.copySeed ?? active.seed}`;
+    } else if (active.copySeed !== undefined) {
+      url.hash = `/c/${active.id}/${active.copySeed}`;
+    } else {
+      url.hash = `/v/${active.id}`;
+    }
+    return url.toString();
+  }
+
+  async function shareCurrent(): Promise<boolean> {
+    const shareUrl = canonicalShareUrl();
+    window.history.replaceState({}, '', shareUrl);
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      return true;
+    } catch {
+      const input = document.createElement('textarea');
+      input.value = shareUrl;
+      input.style.position = 'fixed';
+      input.style.opacity = '0';
+      document.body.append(input);
+      input.select();
+      const copied = document.execCommand('copy');
+      input.remove();
+      return copied;
+    }
+  }
 </script>
 
 <svelte:head>
@@ -157,5 +191,5 @@
 {#if view === 'gallery'}
   <Gallery designs={localizedDesigns} {locale} onLocaleChange={setLocale} onOpen={open} onRandom={randomRoot} onMix={mix} />
 {:else}
-  <Landing design={localizedActive} designCount={designs.length} {locale} onLocaleChange={setLocale} {isMix} onShuffle={shuffle} onCopy={changeCopy} onMix={mix} onGallery={gallery} />
+  <Landing design={localizedActive} designCount={designs.length} {locale} onLocaleChange={setLocale} {isMix} onShuffle={shuffle} onCopy={changeCopy} onMix={mix} onGallery={gallery} onShare={shareCurrent} />
 {/if}
