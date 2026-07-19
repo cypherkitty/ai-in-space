@@ -6,7 +6,7 @@
   import OrbitalArt from './OrbitalArt.svelte';
   import Widget from './Widget.svelte';
   import { designAnalyticsContext, trackEvent } from './analytics';
-  import { researchPrinciplesFor, type Design } from './designs';
+  import { researchPrinciplesFor, type Design, type Layout, type WidgetName } from './designs';
 
   export let design: Design;
   export let designCount = 61;
@@ -22,9 +22,63 @@
   let signupEmail = '';
   let emailInput: HTMLInputElement;
   let storySection: HTMLElement;
-  const expandedTelemetryLayouts = new Set(['triptych', 'timeline', 'specimen', 'constellation', 'command', 'signalstack']);
+  type TelemetryComposition = 'dock' | 'duo' | 'stack' | 'rail' | 'scatter' | 'focus';
+
+  const telemetryByLayout: Record<Layout, TelemetryComposition> = {
+    origin: 'dock', split: 'stack', editorial: 'duo', console: 'rail', poster: 'focus', manifesto: 'scatter',
+    radar: 'dock', diagonal: 'stack', monolith: 'duo', terminal: 'rail', atlas: 'focus', horizon: 'scatter',
+    aperture: 'duo', zenith: 'dock', broadcast: 'stack', ledger: 'rail', triptych: 'stack', timeline: 'rail',
+    specimen: 'focus', constellation: 'scatter', command: 'rail', signalstack: 'stack'
+  };
+  const telemetryVariations: Record<TelemetryComposition, readonly TelemetryComposition[]> = {
+    dock: ['dock', 'duo', 'scatter'],
+    duo: ['duo', 'focus', 'dock'],
+    stack: ['stack', 'duo', 'focus'],
+    rail: ['focus', 'stack', 'duo'],
+    scatter: ['scatter', 'duo', 'dock'],
+    focus: ['focus', 'duo', 'scatter']
+  };
+  const curatedTelemetryOverrides: Partial<Record<string, TelemetryComposition>> = {
+    'event-horizon': 'focus',
+    'ring-observer': 'focus',
+    'far-observatory': 'stack',
+    'light-year-route': 'focus',
+    'periapsis-control': 'stack'
+  };
+  const dialWidgets = new Set<WidgetName>(['anomaly', 'orbit', 'progress', 'thermal', 'delay']);
+
+  const telemetryHash = (value: string): number => {
+    let result = 2166136261;
+    for (let index = 0; index < value.length; index += 1) {
+      result ^= value.charCodeAt(index);
+      result = Math.imul(result, 16777619);
+    }
+    return result >>> 0;
+  };
+
+  const telemetryFor = (value: Design): TelemetryComposition => {
+    const primary = telemetryByLayout[value.layout];
+    if (!value.generated) return curatedTelemetryOverrides[value.id] ?? primary;
+    const options = telemetryVariations[primary];
+    return options[telemetryHash(`${value.id}:${value.seed ?? 0}:telemetry`) % options.length]!;
+  };
+
+  const shellFor = (composition: TelemetryComposition, widget: WidgetName, index: number) => {
+    if (composition === 'rail') return 'strip' as const;
+    if (composition === 'focus') return dialWidgets.has(widget) ? 'dial' as const : 'cut' as const;
+    if (composition === 'stack') return index === 0 ? 'cut' as const : 'ghost' as const;
+    if (composition === 'duo') return index === 1 && dialWidgets.has(widget) ? 'dial' as const : index === 0 ? 'cut' as const : 'capsule' as const;
+    if (composition === 'scatter') return dialWidgets.has(widget) ? 'dial' as const : index === 1 ? 'capsule' as const : 'ghost' as const;
+    return index === 0 ? 'panel' as const : index === 1 ? 'cut' as const : 'ghost' as const;
+  };
+
   $: principles = researchPrinciplesFor(design);
-  $: expandedTelemetry = expandedTelemetryLayouts.has(design.layout);
+  $: telemetry = telemetryFor(design);
+  $: telemetryWidgets = telemetry === 'focus'
+    ? design.widgets.slice(0, 1)
+    : telemetry === 'duo' || telemetry === 'stack'
+      ? design.widgets.slice(0, 2)
+      : design.widgets;
 
   const analyticsContext = () => designAnalyticsContext(design);
 
@@ -73,7 +127,6 @@
 
 <div
   class={`site layout-${design.layout} treatment-${design.treatment ?? 'native'} texture-${design.texture ?? 'grid'} scene-${design.sceneAlign ?? 'center'}`}
-  class:light={design.tone === 'light'}
   class:generated={design.generated}
   style={`--accent:${design.accent};--accent2:${design.accent2};--bg:${design.bg};--text:${design.text};--muted:${design.muted};--panel:${design.panel};--scene:url(${design.scene})`}
 >
@@ -126,10 +179,10 @@
       {/if}
     </div>
 
-    <aside class="widgets" aria-label="Mission telemetry">
-      {#each design.widgets as widget, i}
-        <div class="widget-slot" class:secondary={i > 0} class:curated-hidden={!design.generated && !expandedTelemetry && i > 0 && widget !== 'stats'}>
-          <Widget type={widget} {design} />
+    <aside class={`widgets telemetry-${telemetry}`} aria-label={`Mission telemetry / ${telemetry} composition`}>
+      {#each telemetryWidgets as widget, i}
+        <div class="widget-slot" class:secondary={i > 0}>
+          <Widget type={widget} {design} shell={shellFor(telemetry, widget, i)} />
         </div>
       {/each}
     </aside>
@@ -244,9 +297,9 @@
   .text-action i { display: inline-grid; place-items: center; width: 1.45rem; height: 1.45rem; margin-right: .5rem; border: 1px solid currentColor; border-radius: 50%; font-style: normal; }
   .art { position: absolute; z-index: 1; right: 14%; top: 22%; opacity: .62; }
   .art.neural { top: 13%; right: 3%; width: min(62vw, 900px); height: min(72vw, 720px); opacity: .88; }
-  .widgets { position: absolute; z-index: 4; left: clamp(1.25rem, 4.5vw, 5rem); bottom: 2.2rem; display: flex; gap: .75rem; max-width: calc(100vw - 10rem); }
-  .widget-slot { display: contents; }
-  .widget-slot.curated-hidden { display: none; }
+  .widgets { position: absolute; z-index: 4; left: clamp(1.25rem, 4.5vw, 5rem); bottom: 2.2rem; display: flex; align-items: end; gap: .75rem; max-width: calc(100vw - 10rem); }
+  .widget-slot { display: block; min-width: 0; }
+  .widget-slot :global(.widget:not(.shell-dial)) { width: 100%; height: 100%; }
   .coordinate { position: absolute; right: 3rem; top: 50%; color: var(--muted); font-family: var(--font-mono); font-size: .48rem; letter-spacing: .12em; writing-mode: vertical-rl; }
   .scroll-cue { position: absolute; right: 4.5vw; bottom: 3rem; display: flex; align-items: center; gap: .8rem; color: var(--muted); font-family: var(--font-mono); font-size: .5rem; letter-spacing: .16em; text-transform: uppercase; transform: rotate(90deg); transform-origin: right bottom; }
   .scroll-cue i { width: 55px; border-top: 1px solid var(--accent); }
@@ -516,12 +569,37 @@
   .layout-signalstack .principles { border: 0; gap: .5rem; transform: rotate(-1deg); }
   .layout-signalstack .principles article, .layout-signalstack .principles article + article { padding: 2rem; border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent); background: color-mix(in srgb, var(--accent) 4%, transparent); }
 
+  /* Telemetry is a composition layer of its own: dock, asymmetric pair, stack, rail, scatter, or single instrument. */
+  .widgets.telemetry-dock { left: 50%; right: auto; bottom: 2rem; width: min(88vw, 980px); max-width: none; justify-content: center; transform: translateX(-50%); }
+  .telemetry-dock .widget-slot { flex: 1 1 220px; max-width: 380px; }
+  .telemetry-dock .widget-slot:only-child { flex-basis: auto; max-width: 680px; }
+
+  .widgets.telemetry-duo { left: auto; right: 4vw; top: auto; bottom: 1.5rem; width: min(52vw, 700px); max-width: none; display: grid; grid-template-columns: minmax(250px, 1.15fr) minmax(240px, .85fr); align-items: end; gap: 1rem; transform: none; }
+  .telemetry-duo .widget-slot:first-child { transform: translateY(-1.5rem); }
+  .telemetry-duo .widget-slot:last-child { justify-self: end; }
+
+  .widgets.telemetry-stack { left: auto; right: 3.5vw; top: 22%; bottom: auto; width: min(27vw, 360px); max-width: none; flex-direction: column; align-items: stretch; gap: .65rem; transform: none; }
+  .telemetry-stack .widget-slot:nth-child(2) { width: 86%; margin-left: 14%; }
+
+  .widgets.telemetry-rail { left: 3vw; right: 3vw; top: auto; bottom: 1.5rem; width: auto; max-width: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); align-items: stretch; gap: 0; transform: none; }
+  .telemetry-rail .widget-slot + .widget-slot { border-left: 1px solid color-mix(in srgb, var(--accent) 20%, transparent); }
+
+  .widgets.telemetry-scatter { inset: 104px 0 0; width: auto; max-width: none; display: block; transform: none; pointer-events: none; }
+  .telemetry-scatter .widget-slot { position: absolute; width: min(28vw, 340px); }
+  .telemetry-scatter .widget-slot:nth-child(1) { left: 3.5vw; bottom: 11rem; }
+  .telemetry-scatter .widget-slot:nth-child(2) { right: 4vw; bottom: 9rem; transform: rotate(-1.5deg); }
+  .telemetry-scatter .widget-slot:nth-child(3) { right: 4vw; top: 7%; width: min(24vw, 300px); transform: rotate(1deg); }
+
+  .widgets.telemetry-focus { left: auto; right: 5vw; top: auto; bottom: 4rem; width: min(32vw, 430px); max-width: none; display: block; transform: none; }
+  .telemetry-focus .widget-slot { display: grid; justify-items: end; }
+  .layout-specimen .widgets.telemetry-focus { left: 7vw; right: auto; bottom: 4rem; }
+  .layout-poster .widgets.telemetry-focus { right: 7vw; bottom: 5rem; }
+  .layout-timeline .widgets.telemetry-focus { right: .5vw; width: min(24vw, 340px); }
+
   @media (min-width: 901px) {
     .layout-manifesto .hero, .layout-radar .hero, .layout-monolith .hero, .layout-zenith .hero, .layout-constellation .hero { min-height: max(860px, calc(100svh + 140px)); }
   }
 
-  .light .scene { mix-blend-mode: multiply; opacity: .62; }
-  .light .hero::before { content: ''; position: absolute; z-index: -2; inset: 0; background: linear-gradient(90deg, var(--bg) 0 44%, color-mix(in srgb, var(--bg) 88%, transparent) 62%, transparent 82%); }
   @keyframes blink { 50% { opacity: 0; } }
   @keyframes signal-pulse { 50% { opacity: .45; transform: scale(.72); } }
   @keyframes principle-arrival { from { opacity: 0; transform: translateY(10px); } }
@@ -565,6 +643,10 @@
     .layout-constellation .scene, .layout-signalstack .scene { inset: 0; }
     .layout-triptych .art, .layout-timeline .art, .layout-command .art { right: -20%; left: auto; top: 34%; width: 90vw; }
     .layout-triptych .widgets, .layout-timeline .widgets, .layout-specimen .widgets, .layout-constellation .widgets, .layout-command .widgets, .layout-signalstack .widgets { left: 1.25rem; right: 1.25rem; top: auto; bottom: 1.25rem; width: auto; max-width: none; flex-direction: row; transform: none; }
+    .widgets[class*="telemetry-"] { left: 1.25rem; right: 1.25rem; top: auto; bottom: 1.25rem; width: auto; max-width: none; display: flex; align-items: end; transform: none; }
+    .widgets[class*="telemetry-"] .widget-slot { position: static; width: 100%; max-width: none; margin: 0; transform: none; }
+    .widgets[class*="telemetry-"] .widget-slot :global(.widget) { width: 100%; height: auto; min-width: 0; }
+    .widgets[class*="telemetry-"] .widget-slot :global(.shell-dial) { width: min(240px, 100%); }
     .layout-triptych .story-grid, .layout-specimen .story-grid { grid-template-columns: 1fr; }
     .layout-triptych .story-grid h2 { grid-column: auto; }
     .layout-constellation .principles article, .layout-constellation .principles article + article { border-radius: 0; aspect-ratio: auto; }
@@ -585,7 +667,7 @@
     h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1, .layout-triptych h1, .layout-timeline h1, .layout-specimen h1, .layout-constellation h1, .layout-command h1, .layout-signalstack h1 { font-size: clamp(3.25rem, 17vw, 5.2rem); line-height: .87; }
     .actions { align-items: flex-start; flex-direction: column; gap: .9rem; }
     .primary { padding: .8rem 1rem; }
-    .widgets { bottom: 11.5rem !important; }
+    .widgets { bottom: 2rem !important; }
     .design-tools { width: 100%; margin-top: 1rem; }
     .story { padding-top: 5rem; }
     .story-grid { gap: 2rem; }

@@ -3,6 +3,7 @@
 
   export let type: WidgetName;
   export let design: Design;
+  export let shell: 'panel' | 'cut' | 'ghost' | 'capsule' | 'dial' | 'strip' = 'panel';
 
   const signalVariants = [
     { label: 'Signal analysis', mode: 'LIVE', status: 'Carrier stable', value: '98.42%' },
@@ -132,7 +133,7 @@
   $: solarHeights = Array.from({ length: 18 }, (_, index) => range(widgetKey, `solar-${index}`, 12, 92));
 </script>
 
-<article class="widget" class:stats={type === 'stats'} aria-label={`${type} mission widget`}>
+<article class={`widget shell-${shell}`} class:stats={type === 'stats'} aria-label={`${type} mission widget`}>
   {#if type === 'stats'}
     {#each design.stats as stat}
       <div class="stat"><strong>{stat[0]}</strong><span>{stat[1]}<br />{stat[2]}</span></div>
@@ -209,6 +210,20 @@
 
 <style>
   .widget { position: relative; min-width: 220px; overflow: hidden; padding: 1rem; color: var(--text); border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); background: var(--panel); backdrop-filter: blur(14px); font-family: var(--font-mono); font-size: .62rem; letter-spacing: .08em; }
+  .shell-cut { clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px)); border-color: color-mix(in srgb, var(--accent) 34%, transparent); }
+  .shell-ghost { border: 0; border-left: 2px solid var(--accent); background: linear-gradient(90deg, color-mix(in srgb, var(--panel) 92%, transparent), transparent); backdrop-filter: none; }
+  .shell-capsule { min-width: 280px; padding: 1.25rem 1.8rem; border-radius: 999px; border-color: color-mix(in srgb, var(--accent) 28%, transparent); }
+  .shell-dial { width: 240px; min-width: 240px; aspect-ratio: 1; display: grid; align-content: center; padding: 2rem; border-radius: 50%; border-color: color-mix(in srgb, var(--accent) 46%, transparent); background: radial-gradient(circle, color-mix(in srgb, var(--panel) 94%, transparent) 0 58%, color-mix(in srgb, var(--panel) 72%, transparent)); box-shadow: inset 0 0 0 10px color-mix(in srgb, var(--accent) 3%, transparent), 0 0 45px color-mix(in srgb, var(--accent) 8%, transparent); }
+  .shell-dial header { padding-bottom: .55rem; }
+  .shell-dial footer { margin-top: .55rem; font-size: .46rem; }
+  .shell-dial .progress { margin: 1.35rem 0; }
+  .shell-strip { width: 100%; height: 150px; min-width: 0; padding: .8rem 1rem; border-width: 1px 0; background: linear-gradient(90deg, color-mix(in srgb, var(--panel) 96%, transparent), color-mix(in srgb, var(--panel) 55%, transparent)); backdrop-filter: blur(8px); }
+  .shell-strip header { padding-bottom: .5rem; }
+  .shell-strip footer { margin-top: .5rem; }
+  .shell-strip .coords { padding: .65rem 0 .2rem; font-size: .68rem; line-height: 1.35; }
+  .shell-strip .memory-grid, .shell-strip .archive-list { margin: .55rem 0; }
+  .shell-strip .archive-list { gap: .3rem; }
+  .shell-strip .anomaly-body { margin: .55rem 0 .2rem; }
   header, footer { display: flex; justify-content: space-between; gap: 1rem; text-transform: uppercase; }
   header { color: var(--muted); padding-bottom: .8rem; border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
   header b { color: var(--accent); font-weight: 500; }
