@@ -25,8 +25,10 @@
     y: number;
   };
 
-  const MAX_CANVAS_PIXELS = 1_500_000;
-  const MAX_FRAME_RATE = 30;
+  const MAX_CANVAS_PIXELS = 800_000;
+  const MAX_FRAME_RATE = 20;
+  const ARRIVAL_ANIMATION_MS = 1_800;
+  const INTERACTION_ANIMATION_MS = 420;
 
   const hexToRgb = (value: string, fallback: [number, number, number]): [number, number, number] => {
     const hex = value.trim().replace('#', '');
@@ -50,6 +52,7 @@
     let animationFrame = 0;
     let lastFrameTime = 0;
     let visible = true;
+    let activeUntil = 0;
 
     const canRender = () => visible && !document.hidden;
 
@@ -58,7 +61,12 @@
       animationFrame = requestAnimationFrame(draw);
     }
 
-    refreshCanvas = queueFrame;
+    function wake(duration = INTERACTION_ANIMATION_MS) {
+      activeUntil = Math.max(activeUntil, performance.now() + duration);
+      queueFrame();
+    }
+
+    refreshCanvas = () => wake();
 
     function stopAnimation() {
       if (animationFrame) cancelAnimationFrame(animationFrame);
@@ -68,7 +76,7 @@
 
     function createNetwork() {
       nodes.length = 0;
-      const count = Math.max(72, Math.min(180, Math.floor((width * height) / 4800)));
+      const count = Math.max(56, Math.min(100, Math.floor((width * height) / 7200)));
       const radius = Math.min(width, height) * 0.39;
       for (let i = 0; i < count; i += 1) {
         nodes.push({
@@ -89,14 +97,14 @@
       const bounds = host!.getBoundingClientRect();
       width = Math.max(1, bounds.width);
       height = Math.max(1, bounds.height);
-      const preferredScale = Math.min(window.devicePixelRatio || 1, 1.5);
+      const preferredScale = Math.min(window.devicePixelRatio || 1, 1.25);
       const pixelBudgetScale = Math.sqrt(MAX_CANVAS_PIXELS / (width * height));
       const renderScale = Math.max(1, Math.min(preferredScale, pixelBudgetScale));
       canvas.width = Math.floor(width * renderScale);
       canvas.height = Math.floor(height * renderScale);
       context!.setTransform(renderScale, 0, 0, renderScale, 0, 0);
       createNetwork();
-      queueFrame();
+      wake(ARRIVAL_ANIMATION_MS);
     }
 
     function draw(frameTime: number) {
@@ -162,7 +170,7 @@
         const pulse = 1 + Math.sin(time * 2.2 + node.phase) * 0.35;
         const color = node.color > 0.94 ? spark : node.color > 0.86 ? secondary : primary;
         context!.shadowColor = rgba(color, 1);
-        context!.shadowBlur = node.color > 0.86 ? 15 : 7;
+        context!.shadowBlur = node.color > 0.86 ? 10 : 0;
         context!.fillStyle = rgba(color, 0.55 + node.depth * 0.35);
         context!.beginPath();
         context!.arc(node.x, node.y, node.depth * 1.75 * pulse, 0, Math.PI * 2);
@@ -191,36 +199,36 @@
       context!.fill();
       context!.shadowBlur = 0;
       context!.globalCompositeOperation = 'source-over';
-      if (animated) queueFrame();
+      if (animated && frameTime < activeUntil) queueFrame();
     }
 
     function movePointer(event: PointerEvent) {
       const bounds = canvas.getBoundingClientRect();
       pointer.x = (event.clientX - bounds.left) / bounds.width - 0.5;
       pointer.y = (event.clientY - bounds.top) / bounds.height - 0.5;
-      if (reducedMotion.matches) queueFrame();
+      wake();
     }
 
     function resetPointer() {
       pointer.x = 0;
       pointer.y = 0;
-      if (reducedMotion.matches) queueFrame();
+      wake();
     }
 
     function handleMotionPreference() {
       lastFrameTime = 0;
-      queueFrame();
+      wake(ARRIVAL_ANIMATION_MS);
     }
 
     function handleDocumentVisibility() {
       if (document.hidden) stopAnimation();
-      else queueFrame();
+      else wake(ARRIVAL_ANIMATION_MS);
     }
 
     const resizeObserver = new ResizeObserver(resize);
     const visibilityObserver = new IntersectionObserver(([entry]) => {
       visible = entry?.isIntersecting ?? true;
-      if (visible) queueFrame();
+      if (visible) wake(ARRIVAL_ANIMATION_MS);
       else stopAnimation();
     });
     resizeObserver.observe(host);

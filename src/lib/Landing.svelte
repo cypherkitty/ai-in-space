@@ -148,7 +148,20 @@
       </button>
     </header>
 
-    <div class="edition"><span>{design.index}</span><i></i><span>{design.name}</span></div>
+    <div class="transmission-rail">
+      <div class="edition"><span>{design.index}</span><i></i><span>{design.name}</span></div>
+
+      <div class="design-tools" aria-label="Generative design controls">
+        <button class="signal-control" type="button" onclick={() => runExperience('alternate_signal', onShuffle)} aria-label="Receive alternate signal">
+          <span class="signal-status"><i></i> Alternate signal</span>
+          <strong>New interface <b aria-hidden="true">↻</b></strong>
+        </button>
+        <div class="design-utilities">
+          <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label="Open design gallery">All {designCount}</button>
+          <button type="button" onclick={() => runExperience('remix', onMix)} class:active={isMix} aria-label="Generate a widget mix">Remix</button>
+        </div>
+      </div>
+    </div>
 
     <main class="hero-copy">
       <p class="kicker">{design.kicker}</p>
@@ -160,18 +173,6 @@
         <button class="text-action" type="button" onclick={() => runExperience('new_message', onCopy)}><i>✎</i> New message</button>
       </div>
     </main>
-
-    <div class="design-tools" aria-label="Generative design controls">
-      <button class="signal-control" type="button" onclick={() => runExperience('alternate_signal', onShuffle)} aria-label="Receive alternate signal">
-        <span class="signal-status"><i></i> Alternate signal available</span>
-        <strong>Receive a new interface <b aria-hidden="true">↻</b></strong>
-        <small>Every transmission retunes the page.</small>
-      </button>
-      <div class="design-utilities">
-        <button type="button" onclick={() => runExperience('open_gallery', onGallery)} aria-label="Open design gallery">All {designCount}</button>
-        <button type="button" onclick={() => runExperience('remix', onMix)} class:active={isMix} aria-label="Generate a widget mix">Remix</button>
-      </div>
-    </div>
 
     <div class:neural={design.visual === 'neural'} class="art">
       {#if design.visual === 'neural'}
@@ -260,7 +261,7 @@
   .scene-right .scene { background-position: right center; }
   .texture-clean .grain, .texture-clean .grid-lines { display: none; }
   .texture-grain .grid-lines { display: none; }
-  .texture-scan .grid-lines { opacity: .22; background-image: repeating-linear-gradient(0deg, transparent 0 5px, color-mix(in srgb, var(--accent) 12%, transparent) 5px 6px); background-size: auto; }
+  .texture-scan .grid-lines { opacity: .12; background-image: repeating-linear-gradient(0deg, transparent 0 6px, color-mix(in srgb, var(--accent) 10%, transparent) 6px 7px); background-size: auto; }
   .topbar { position: absolute; z-index: 10; top: 0; left: 0; right: 0; height: 104px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 clamp(1.25rem, 4.5vw, 5rem); border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent); }
   .brand-button, nav button, .explore, .design-tools button { border: 0; background: transparent; cursor: pointer; }
   .brand-button { justify-self: start; padding: 0; }
@@ -277,17 +278,18 @@
   .mission-cta.compact:hover { color: var(--bg); border-color: var(--accent); background: var(--accent); }
   .mission-cta.compact:hover small, .mission-cta.compact:hover strong, .mission-cta.compact:hover b { color: var(--bg); }
   .mission-cta.compact:hover b { transform: translate(2px, -2px); }
-  .edition { position: absolute; z-index: 2; left: calc(clamp(1.25rem, 4.5vw, 5rem) + min(340px, 29vw) + 1.25rem); top: 132px; display: flex; align-items: center; gap: .65rem; color: var(--muted); font-family: var(--font-mono); font-size: .55rem; letter-spacing: .16em; text-transform: uppercase; }
+  .transmission-rail { position: absolute; z-index: 6; left: clamp(1.25rem, 4.5vw, 5rem); top: 110px; display: flex; align-items: center; gap: 1rem; max-width: calc(100vw - 9rem); }
+  .edition { display: flex; flex: 0 0 auto; align-items: center; gap: .65rem; color: var(--muted); font-family: var(--font-mono); font-size: .55rem; letter-spacing: .16em; text-transform: uppercase; }
   .edition i { display: block; width: 40px; border-top: 1px solid currentColor; }
-  .hero-copy { position: absolute; z-index: 3; left: clamp(1.25rem, 7vw, 7.5rem); top: 27%; width: min(540px, 48vw); }
+  .hero-copy { position: absolute; z-index: 5; left: clamp(1.25rem, 7vw, 7.5rem); top: 27%; width: min(540px, 48vw); }
   .kicker { margin: 0 0 1.2rem; color: var(--accent); font-family: var(--font-mono); font-size: .62rem; letter-spacing: .23em; line-height: 1.5; text-transform: uppercase; }
-  h1 { margin: 0; font-family: var(--font-display); font-size: clamp(3.7rem, 7.6vw, 8.3rem); font-weight: 390; letter-spacing: -.065em; line-height: .82; text-wrap: balance; }
+  h1 { margin: 0; font-family: var(--font-display); font-size: clamp(3.7rem, 7.6vw, 8.3rem); font-weight: 390; letter-spacing: -.065em; line-height: .82; text-wrap: balance; text-shadow: 0 2px 28px color-mix(in srgb, var(--bg) 76%, transparent); }
   h1 span { display: block; }
   h1 span:nth-child(2) { color: var(--accent2); }
   .treatment-outline h1 span:nth-child(2) { color: transparent !important; -webkit-text-stroke: 1px var(--accent2); }
   .treatment-editorial h1 span:nth-child(2) { color: var(--accent2) !important; font-family: Georgia, serif; font-style: italic; font-weight: 400; }
   .treatment-mono h1 { font-family: var(--font-mono); letter-spacing: -.07em; }
-  .summary { max-width: 41ch; margin: 1.55rem 0 0; color: var(--muted); font-size: clamp(.78rem, 1vw, .95rem); line-height: 1.75; }
+  .summary { max-width: 41ch; margin: 1.55rem 0 0; color: color-mix(in srgb, var(--text) 76%, var(--muted)); font-size: clamp(.78rem, 1vw, .95rem); line-height: 1.75; text-shadow: 0 2px 16px var(--bg), 0 0 3px var(--bg); }
   .actions { display: flex; align-items: center; gap: 1.5rem; margin-top: 1.8rem; }
   .actions button { cursor: pointer; }
   .primary { padding: .95rem 1.25rem; border: 1px solid var(--accent); border-radius: 2px; background: var(--accent); color: var(--bg); font-family: var(--font-mono); font-size: .59rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 0 32px -18px var(--accent); transition: .25s; }
@@ -305,19 +307,18 @@
   .coordinate { position: absolute; right: 3rem; top: 50%; color: var(--muted); font-family: var(--font-mono); font-size: .48rem; letter-spacing: .12em; writing-mode: vertical-rl; }
   .scroll-cue { position: absolute; right: 4.5vw; bottom: 3rem; display: flex; align-items: center; gap: .8rem; color: var(--muted); font-family: var(--font-mono); font-size: .5rem; letter-spacing: .16em; text-transform: uppercase; transform: rotate(90deg); transform-origin: right bottom; }
   .scroll-cue i { width: 55px; border-top: 1px solid var(--accent); }
-  .design-tools { position: absolute; z-index: 6; left: clamp(1.25rem, 4.5vw, 5rem); top: 120px; width: min(340px, 29vw); display: grid; grid-template-columns: minmax(0, 1fr) 64px; margin: 0; border: 1px solid color-mix(in srgb, var(--text) 18%, transparent); border-radius: 7px; background: color-mix(in srgb, var(--bg) 78%, transparent); box-shadow: 0 18px 55px -32px color-mix(in srgb, var(--accent) 72%, #000); backdrop-filter: blur(18px); overflow: hidden; }
+  .design-tools { position: relative; width: min(316px, 30vw); display: grid; grid-template-columns: minmax(0, 1fr) 104px; margin: 0; border: 1px solid color-mix(in srgb, var(--text) 16%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--bg) 86%, transparent); box-shadow: 0 12px 36px -28px color-mix(in srgb, var(--accent) 72%, #000); backdrop-filter: blur(16px); overflow: hidden; }
   .design-tools::before { content: ''; position: absolute; z-index: 1; top: -1px; left: 1rem; width: 44px; border-top: 2px solid var(--accent); }
-  .signal-control { display: grid; gap: .28rem; min-width: 0; padding: .72rem .85rem .68rem; border: 0 !important; background: color-mix(in srgb, var(--accent) 4%, transparent) !important; text-align: left; transition: background .2s, transform .2s; }
+  .signal-control { display: flex; min-width: 0; align-items: center; gap: .65rem; padding: .62rem .8rem; border: 0 !important; background: color-mix(in srgb, var(--accent) 4%, transparent) !important; text-align: left; transition: background .2s, transform .2s; }
   .signal-status { display: flex; align-items: center; gap: .5rem; color: var(--accent); font-family: var(--font-mono); font-size: .43rem; letter-spacing: .13em; text-transform: uppercase; }
   .signal-status i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 12%, transparent), 0 0 12px var(--accent); animation: signal-pulse 2s ease-in-out infinite; }
-  .signal-control strong { display: flex; justify-content: space-between; align-items: center; gap: 1rem; color: var(--text); font-family: var(--font-mono); font-size: .56rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+  .signal-control strong { display: flex; align-items: center; gap: .45rem; color: var(--text); font-family: var(--font-mono); font-size: .49rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
   .signal-control strong b { color: var(--accent); font-size: .9rem; font-weight: 400; transition: transform .2s; }
-  .signal-control small { color: var(--muted); font-family: var(--font-mono); font-size: .43rem; letter-spacing: .04em; }
   .signal-control:hover { background: color-mix(in srgb, var(--accent) 11%, transparent) !important; transform: translateX(2px); }
   .signal-control:hover strong b { transform: rotate(40deg); }
-  .design-utilities { display: grid; grid-template-rows: 1fr 1fr; border-left: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
+  .design-utilities { display: grid; grid-template-columns: 42px 1fr; border-left: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
   .design-utilities button { min-width: 0; padding: .35rem; color: var(--muted); font-family: var(--font-mono); font-size: .42rem; letter-spacing: .06em; text-transform: uppercase; }
-  .design-utilities button + button { border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
+  .design-utilities button + button { border-left: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
   .design-utilities button:hover, .design-utilities button.active { color: var(--bg); background: var(--accent); }
 
   .signup-layer { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 1.25rem; }
@@ -375,10 +376,10 @@
 
   .layout-console .hero { padding-left: 28vw; }
   .layout-console .topbar { left: 25vw; }
+  .layout-console .transmission-rail { left: 31vw; }
   .layout-console::before { content: 'AIS / INDEX\A\A 01  OBSERVATIONS\A 02  MODELS\A 03  MISSIONS\A 04  FIELD NOTES\A\A NETWORK: LIVE'; white-space: pre; position: absolute; z-index: 5; top: 0; bottom: 0; width: 25vw; padding: 9rem 2.4rem; border-right: 1px solid color-mix(in srgb, var(--accent) 24%, transparent); background: color-mix(in srgb, var(--bg) 88%, transparent); color: var(--muted); font-family: var(--font-mono); font-size: .6rem; line-height: 2.5; letter-spacing: .1em; }
   .layout-console .hero-copy { left: 31vw; top: 23%; width: 46vw; }
   .layout-console h1 { font-family: var(--font-mono); font-size: clamp(3rem, 6.5vw, 7rem); line-height: .92; letter-spacing: -.07em; }
-  .layout-console .edition { left: 31vw; }
   .layout-console .widgets { left: 31vw; bottom: 3rem; }
   .layout-console .art { right: 7%; top: 28%; opacity: .45; }
   .layout-console .art.neural { top: 12%; right: 1%; width: min(68vw, 960px); opacity: .92; }
@@ -394,7 +395,7 @@
 
   .layout-poster .scene { clip-path: polygon(45% 0,100% 0,100% 100%,30% 100%); background-image: linear-gradient(90deg, var(--bg), transparent 40%), var(--scene); }
   .layout-poster .hero-copy { top: 19%; }
-  .layout-poster h1 { font-size: clamp(4.8rem, 10.5vw, 11rem); line-height: .75; text-transform: uppercase; }
+  .layout-poster h1 { font-size: clamp(4.4rem, 8.8vw, 9.5rem); line-height: .77; text-transform: uppercase; }
   .layout-poster h1 span:nth-child(2) { color: transparent; -webkit-text-stroke: 1px var(--accent); }
   .layout-poster .widgets { left: auto; right: 12vw; }
   .layout-poster .art { right: 20%; top: 18%; opacity: .18; }
@@ -492,8 +493,8 @@
 
   .layout-timeline .scene { bottom: 51%; background-image: linear-gradient(0deg, var(--bg), transparent 48%), linear-gradient(90deg, color-mix(in srgb, var(--bg) 70%, transparent), transparent), var(--scene); background-position: center; opacity: .9; }
   .layout-timeline .grid-lines { display: none; }
-  .layout-timeline .edition { top: 125px; }
-  .layout-timeline .hero-copy { left: 4.5vw; top: 52%; width: min(1080px, 78vw); }
+  .layout-timeline .transmission-rail { top: 110px; }
+  .layout-timeline .hero-copy { left: 4.5vw; top: 44%; width: min(1080px, 78vw); }
   .layout-timeline .kicker { display: none; }
   .layout-timeline h1 { display: grid; grid-template-columns: .78fr 1.22fr; gap: 2vw; font-size: clamp(3.8rem, 7.5vw, 8.5rem); line-height: .82; }
   .layout-timeline h1 span:last-child { font-family: Georgia, serif; font-style: italic; }
@@ -591,12 +592,13 @@
 
   .widgets.telemetry-scatter { inset: 104px 0 0; width: auto; max-width: none; display: block; transform: none; pointer-events: none; }
   .telemetry-scatter .widget-slot { position: absolute; width: min(28vw, 340px); }
-  .telemetry-scatter .widget-slot:nth-child(1) { left: 3.5vw; bottom: 11rem; }
-  .telemetry-scatter .widget-slot:nth-child(2) { right: 4vw; bottom: 9rem; transform: rotate(-1.5deg); }
+  .telemetry-scatter .widget-slot:nth-child(1) { left: 3.5vw; bottom: 2.5rem; }
+  .telemetry-scatter .widget-slot:nth-child(2) { right: 4vw; bottom: 1.5rem; transform: rotate(-1.5deg); }
   .telemetry-scatter .widget-slot:nth-child(3) { right: 4vw; top: 7%; width: min(24vw, 300px); transform: rotate(1deg); }
 
   .widgets.telemetry-focus { left: auto; right: 5vw; top: auto; bottom: 4rem; width: min(32vw, 430px); max-width: none; display: block; transform: none; }
   .telemetry-focus .widget-slot { display: grid; justify-items: end; }
+  .layout-triptych .widgets.telemetry-focus { right: 5.5vw; top: 31%; bottom: auto; }
   .layout-specimen .widgets.telemetry-focus { left: 7vw; right: auto; bottom: 4rem; }
   .layout-poster .widgets.telemetry-focus { right: 7vw; bottom: 5rem; }
   .layout-timeline .widgets.telemetry-focus { right: .5vw; width: min(24vw, 340px); }
@@ -616,7 +618,8 @@
   @media (max-width: 900px) {
     .topbar { height: 82px; grid-template-columns: 1fr auto; }
     nav { display: none; }
-    .edition { left: 1.25rem; top: 205px; }
+    .transmission-rail { left: 1.25rem; top: 94px; max-width: calc(100vw - 2.5rem); }
+    .transmission-rail .edition { display: none; }
     .hero-copy, .layout-console .hero-copy, .layout-atlas .hero-copy, .layout-horizon .hero-copy, .layout-aperture .hero-copy, .layout-zenith .hero-copy, .layout-broadcast .hero-copy, .layout-ledger .hero-copy { left: 1.25rem; top: 22%; width: calc(100vw - 2.5rem); transform: none; text-align: left; }
     h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1 { font-size: clamp(3.6rem, 14vw, 7rem); }
     .summary { max-width: 34ch; }
@@ -633,7 +636,7 @@
     .layout-manifesto .hero-copy, .layout-radar .hero-copy, .layout-monolith .hero-copy { left: 1.25rem; top: 20%; width: calc(100vw - 2.5rem); transform: none; text-align: left; }
     .layout-manifesto .summary, .layout-radar .summary, .layout-monolith .summary, .layout-zenith .summary { margin-left: 0; }
     .layout-manifesto .actions, .layout-radar .actions, .layout-monolith .actions, .layout-zenith .actions { justify-content: flex-start; }
-    .design-tools { left: 1.25rem; top: 94px; width: min(340px, calc(100vw - 2.5rem)); }
+    .design-tools { width: min(340px, calc(100vw - 2.5rem)); }
     .scroll-cue, .coordinate { display: none; }
     .story-grid { grid-template-columns: 1fr; margin: 4rem 0 5rem; }
     .layout-triptych .hero-copy, .layout-timeline .hero-copy, .layout-specimen .hero-copy, .layout-constellation .hero-copy, .layout-command .hero-copy, .layout-signalstack .hero-copy { left: 1.25rem; top: 20%; width: calc(100vw - 2.5rem); text-align: left; transform: none; }
@@ -666,13 +669,12 @@
     .mission-cta.compact small { display: none; }
     .mission-cta.compact strong { font-size: .46rem; letter-spacing: .08em; }
     .mission-cta.compact b { display: none; }
-    .edition { left: 1.25rem; }
     .hero-copy { top: 24%; }
     h1, .layout-split h1, .layout-poster h1, .layout-console h1, .layout-manifesto h1, .layout-radar h1, .layout-monolith h1, .layout-horizon h1, .layout-aperture h1, .layout-zenith h1, .layout-broadcast h1, .layout-ledger h1, .layout-triptych h1, .layout-timeline h1, .layout-specimen h1, .layout-constellation h1, .layout-command h1, .layout-signalstack h1 { font-size: clamp(3.25rem, 17vw, 5.2rem); line-height: .87; }
     .actions { align-items: flex-start; flex-direction: column; gap: .9rem; }
     .primary { padding: .8rem 1rem; }
     .widgets { bottom: 2rem !important; }
-    .design-tools { left: 1.25rem; top: 94px; width: calc(100vw - 2.5rem); max-width: 380px; }
+    .design-tools { width: calc(100vw - 2.5rem); max-width: 380px; }
     .story { padding-top: 5rem; }
     .story-grid { gap: 2rem; }
     .principles { grid-template-columns: 1fr; }
