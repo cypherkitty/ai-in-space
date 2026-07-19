@@ -5,6 +5,13 @@
   export let accent2 = '#754cff';
 
   let canvas: HTMLCanvasElement;
+  let refreshCanvas = () => {};
+
+  $: {
+    accent;
+    accent2;
+    refreshCanvas();
+  }
 
   type NodePoint = {
     angle: number;
@@ -14,7 +21,12 @@
     phase: number;
     tilt: number;
     color: number;
+    x: number;
+    y: number;
   };
+
+  const MAX_CANVAS_PIXELS = 1_500_000;
+  const MAX_FRAME_RATE = 30;
 
   const hexToRgb = (value: string, fallback: [number, number, number]): [number, number, number] => {
     const hex = value.trim().replace('#', '');
@@ -36,8 +48,23 @@
     let height = 1;
     let time = 0;
     let animationFrame = 0;
+    let lastFrameTime = 0;
     let visible = true;
-    let needsStaticFrame = true;
+
+    const canRender = () => visible && !document.hidden;
+
+    function queueFrame() {
+      if (animationFrame || !canRender()) return;
+      animationFrame = requestAnimationFrame(draw);
+    }
+
+    refreshCanvas = queueFrame;
+
+    function stopAnimation() {
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+      lastFrameTime = 0;
+    }
 
     function createNetwork() {
       nodes.length = 0;
@@ -51,35 +78,41 @@
           depth: 0.28 + Math.random() * 0.9,
           phase: Math.random() * Math.PI * 2,
           tilt: (Math.random() - 0.5) * 0.48,
-          color: Math.random()
+          color: Math.random(),
+          x: 0,
+          y: 0
         });
       }
     }
 
     function resize() {
       const bounds = host!.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       width = Math.max(1, bounds.width);
       height = Math.max(1, bounds.height);
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
-      context!.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const preferredScale = Math.min(window.devicePixelRatio || 1, 1.5);
+      const pixelBudgetScale = Math.sqrt(MAX_CANVAS_PIXELS / (width * height));
+      const renderScale = Math.max(1, Math.min(preferredScale, pixelBudgetScale));
+      canvas.width = Math.floor(width * renderScale);
+      canvas.height = Math.floor(height * renderScale);
+      context!.setTransform(renderScale, 0, 0, renderScale, 0, 0);
       createNetwork();
-      needsStaticFrame = true;
+      queueFrame();
     }
 
-    function draw() {
-      if (!visible) {
-        animationFrame = requestAnimationFrame(draw);
-        return;
-      }
-      if (reducedMotion.matches && !needsStaticFrame) {
-        animationFrame = requestAnimationFrame(draw);
+    function draw(frameTime: number) {
+      animationFrame = 0;
+      if (!canRender()) return;
+
+      const animated = !reducedMotion.matches;
+      const minimumFrameDuration = 1000 / MAX_FRAME_RATE;
+      if (animated && lastFrameTime && frameTime - lastFrameTime < minimumFrameDuration) {
+        queueFrame();
         return;
       }
 
-      needsStaticFrame = false;
-      time += reducedMotion.matches ? 0 : 0.012;
+      const elapsed = lastFrameTime ? Math.min(frameTime - lastFrameTime, 50) : minimumFrameDuration;
+      lastFrameTime = frameTime;
+      time += animated ? elapsed * 0.00072 : 0;
       context!.clearRect(0, 0, width, height);
 
       const primary = hexToRgb(accent, [118, 239, 255]);
@@ -96,27 +129,25 @@
       context!.fillStyle = aura;
       context!.fillRect(0, 0, width, height);
 
-      const positions = nodes.map((node) => {
-        node.angle += node.speed;
+      for (const node of nodes) {
+        if (animated) node.angle += node.speed * elapsed / 16.67;
         const breathe = 1 + Math.sin(time * 1.4 + node.phase) * 0.07;
         const turbulence = Math.sin(time * 0.8 + node.angle * 4 + node.phase) * radius * 0.055;
-        return {
-          ...node,
-          x: centerX + Math.cos(node.angle) * (node.distance * breathe + turbulence),
-          y: centerY + Math.sin(node.angle) * node.distance * (0.54 + node.tilt) * breathe
-        };
-      });
+        node.x = centerX + Math.cos(node.angle) * (node.distance * breathe + turbulence);
+        node.y = centerY + Math.sin(node.angle) * node.distance * (0.54 + node.tilt) * breathe;
+      }
 
       context!.globalCompositeOperation = 'lighter';
-      for (let i = 0; i < positions.length; i += 1) {
-        const a = positions[i]!;
-        for (let j = i + 1; j < positions.length; j += 1) {
-          const b = positions[j]!;
+      for (let i = 0; i < nodes.length; i += 1) {
+        const a = nodes[i]!;
+        for (let j = i + 1; j < nodes.length; j += 1) {
+          const b = nodes[j]!;
           const dx = a.x - b.x;
           const dy = a.y - b.y;
-          const distance = Math.hypot(dx, dy);
           const linkRange = 82 + (a.depth + b.depth) * 9;
-          if (distance < linkRange) {
+          const distanceSquared = dx * dx + dy * dy;
+          if (distanceSquared < linkRange * linkRange) {
+            const distance = Math.sqrt(distanceSquared);
             context!.strokeStyle = rgba(primary, (1 - distance / linkRange) * 0.2);
             context!.lineWidth = 0.42 + Math.min(a.depth, b.depth) * 0.38;
             context!.beginPath();
@@ -127,7 +158,7 @@
         }
       }
 
-      positions.forEach((node, index) => {
+      nodes.forEach((node, index) => {
         const pulse = 1 + Math.sin(time * 2.2 + node.phase) * 0.35;
         const color = node.color > 0.94 ? spark : node.color > 0.86 ? secondary : primary;
         context!.shadowColor = rgba(color, 1);
@@ -160,41 +191,55 @@
       context!.fill();
       context!.shadowBlur = 0;
       context!.globalCompositeOperation = 'source-over';
-      animationFrame = requestAnimationFrame(draw);
+      if (animated) queueFrame();
     }
 
     function movePointer(event: PointerEvent) {
       const bounds = canvas.getBoundingClientRect();
       pointer.x = (event.clientX - bounds.left) / bounds.width - 0.5;
       pointer.y = (event.clientY - bounds.top) / bounds.height - 0.5;
-      needsStaticFrame = true;
+      if (reducedMotion.matches) queueFrame();
     }
 
     function resetPointer() {
       pointer.x = 0;
       pointer.y = 0;
-      needsStaticFrame = true;
+      if (reducedMotion.matches) queueFrame();
+    }
+
+    function handleMotionPreference() {
+      lastFrameTime = 0;
+      queueFrame();
+    }
+
+    function handleDocumentVisibility() {
+      if (document.hidden) stopAnimation();
+      else queueFrame();
     }
 
     const resizeObserver = new ResizeObserver(resize);
     const visibilityObserver = new IntersectionObserver(([entry]) => {
       visible = entry?.isIntersecting ?? true;
+      if (visible) queueFrame();
+      else stopAnimation();
     });
     resizeObserver.observe(host);
     visibilityObserver.observe(canvas);
     canvas.addEventListener('pointermove', movePointer);
     canvas.addEventListener('pointerleave', resetPointer);
-    reducedMotion.addEventListener('change', resize);
+    reducedMotion.addEventListener('change', handleMotionPreference);
+    document.addEventListener('visibilitychange', handleDocumentVisibility);
     resize();
-    draw();
 
     return () => {
-      cancelAnimationFrame(animationFrame);
+      refreshCanvas = () => {};
+      stopAnimation();
       resizeObserver.disconnect();
       visibilityObserver.disconnect();
       canvas.removeEventListener('pointermove', movePointer);
       canvas.removeEventListener('pointerleave', resetPointer);
-      reducedMotion.removeEventListener('change', resize);
+      reducedMotion.removeEventListener('change', handleMotionPreference);
+      document.removeEventListener('visibilitychange', handleDocumentVisibility);
     };
   });
 </script>

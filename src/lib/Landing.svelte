@@ -197,8 +197,8 @@
   button { color: inherit; font: inherit; }
   .hero { position: relative; min-height: max(720px, 100svh); overflow: hidden; isolation: isolate; background: var(--bg); }
   .scene, .grain, .grid-lines { position: absolute; inset: 0; pointer-events: none; }
-  .scene { z-index: -3; background-image: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 92%, transparent) 23%, transparent 65%), var(--scene); background-size: cover; background-position: center; opacity: .9; transform: scale(1.012); animation: breathe 18s ease-in-out infinite alternate; }
-  .grain { z-index: 8; opacity: .045; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E"); mix-blend-mode: overlay; }
+  .scene { z-index: -3; background-image: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 92%, transparent) 23%, transparent 65%), var(--scene); background-size: cover; background-position: center; opacity: .9; transform: scale(1.025); }
+  .grain { z-index: 8; opacity: .025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E"); }
   .grid-lines { z-index: -1; opacity: .14; background-image: linear-gradient(color-mix(in srgb, var(--accent) 16%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--accent) 16%, transparent) 1px, transparent 1px); background-size: 8vw 8vw; mask-image: linear-gradient(90deg, transparent 10%, #000 75%, transparent); }
   .scene-left .scene { background-position: left center; }
   .scene-center .scene { background-position: center; }
@@ -235,14 +235,14 @@
   .summary { max-width: 41ch; margin: 1.55rem 0 0; color: var(--muted); font-size: clamp(.78rem, 1vw, .95rem); line-height: 1.75; }
   .actions { display: flex; align-items: center; gap: 1.5rem; margin-top: 1.8rem; }
   .actions button { cursor: pointer; }
-  .primary { padding: .95rem 1.25rem; border: 1px solid var(--accent); border-radius: 2px; background: var(--accent); color: var(--bg); font-family: var(--font-mono); font-size: .59rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; backdrop-filter: blur(8px); box-shadow: 0 0 32px -18px var(--accent); transition: .25s; }
+  .primary { padding: .95rem 1.25rem; border: 1px solid var(--accent); border-radius: 2px; background: var(--accent); color: var(--bg); font-family: var(--font-mono); font-size: .59rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 0 32px -18px var(--accent); transition: .25s; }
   .primary:hover { transform: translateY(-2px); box-shadow: 0 0 38px -10px var(--accent); }
   .primary span { margin-left: 1.5rem; }
   .secondary-action { padding: .9rem 0; border: 0; border-bottom: 1px solid color-mix(in srgb, var(--text) 45%, transparent); background: transparent; color: var(--text); font-family: var(--font-mono); font-size: .57rem; letter-spacing: .11em; text-transform: uppercase; }
   .secondary-action:hover { border-color: var(--accent); color: var(--accent); }
   .text-action { border: 0; background: transparent; color: var(--muted); font-family: var(--font-mono); font-size: .57rem; letter-spacing: .12em; text-transform: uppercase; }
   .text-action i { display: inline-grid; place-items: center; width: 1.45rem; height: 1.45rem; margin-right: .5rem; border: 1px solid currentColor; border-radius: 50%; font-style: normal; }
-  .art { position: absolute; z-index: 1; right: 14%; top: 22%; opacity: .62; mix-blend-mode: screen; }
+  .art { position: absolute; z-index: 1; right: 14%; top: 22%; opacity: .62; }
   .art.neural { top: 13%; right: 3%; width: min(62vw, 900px); height: min(72vw, 720px); opacity: .88; }
   .widgets { position: absolute; z-index: 4; left: clamp(1.25rem, 4.5vw, 5rem); bottom: 2.2rem; display: flex; gap: .75rem; max-width: calc(100vw - 10rem); }
   .widget-slot { display: contents; }
@@ -522,8 +522,6 @@
 
   .light .scene { mix-blend-mode: multiply; opacity: .62; }
   .light .hero::before { content: ''; position: absolute; z-index: -2; inset: 0; background: linear-gradient(90deg, var(--bg) 0 44%, color-mix(in srgb, var(--bg) 88%, transparent) 62%, transparent 82%); }
-  .light .grain { mix-blend-mode: multiply; }
-  @keyframes breathe { to { transform: scale(1.045); } }
   @keyframes blink { 50% { opacity: 0; } }
   @keyframes signal-pulse { 50% { opacity: .45; transform: scale(.72); } }
   @keyframes principle-arrival { from { opacity: 0; transform: translateY(10px); } }

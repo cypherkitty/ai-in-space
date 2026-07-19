@@ -5,6 +5,13 @@ import gravityLens from './assets/gravity-lens.jpg';
 import oceanWorld from './assets/ocean-world.jpg';
 import solarSail from './assets/solar-sail.jpg';
 import farObservatory from './assets/far-observatory.jpg';
+import earthPreview from './assets/previews/orbital-earth-preview.jpg';
+import copperPreview from './assets/previews/copper-eclipse-preview.jpg';
+import ringWorldPreview from './assets/previews/ring-world-preview.jpg';
+import gravityLensPreview from './assets/previews/gravity-lens-preview.jpg';
+import oceanWorldPreview from './assets/previews/ocean-world-preview.jpg';
+import solarSailPreview from './assets/previews/solar-sail-preview.jpg';
+import farObservatoryPreview from './assets/previews/far-observatory-preview.jpg';
 
 export type Layout =
   | 'origin'
@@ -289,6 +296,17 @@ const familyRules: Record<Layout, FamilyRule> = {
 const generatedPrefixes = ['Aster', 'Silent', 'Far', 'Helio', 'Signal', 'Nova', 'Liminal', 'Outer', 'Vector', 'Echo'];
 const generatedSuffixes = ['Memory', 'Relay', 'Atlas', 'Engine', 'Survey', 'Protocol', 'Horizon', 'Field', 'Archive', 'Dawn'];
 const scenes = [earth, copper, ringWorld, gravityLens, oceanWorld, solarSail, farObservatory];
+const scenePreviews = new Map([
+  [earth, earthPreview],
+  [copper, copperPreview],
+  [ringWorld, ringWorldPreview],
+  [gravityLens, gravityLensPreview],
+  [oceanWorld, oceanWorldPreview],
+  [solarSail, solarSailPreview],
+  [farObservatory, farObservatoryPreview]
+]);
+
+export const previewSceneFor = (scene: string): string => scenePreviews.get(scene) ?? scene;
 
 type CopyPack = Pick<Design, 'kicker' | 'title' | 'titleLine2' | 'summary' | 'action'>;
 

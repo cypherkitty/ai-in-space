@@ -1,7 +1,7 @@
 <script lang="ts">
   import Brand from './Brand.svelte';
   import { designAnalyticsContext, trackEvent } from './analytics';
-  import type { Design } from './designs';
+  import { previewSceneFor, type Design } from './designs';
   export let designs: Design[];
   export let onOpen: (design: Design) => void;
   export let onRandom: () => void;
@@ -55,7 +55,7 @@
         class:feature={filter === 'curated' ? i === 0 || i === 3 || i === 8 || design.id === 'gravity-well' || design.id === 'three-body' || design.id === 'constellation-engine' || design.id === 'periapsis-control' : i % 13 === 0}
         class:light={design.tone === 'light'}
         class={`design-card preview-${design.layout}`}
-        style={`--accent:${design.accent};--accent2:${design.accent2};--bg:${design.bg};--text:${design.text};--muted:${design.muted};--scene:url(${design.scene})`}
+        style={`--accent:${design.accent};--accent2:${design.accent2};--bg:${design.bg};--text:${design.text};--muted:${design.muted};--scene:url(${previewSceneFor(design.scene)})`}
         onclick={() => openDesign(design)}
       >
         <div class="preview">
@@ -94,7 +94,7 @@
   .filters button.active { color: #07100d; border-color: #a7fce4; background: #a7fce4; }
   .filters button.active span { color: inherit; }
   .design-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: dense; gap: 1px; background: #24282c; }
-  .design-card { display: block; min-width: 0; padding: 0; border: 0; background: #07090b; text-align: left; }
+  .design-card { display: block; min-width: 0; padding: 0; border: 0; background: #07090b; text-align: left; content-visibility: auto; contain-intrinsic-size: auto 600px; }
   .design-card.feature { grid-column: span 2; }
   .preview { position: relative; height: min(34vw, 520px); min-height: 260px; overflow: hidden; color: var(--text); background: var(--bg); }
   .design-card:not(.feature) .preview { height: min(30vw, 410px); }
