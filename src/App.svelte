@@ -4,6 +4,7 @@
   import Landing from './lib/Landing.svelte';
   import { designAnalyticsContext, initAnalytics, trackPageView } from './lib/analytics';
   import { crazyMix, designs, generateDesign, randomSeed, remixCopy, type Design } from './lib/designs';
+  import { localizeDesign, t, type Locale } from './lib/i18n';
 
   type View = 'landing' | 'gallery';
   let view: View = 'landing';
@@ -12,6 +13,9 @@
   let analyticsReady = false;
   let lastTrackedLocation = '';
   let remixCursor = randomSeed();
+  let locale: Locale = 'en';
+  $: localizedActive = localizeDesign(active, locale);
+  $: localizedDesigns = designs.map((design) => localizeDesign(design, locale));
 
   const REMIX_STEP = 0x9e3779b9;
 
@@ -69,12 +73,21 @@
   }
 
   onMount(() => {
+    const savedLocale = window.localStorage.getItem('ai-in-space-locale');
+    locale = savedLocale === 'ru' ? 'ru' : 'en';
+    document.documentElement.lang = locale;
     initAnalytics();
     syncRoute();
     analyticsReady = true;
     window.addEventListener('hashchange', syncRoute);
     return () => window.removeEventListener('hashchange', syncRoute);
   });
+
+  function setLocale(next: Locale) {
+    locale = next;
+    window.localStorage.setItem('ai-in-space-locale', next);
+    document.documentElement.lang = next;
+  }
 
   function open(design: Design) {
     window.location.hash = `/v/${design.id}`;
@@ -137,12 +150,12 @@
 </script>
 
 <svelte:head>
-  <title>{view === 'gallery' ? 'Design Atlas' : `${active.name} — AI in Space`}</title>
+  <title>{view === 'gallery' ? t(locale, 'atlas') : `${localizedActive.name} — AI in Space`}</title>
   <meta name="theme-color" content={active.bg} />
 </svelte:head>
 
 {#if view === 'gallery'}
-  <Gallery {designs} onOpen={open} onRandom={randomRoot} onMix={mix} />
+  <Gallery designs={localizedDesigns} {locale} onLocaleChange={setLocale} onOpen={open} onRandom={randomRoot} onMix={mix} />
 {:else}
-  <Landing design={active} designCount={designs.length} {isMix} onShuffle={shuffle} onCopy={changeCopy} onMix={mix} onGallery={gallery} />
+  <Landing design={localizedActive} designCount={designs.length} {locale} onLocaleChange={setLocale} {isMix} onShuffle={shuffle} onCopy={changeCopy} onMix={mix} onGallery={gallery} />
 {/if}

@@ -2,10 +2,13 @@
   import Brand from './Brand.svelte';
   import { designAnalyticsContext, trackEvent } from './analytics';
   import { previewSceneFor, sceneCount, type Design } from './designs';
+  import { t, type Locale } from './i18n';
   export let designs: Design[];
   export let onOpen: (design: Design) => void;
   export let onRandom: () => void;
   export let onMix: () => void;
+  export let locale: Locale = 'en';
+  export let onLocaleChange: (locale: Locale) => void;
   let filter: 'curated' | 'generated' | 'all' = 'curated';
   $: curatedCount = designs.filter((design) => !design.generated).length;
   $: generatedCount = designs.length - curatedCount;
@@ -27,24 +30,24 @@
   }
 </script>
 
-<svelte:head><title>Design Atlas — AI in Space</title></svelte:head>
+<svelte:head><title>{t(locale, 'atlas')} — AI in Space</title></svelte:head>
 
 <main class="gallery">
   <header>
     <Brand />
-    <div class="header-actions"><button type="button" onclick={() => launchExperience('random_launch', onRandom)}>Random launch</button><button class="mix" type="button" onclick={() => launchExperience('crazy_mix', onMix)}>Crazy mix ✦</button></div>
+    <div class="header-actions"><button type="button" onclick={() => onLocaleChange(locale === 'en' ? 'ru' : 'en')}>{t(locale, 'language')}</button><button type="button" onclick={() => launchExperience('random_launch', onRandom)}>{t(locale, 'randomLaunch')}</button><button class="mix" type="button" onclick={() => launchExperience('crazy_mix', onMix)}>{t(locale, 'crazyMix')} ✦</button></div>
   </header>
 
   <section class="intro">
-    <p>Design atlas / {designs.length} transmissions</p>
-    <h1>One system.<br /><em>Millions of skies.</em></h1>
-    <div class="intro-note"><span>Coherent by design</span><p>{curatedCount} art-direction families × {sceneCount} visual worlds constrain the generator. Intelligence changes form—from instrument to ecosystem—without losing the shared visual language.</p></div>
+    <p>{t(locale, 'atlas')} / {designs.length} {t(locale, 'transmissions')}</p>
+    <h1>{t(locale, 'atlasTitleA')}<br /><em>{t(locale, 'atlasTitleB')}</em></h1>
+    <div class="intro-note"><span>{t(locale, 'coherent')}</span><p>{curatedCount} × {sceneCount}. {t(locale, 'atlasCopy')}</p></div>
   </section>
 
   <nav class="filters" aria-label="Design atlas filters">
-    <button class:active={filter === 'curated'} type="button" onclick={() => setFilter('curated')}>Curated <span>{curatedCount}</span></button>
-    <button class:active={filter === 'generated'} type="button" onclick={() => setFilter('generated')}>Generated <span>{generatedCount}</span></button>
-    <button class:active={filter === 'all'} type="button" onclick={() => setFilter('all')}>All <span>{designs.length}</span></button>
+    <button class:active={filter === 'curated'} type="button" onclick={() => setFilter('curated')}>{t(locale, 'curated')} <span>{curatedCount}</span></button>
+    <button class:active={filter === 'generated'} type="button" onclick={() => setFilter('generated')}>{t(locale, 'generated')} <span>{generatedCount}</span></button>
+    <button class:active={filter === 'all'} type="button" onclick={() => setFilter('all')}>{t(locale, 'all')} <span>{designs.length}</span></button>
   </nav>
 
   <section class="design-grid" aria-label="Landing page designs">
@@ -68,11 +71,11 @@
       </button>
     {/each}
     <button class="generator-card" type="button" onclick={() => launchExperience('generative_mix', onMix)}>
-      <span>∞</span><div><strong>Generative mix</strong><small>Layout × scene × palette × widgets</small></div><b>Generate ↗</b>
+      <span>∞</span><div><strong>{t(locale, 'generativeMix')}</strong><small>{t(locale, 'generatorMeta')}</small></div><b>{t(locale, 'generate')} ↗</b>
     </button>
   </section>
 
-  <footer><Brand /><p>Choose what survives.<br />Everything else stays possible.</p><span>AI IN SPACE / DESIGN ATLAS</span></footer>
+  <footer><Brand /><p>{t(locale, 'galleryFooterA')}<br />{t(locale, 'galleryFooterB')}</p><span>AI IN SPACE / {t(locale, 'atlas')}</span></footer>
 </main>
 
 <style>

@@ -1,9 +1,12 @@
 <script lang="ts">
   import type { Design, WidgetName } from './designs';
+  import { telemetryText, type Locale } from './i18n';
 
   export let type: WidgetName;
   export let design: Design;
   export let shell: 'panel' | 'cut' | 'ghost' | 'capsule' | 'dial' | 'strip' = 'panel';
+  export let locale: Locale = 'en';
+  const tt = (value: string) => telemetryText(locale, value);
 
   const signalVariants = [
     { label: 'Signal analysis', mode: 'LIVE', status: 'Carrier stable', value: '98.42%' },
@@ -139,50 +142,50 @@
       <div class="stat"><strong>{stat[0]}</strong><span>{stat[1]}<br />{stat[2]}</span></div>
     {/each}
   {:else if type === 'signal'}
-    <header><span>{signal.label}</span><b>{signal.mode}</b></header>
+    <header><span>{tt(signal.label)}</span><b>{signal.mode}</b></header>
     <div class="wave" aria-hidden="true">{#each waveHeights as height}<i style={`height:${height}%`}></i>{/each}</div>
     <footer>{signal.status} <span>{signal.value}</span></footer>
   {:else if type === 'coordinates'}
-    <header><span>{coordinates.label}</span><b>{coordinates.mode}</b></header>
+    <header><span>{tt(coordinates.label)}</span><b>{coordinates.mode}</b></header>
     <strong class="coords">{coordinates.a}<br />{coordinates.b}</strong>
     <footer>{coordinates.footer} <span>{coordinates.state}</span></footer>
   {:else if type === 'progress'}
-    <header><span>{progress.label}</span><b>{String(progress.progress).padStart(3, '0')}%</b></header>
+    <header><span>{tt(progress.label)}</span><b>{String(progress.progress).padStart(3, '0')}%</b></header>
     <div class="progress"><i style={`width:${progress.progress}%`}></i></div>
     <footer>{progress.amount} <span>{progress.time}</span></footer>
   {:else if type === 'quote'}
     <span class="quote-mark">“</span>
     <p class="quote">{quote[0]}</p>
-    <footer>FIELD PRINCIPLE <span>NO. {quote[1]}</span></footer>
+    <footer>{tt('FIELD PRINCIPLE')} <span>№ {quote[1]}</span></footer>
   {:else if type === 'mission'}
-    <header><span>Next mission</span><b>{mission.code}</b></header>
+    <header><span>{tt('Next mission')}</span><b>{mission.code}</b></header>
     <div class="mission-line"><i></i><i></i><i></i><i></i></div>
     <strong class="mission-title">{mission.title}<br />{mission.subtitle}</strong>
-    <footer>LAUNCH WINDOW <span>{mission.window}</span></footer>
+    <footer>{tt('LAUNCH WINDOW')} <span>{mission.window}</span></footer>
   {:else if type === 'spectrum'}
-    <header><span>Spectral fingerprint</span><b>{spectrum.state}</b></header>
+    <header><span>{tt('Spectral fingerprint')}</span><b>{spectrum.state}</b></header>
     <div class="spectrum" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <strong class="compact-title">{spectrum.source}</strong>
     <footer>{spectrum.range} <span>{spectrum.peaks}</span></footer>
   {:else if type === 'delay'}
-    <header><span>Light delay</span><b>{delay.state}</b></header>
-    <div class="delay-clock">{delay.time}<small>MIN</small></div>
+    <header><span>{tt('Light delay')}</span><b>{delay.state}</b></header>
+    <div class="delay-clock">{delay.time}<small>{tt('MIN')}</small></div>
     <div class="delay-path" aria-hidden="true"><i></i><b></b><i></i></div>
     <footer>{delay.target} <span>{delay.distance}</span></footer>
   {:else if type === 'anomaly'}
-    <header><span>Anomaly review</span><b>OPEN</b></header>
+    <header><span>{tt('Anomaly review')}</span><b>{tt('OPEN')}</b></header>
     <div class="anomaly-body">
       <div class="confidence" style={`--confidence:${anomaly.confidence}%`}><strong>{anomaly.confidence}</strong><small>%</small></div>
       <div><strong class="compact-title">{anomaly.label}</strong><small>{anomaly.source}</small></div>
     </div>
-    <footer>MODEL AGREEMENT <span>REVIEW</span></footer>
+    <footer>{tt('MODEL AGREEMENT')} <span>{tt('REVIEW')}</span></footer>
   {:else if type === 'orbit'}
-    <header><span>Orbital phase</span><b>{orbit.phase}%</b></header>
+    <header><span>{tt('Orbital phase')}</span><b>{orbit.phase}%</b></header>
     <div class="orbit-body">
       <div class="orbit-map" style={`--phase:${orbit.phase * 3.6}deg`} aria-hidden="true"><i></i><b></b></div>
       <strong class="compact-title">{orbit.body}</strong>
     </div>
-    <footer>{orbit.period} PERIOD <span>{orbit.altitude}</span></footer>
+    <footer>{orbit.period} {tt('PERIOD')} <span>{orbit.altitude}</span></footer>
   {:else if type === 'solar'}
     <header><span>{solar.label}</span><b>{solar.level}</b></header>
     <div class="solar-chart" aria-hidden="true">{#each solarHeights as height}<i style={`height:${height}%`}></i>{/each}</div>
@@ -191,12 +194,12 @@
   {:else if type === 'memory'}
     <header><span>{memory.label}</span><b>{memory.state}</b></header>
     <div class="memory-grid" aria-hidden="true">{#each Array(24) as _, index}<i class:filled={index < memory.cells}></i>{/each}</div>
-    <footer>{memory.used} USED <span>{memory.total} CAPACITY</span></footer>
+    <footer>{memory.used} {tt('USED')} <span>{memory.total} {tt('CAPACITY')}</span></footer>
   {:else if type === 'thermal'}
     <header><span>{thermal.label}</span><b>{thermal.state}</b></header>
     <strong class="temperature">{thermal.temp}</strong>
     <div class="thermal-scale" style={`--marker:${thermal.marker}%`} aria-hidden="true"><i></i></div>
-    <footer>{thermal.low} LOW <span>{thermal.high} HIGH</span></footer>
+    <footer>{thermal.low} {tt('LOW')} <span>{thermal.high} {tt('HIGH')}</span></footer>
   {:else}
     <header><span>{archive.label}</span><b>{archive.code}</b></header>
     <div class="archive-list">
@@ -204,7 +207,7 @@
         <div><time>{entry[0]}</time><span>{entry[1]}</span><i></i></div>
       {/each}
     </div>
-    <footer>TRACE PRESERVED <span>03 EVENTS</span></footer>
+    <footer>{tt('TRACE PRESERVED')} <span>03 {tt('EVENTS')}</span></footer>
   {/if}
 </article>
 
