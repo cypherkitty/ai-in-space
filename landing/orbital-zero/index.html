@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#02060b" />
+    <meta name="description" content="AI in Space advances intelligent systems for exploration, autonomous science, and discovery beyond Earth." />
+    <meta name="robots" content="index, follow" />
+    <meta name="google-site-verification" content="PZoS7jgQA1AgYKerVUQHhUfPBUYFvYYDsi2wcxrpZJw" />
+    <link rel="canonical" href="https://ai-in.space/landing/orbital-zero/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AI in Space" />
+    <meta property="og:title" content="AI in Space — Intelligence Beyond Boundaries" />
+    <meta property="og:description" content="Advancing intelligent systems to explore, understand, and shape the future of space." />
+    <meta property="og:url" content="https://ai-in.space/landing/orbital-zero/" />
+    <meta property="og:image" content="https://ai-in.space/assets/orbital-earth-BaiToibi.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI in Space — Intelligence Beyond Boundaries" />
+    <meta name="twitter:description" content="Advancing intelligent systems to explore, understand, and shape the future of space." />
+    <meta name="twitter:image" content="https://ai-in.space/assets/orbital-earth-BaiToibi.jpg" />
+    <title>AI in Space — Intelligence Beyond Boundaries</title>
+    <style>
+      @font-face { font-family: "AIS Display"; src: url("../../assets/space-grotesk-latin-wght-normal-BhU9QXUp.woff2") format("woff2"); font-weight: 300 700; font-display: swap; }
+      @font-face { font-family: "AIS Mono"; src: url("../../assets/ibm-plex-mono-latin-400-normal-DMJ8VG8y.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+      @font-face { font-family: "AIS Body"; src: url("../../assets/manrope-latin-wght-normal-DHIcAJRg.woff2") format("woff2"); font-weight: 200 800; font-display: swap; }
+      :root { color-scheme: dark; font-family: "AIS Body", system-ui, sans-serif; background: #02060b; }
+      * { box-sizing: border-box; }
+      html { min-width: 320px; scroll-behavior: smooth; scroll-snap-type: y proximity; background: #02060b; }
+      body { min-width: 320px; margin: 0; color: #eef5fc; background: #02060b; }
+      a { color: inherit; text-decoration: none; }
+      a:focus-visible { outline: 1px solid #d7eaff; outline-offset: 5px; }
+      .hero { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; scroll-snap-align: start; border: 1px solid rgba(190, 215, 238, .16); border-radius: 22px; background: #02060b; }
+      .space { position: absolute; z-index: -4; inset: 0; overflow: hidden; background: #02060b url("../../assets/orbital-earth-BaiToibi.jpg") right center / cover no-repeat; transform: scale(1.003); }
+      .space video { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.86) contrast(1.04); }
+      .space::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(1, 5, 10, .97) 0%, rgba(1, 5, 10, .74) 34%, rgba(1, 5, 10, .12) 66%), linear-gradient(180deg, rgba(0, 0, 0, .08), rgba(0, 3, 8, .16) 60%, rgba(0, 2, 6, .82)); transition: opacity .55s ease; }
+      .grain { position: absolute; z-index: -2; inset: 0; opacity: .09; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E"); }
+      .topbar { position: fixed; z-index: 30; top: 1px; right: 1px; left: 1px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 3rem; padding: clamp(24px, 3.2vw, 48px) clamp(28px, 5.1vw, 82px); border-radius: 21px 21px 0 0; background: linear-gradient(180deg, rgba(1, 5, 10, .86), rgba(1, 5, 10, .34) 72%, transparent); transition: padding .35s ease, background .35s ease, backdrop-filter .35s ease, opacity .35s ease, transform .35s ease; }
+      .topbar.scrolled { padding-top: 20px; padding-bottom: 20px; background: rgba(2, 7, 13, .78); backdrop-filter: blur(18px); }
+      .brand { display: inline-flex; align-items: center; gap: 1rem; width: max-content; font-family: "AIS Display", sans-serif; font-size: clamp(.72rem, 1.1vw, 1.08rem); font-weight: 520; letter-spacing: .34em; white-space: nowrap; }
+      .brand svg { width: 34px; height: 34px; overflow: visible; }
+      nav { display: flex; align-items: center; gap: clamp(2.2rem, 5vw, 5rem); font-family: "AIS Mono", monospace; font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; }
+      nav a, .explore-top { transition: color .2s ease, border-color .2s ease, background .2s ease; }
+      nav a { color: rgba(235, 242, 249, .78); }
+      nav a:hover { color: #fff; }
+      .explore-top { justify-self: end; display: inline-flex; align-items: center; justify-content: center; gap: .8rem; min-width: 155px; padding: .86rem 1.15rem; border: 1px solid rgba(207, 225, 242, .2); border-radius: 16px; font-family: "AIS Mono", monospace; font-size: .65rem; letter-spacing: .17em; text-transform: uppercase; }
+      .explore-top:hover, .button:hover { border-color: rgba(210, 232, 255, .58); background: rgba(159, 204, 246, .07); }
+      .hero-copy { width: min(46rem, 49vw); margin: clamp(180px, 25vh, 260px) 0 0 clamp(36px, 7.3vw, 118px); transition: opacity .4s ease, transform .4s ease; }
+      .chapter { margin: 0 0 1.25rem; color: #a8d6ff; font-family: "AIS Mono", monospace; font-size: .65rem; letter-spacing: .22em; text-transform: uppercase; }
+      h1 { margin: 0; font-family: "AIS Display", sans-serif; font-size: clamp(4rem, 7.15vw, 7.1rem); font-weight: 360; letter-spacing: .11em; line-height: .7; text-transform: uppercase; text-shadow: 0 0 30px rgba(170, 214, 255, .1); }
+      h1 span { display: block; margin-top: .38em; font-size: .66em; letter-spacing: .19em; white-space: nowrap; }
+      .kicker { margin: 1.65rem 0 0; font-family: "AIS Display", sans-serif; font-size: clamp(.73rem, 1.05vw, 1rem); letter-spacing: .19em; text-transform: uppercase; }
+      .summary { max-width: 36ch; margin: 1.85rem 0 0; color: rgba(221, 231, 241, .56); font-size: clamp(.78rem, 1vw, .96rem); line-height: 1.8; }
+      .actions { display: flex; align-items: center; gap: clamp(1.4rem, 3.1vw, 3.2rem); margin-top: 2rem; }
+      .button { display: inline-flex; align-items: center; justify-content: space-between; gap: 2.3rem; min-width: 245px; padding: 1.03rem 1.45rem; border: 1px solid rgba(206, 226, 244, .42); border-radius: 15px; color: #eef5fc; background: rgba(2, 8, 14, .2); font-family: "AIS Mono", monospace; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; transition: border-color .2s ease, background .2s ease, box-shadow .2s ease; }
+      .film-button { border-color: rgba(193, 225, 251, .68); background: rgba(195, 226, 251, .1); cursor: pointer; box-shadow: 0 0 30px rgba(91, 174, 238, .08); }
+      .film-button:hover { box-shadow: 0 0 35px rgba(91, 174, 238, .18); }
+      .play { display: inline-grid; width: 21px; height: 21px; place-items: center; border: 1px solid rgba(220, 238, 252, .72); border-radius: 50%; font-size: .5rem; }
+      .story-rail { position: absolute; bottom: clamp(28px, 4.8vh, 58px); left: clamp(36px, 7.3vw, 118px); display: flex; align-items: center; gap: clamp(1rem, 2.2vw, 2.2rem); color: rgba(224, 237, 248, .56); font-family: "AIS Mono", monospace; font-size: .61rem; letter-spacing: .16em; text-transform: uppercase; }
+      .story-rail span { display: flex; align-items: center; gap: .9rem; }
+      .story-rail span + span::before { content: ""; width: clamp(34px, 4vw, 62px); height: 1px; background: linear-gradient(90deg, rgba(153, 207, 249, .2), rgba(185, 222, 251, .72)); }
+      .story-rail strong { color: #ddebfa; font-weight: 400; }
+      .stats { display: grid; grid-template-columns: repeat(3, minmax(170px, 210px)); gap: 1.3rem; margin: clamp(58px, 8vh, 105px) 0 34px clamp(36px, 4.7vw, 76px); transition: opacity .4s ease, transform .4s ease; }
+      .stat { min-height: 184px; padding: 1.55rem 1.8rem; border: 1px solid rgba(192, 216, 238, .14); border-radius: 14px; background: linear-gradient(145deg, rgba(8, 17, 27, .34), rgba(2, 7, 13, .7)); backdrop-filter: blur(5px); }
+      .stat svg { width: 46px; height: 46px; color: #e3f1ff; }
+      .stat strong { display: block; margin-top: 1.35rem; font-family: "AIS Display", sans-serif; font-size: 1.72rem; font-weight: 400; letter-spacing: .08em; }
+      .stat span { display: block; margin-top: .7rem; color: rgba(219, 231, 241, .68); font-family: "AIS Mono", monospace; font-size: .72rem; letter-spacing: .13em; line-height: 1.55; text-transform: uppercase; }
+      .scroll-cue { position: absolute; right: 4.9%; bottom: 5.6%; display: grid; justify-items: center; gap: 1rem; color: #dcecff; }
+      .scroll-cue i { width: 2px; height: 38px; background: linear-gradient(#fff, rgba(255, 255, 255, .2)); box-shadow: 0 0 10px rgba(199, 227, 255, .3); }
+      .scroll-cue::before, .scroll-cue::after { content: "✦"; font-size: .7rem; }
+      .scroll-cue::after { opacity: .45; transform: scale(.55); }
+      .film-hud { position: absolute; z-index: 3; right: clamp(20px, 4vw, 64px); bottom: clamp(22px, 4vw, 60px); left: clamp(20px, 4vw, 64px); display: flex; align-items: end; justify-content: space-between; gap: 2rem; opacity: 0; pointer-events: none; transform: translateY(18px); transition: opacity .4s ease, transform .4s ease; }
+      .film-hud-copy { max-width: 44rem; text-shadow: 0 2px 24px #000; }
+      .film-hud small { color: #9fd5ff; font-family: "AIS Mono", monospace; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; }
+      .film-hud h2 { margin: .45rem 0 0; font-family: "AIS Display", sans-serif; font-size: clamp(2rem, 4vw, 4.3rem); font-weight: 380; letter-spacing: -.03em; }
+      .film-hud p { max-width: 62ch; margin: .65rem 0 0; color: rgba(236, 246, 255, .72); font-size: .82rem; line-height: 1.55; }
+      .film-controls { display: flex; align-items: center; gap: .7rem; white-space: nowrap; }
+      .film-controls button { min-width: 116px; padding: .8rem 1rem; border: 1px solid rgba(218, 237, 252, .5); border-radius: 12px; color: #f1f8ff; background: rgba(2, 8, 15, .62); backdrop-filter: blur(10px); font-family: "AIS Mono", monospace; font-size: .61rem; letter-spacing: .13em; text-transform: uppercase; cursor: pointer; }
+      .film-progress { position: absolute; right: 0; bottom: -18px; left: 0; height: 2px; overflow: hidden; background: rgba(220, 239, 255, .22); }
+      .film-progress i { display: block; width: var(--film-progress, 0%); height: 100%; background: #d7edff; box-shadow: 0 0 12px #8fcfff; }
+      .hero.film-playing { position: fixed; z-index: 100; inset: 0; width: 100vw; height: 100svh; min-height: 0; border-radius: 0; }
+      .hero.film-playing .hero-copy, .hero.film-playing .story-rail, .hero.film-playing .scroll-cue { opacity: 0; pointer-events: none; transform: translateY(-12px); }
+      body.film-mode .topbar { opacity: 0; pointer-events: none; transform: translateY(-12px); }
+      .hero.film-playing .space::after { opacity: .2; }
+      .hero.film-playing .space video { filter: saturate(1) contrast(1); }
+      .hero.film-playing .grain { opacity: .025; }
+      .hero.film-playing .film-hud { opacity: 1; pointer-events: auto; transform: none; }
+      .orbit-page { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; scroll-snap-align: start; border: 1px solid rgba(190, 215, 238, .16); border-radius: 22px; background: #02060b; }
+      .orbit-space { position: absolute; z-index: -4; inset: 0; background: linear-gradient(90deg, rgba(1, 5, 10, .99) 0%, rgba(1, 5, 10, .8) 32%, rgba(1, 5, 10, .08) 62%), url("../../assets/orbital-earth-BaiToibi.jpg") right center / cover no-repeat; transform: scale(1.003); }
+      .orbit-space::before { content: ""; position: absolute; width: clamp(104px, 11vw, 190px); aspect-ratio: 1; top: 14.5%; right: 10.2%; border-radius: 50%; background: radial-gradient(circle at 33% 30%, #818b96 0 2%, #3f4650 17%, #141b23 43%, #04080d 68%, #000 74%); box-shadow: inset -22px -16px 35px #000, -12px 8px 30px rgba(0, 0, 0, .65); opacity: .88; }
+      .orbit-space::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 66% 49%, transparent 0 12%, rgba(1, 4, 8, .06) 31%, rgba(1, 4, 8, .48) 100%), linear-gradient(180deg, rgba(0, 0, 0, .08), rgba(0, 3, 8, .12) 62%, rgba(0, 2, 6, .65)); }
+      .orbit-page .hero-copy { width: min(42rem, 44vw); margin-top: clamp(185px, 25vh, 260px); transition: none; }
+      .orbit-page h1 { font-size: clamp(3.6rem, 6.2vw, 6.4rem); line-height: .82; letter-spacing: .04em; text-transform: none; }
+      .orbit-page h1 span { margin-top: .22em; font-size: .7em; letter-spacing: .08em; }
+      .replay-link { display: inline-flex; align-items: center; gap: .75rem; padding: 0; border: 0; color: rgba(235, 243, 250, .86); background: transparent; font-family: "AIS Mono", monospace; font-size: .63rem; letter-spacing: .15em; text-transform: uppercase; white-space: nowrap; cursor: pointer; }
+      .orbit-page .scroll-cue { bottom: 7%; }
+      .handoff { position: absolute; z-index: 4; top: 0; left: clamp(36px, 7.3vw, 118px); display: flex; align-items: center; gap: 1.2rem; color: rgba(212, 233, 250, .6); font-family: "AIS Mono", monospace; font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; transform: translateY(-50%); }
+      .handoff i { display: block; width: 68px; height: 1px; background: linear-gradient(90deg, #9dd2ff, transparent); box-shadow: 0 0 12px rgba(128, 200, 255, .5); }
+      .content { display: grid; grid-template-columns: .75fr 1.25fr; gap: clamp(3rem, 8vw, 9rem); padding: clamp(5rem, 10vw, 10rem) clamp(2rem, 8vw, 9rem); border-top: 1px solid rgba(192, 216, 238, .12); background: radial-gradient(circle at 72% 38%, #0a1b2d, #02060b 43%); }
+      .eyebrow { margin: 0; color: #9ecdf5; font-family: "AIS Mono", monospace; font-size: .67rem; letter-spacing: .2em; text-transform: uppercase; }
+      .content h2 { margin: .9rem 0 0; font-family: "AIS Display", sans-serif; font-size: clamp(2.7rem, 5vw, 5.5rem); font-weight: 350; letter-spacing: -.04em; line-height: .95; }
+      .content-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(195, 220, 243, .14); }
+      .content article { min-height: 230px; padding: 1.8rem; background: #04101b; }
+      .content article small { color: #8fc7f6; font-family: "AIS Mono", monospace; letter-spacing: .15em; }
+      .content article h3 { margin: 3rem 0 .8rem; font-family: "AIS Display", sans-serif; font-size: 1.2rem; font-weight: 450; }
+      .content article p { margin: 0; color: rgba(220, 233, 245, .6); font-size: .85rem; line-height: 1.7; }
+      @media (max-width: 980px) {
+        .hero, .orbit-page { border-radius: 0; }
+        .topbar { grid-template-columns: 1fr auto; }
+        nav { display: none; }
+        .hero-copy { width: min(650px, calc(100% - 72px)); margin-top: 20vh; }
+        h1 { font-size: clamp(3.4rem, 11vw, 6.5rem); }
+        .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-right: 36px; }
+        .content { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 680px) {
+        .topbar { padding: 24px 20px; }
+        .brand { letter-spacing: .23em; }
+        .explore-top { min-width: 0; padding-inline: .9rem; }
+        .hero, .orbit-page { min-height: 100svh; }
+        .space { background-position: 61% top; }
+        .space::before { top: 17%; right: 5%; }
+        .hero-copy { width: auto; margin: 29vh 24px 0; }
+        h1 { font-size: clamp(3.1rem, 16.5vw, 5.2rem); line-height: .72; letter-spacing: .06em; }
+        h1 span { white-space: normal; letter-spacing: .1em; }
+        .kicker { line-height: 1.6; }
+        .actions { align-items: stretch; flex-direction: column; }
+        .button { width: 100%; }
+        .stats { grid-template-columns: 1fr; margin: 5rem 24px 40px; }
+        .stat { min-height: 145px; }
+        .scroll-cue { display: none; }
+        .content { padding: 5rem 24px; }
+        .content-grid { grid-template-columns: 1fr; }
+        .film-hud { align-items: stretch; flex-direction: column; }
+        .film-controls button { flex: 1; min-width: 0; }
+        .orbit-space { background-position: 61% top; }
+        .orbit-space::before { top: 17%; right: 5%; }
+        .orbit-page .hero-copy { width: auto; margin: 27vh 24px 0; }
+        .story-rail { display: none; }
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        .space { animation: reveal 1.4s ease-out both; }
+        .hero-copy > * { animation: rise .85s ease-out both; }
+        .hero-copy > :nth-child(2) { animation-delay: .08s; }
+        .hero-copy > :nth-child(3) { animation-delay: .14s; }
+        .hero-copy > :nth-child(4) { animation-delay: .2s; }
+        .hero-copy > :nth-child(5) { animation-delay: .26s; }
+        @keyframes reveal { from { opacity: 0; transform: scale(1.04); } }
+        @keyframes rise { from { opacity: 0; transform: translateY(15px); } }
+      }
+    </style>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"AI in Space — Intelligence Beyond Boundaries","description":"Advancing intelligent systems to explore, understand, and shape the future of space.","url":"https://ai-in.space/landing/orbital-zero/","image":"https://ai-in.space/assets/orbital-earth-BaiToibi.jpg","isPartOf":{"@type":"WebSite","name":"AI in Space","url":"https://ai-in.space/"}}</script>
+  </head>
+  <body>
+    <header class="topbar" id="site-header">
+      <a class="brand" href="https://ai-in.space/" aria-label="AI in Space home">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="12.5" fill="none" stroke="currentColor" stroke-width=".8"/><path d="M20 0v40M0 20h40M20 8l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" fill="none" stroke="currentColor" stroke-width=".7"/><circle cx="20" cy="20" r="2" fill="currentColor"/></svg>
+        <span>AI IN SPACE</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="#mission">Mission</a><a href="#orbit">Beyond Earth</a><a href="#technology">Technology</a><a href="#about">About</a>
+      </nav>
+      <a class="explore-top" href="#mission"><span aria-hidden="true">✦</span> Begin journey</a>
+    </header>
+    <section class="hero" id="mission" aria-labelledby="hero-title">
+      <div class="space" aria-hidden="true">
+        <video id="mission-video" autoplay muted loop playsinline preload="metadata" poster="../../assets/orbital-earth-BaiToibi.jpg">
+          <source src="./ai-discovery.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="grain" aria-hidden="true"></div>
+      <main class="hero-copy">
+        <p class="chapter">01 / Human curiosity</p>
+        <h1 id="hero-title">Intelligence <span>begins here</span></h1>
+        <p class="kicker">A question becomes a model</p>
+        <p class="summary">We build AI that learns with people—observing the world, testing ideas, and turning questions into new ways of seeing.</p>
+        <div class="actions">
+          <button class="button film-button" id="video-trigger" type="button"><span><span class="play" aria-hidden="true">▶</span>&nbsp; Experience the film</span><span aria-hidden="true">↗</span></button>
+          <a class="replay-link" href="#orbit">Follow the signal <span aria-hidden="true">↓</span></a>
+        </div>
+      </main>
+      <div class="story-rail" aria-label="AI discovery process">
+        <span><strong>01</strong> Observe</span><span><strong>02</strong> Understand</span><span><strong>03</strong> Venture</span>
+      </div>
+      <a class="scroll-cue" href="#orbit" aria-label="Continue beyond Earth"><i></i></a>
+      <aside class="film-hud" id="film-hud" aria-live="polite">
+        <div class="film-hud-copy">
+          <small>AI mission film / 00:20 / Sound on</small>
+          <h2>The Second Question</h2>
+          <p>Forty-three minutes from Earth, LYRA turns a damaged Jovian observatory and a swarm of origami probes into a new instrument—then discovers that the noise was the signal.</p>
+        </div>
+        <div class="film-controls">
+          <button id="film-toggle" type="button">Pause</button>
+          <button id="film-exit" type="button">Exit film</button>
+        </div>
+        <div class="film-progress" aria-hidden="true"><i></i></div>
+      </aside>
+    </section>
+    <section class="orbit-page" id="orbit" aria-labelledby="orbit-title">
+      <div class="orbit-space" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div>
+      <div class="handoff" aria-hidden="true"><span>The same intelligence</span><i></i><span>New frontier</span></div>
+      <main class="hero-copy">
+        <p class="chapter">02 / Beyond Earth</p>
+        <h1 id="orbit-title">Beyond <span>the horizon</span></h1>
+        <p class="kicker">Distance changes the question</p>
+        <p class="summary">Far from Earth, intelligence becomes a scientific partner—reading faint signals, adapting to the unexpected, and helping every mission discover more.</p>
+        <div class="actions">
+          <a class="button" href="#technology">See how we build it <span aria-hidden="true">→</span></a>
+          <button class="replay-link" id="legacy-film-trigger" type="button"><span class="play" aria-hidden="true">↺</span> Return to the film</button>
+        </div>
+      </main>
+      <a class="scroll-cue" href="#technology" aria-label="Continue to technology"><i></i></a>
+    </section>
+    <section class="content" id="technology" aria-labelledby="technology-title">
+      <div>
+        <p class="eyebrow">Mission architecture / 01</p>
+        <h2 id="technology-title">Build for the distance.</h2>
+      </div>
+      <div class="content-grid" id="applications">
+        <article><small>01 / PERCEPTION</small><h3>Observe</h3><p>Turn remote instrument data into evidence while preserving uncertainty and provenance.</p></article>
+        <article><small>02 / AUTONOMY</small><h3>Decide</h3><p>Support bounded scientific decisions when distance makes immediate guidance impossible.</p></article>
+        <article id="about"><small>03 / DISCOVERY</small><h3>Understand</h3><p>Connect faint patterns across missions, models, environments, and time.</p></article>
+      </div>
+    </section>
+    <script>
+      const hero = document.querySelector('.hero');
+      const filmTrigger = document.querySelector('#video-trigger');
+      const filmVideo = document.querySelector('#mission-video');
+      const filmToggle = document.querySelector('#film-toggle');
+      const filmExit = document.querySelector('#film-exit');
+      const filmProgress = document.querySelector('.film-progress i');
+      const legacyFilmTrigger = document.querySelector('#legacy-film-trigger');
+      const siteHeader = document.querySelector('#site-header');
+
+      function enterFilm() {
+        hero.classList.add('film-playing');
+        document.body.classList.add('film-mode');
+        filmVideo.loop = false;
+        filmVideo.muted = false;
+        filmVideo.currentTime = 0;
+        filmVideo.play().catch(() => {});
+        filmToggle.textContent = 'Pause';
+        filmToggle.focus();
+      }
+
+      function exitFilm() {
+        hero.classList.remove('film-playing');
+        document.body.classList.remove('film-mode');
+        filmVideo.muted = true;
+        filmVideo.loop = true;
+        filmVideo.play().catch(() => {});
+        filmTrigger.focus();
+      }
+
+      filmTrigger.addEventListener('click', enterFilm);
+      legacyFilmTrigger.addEventListener('click', enterFilm);
+      filmExit.addEventListener('click', exitFilm);
+      filmToggle.addEventListener('click', () => {
+        if (filmVideo.paused) {
+          filmVideo.play().catch(() => {});
+          filmToggle.textContent = 'Pause';
+        } else {
+          filmVideo.pause();
+          filmToggle.textContent = 'Resume';
+        }
+      });
+      filmVideo.addEventListener('timeupdate', () => {
+        const progress = filmVideo.duration ? (filmVideo.currentTime / filmVideo.duration) * 100 : 0;
+        filmProgress.style.setProperty('--film-progress', `${progress}%`);
+      });
+      filmVideo.addEventListener('ended', exitFilm);
+      window.addEventListener('scroll', () => siteHeader.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && hero.classList.contains('film-playing')) exitFilm();
+      });
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) filmVideo.pause();
+    </script>
+  </body>
+</html>
