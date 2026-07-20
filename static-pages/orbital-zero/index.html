@@ -25,11 +25,11 @@
       @font-face { font-family: "AIS Body"; src: url("{{MANROPE_FONT}}") format("woff2"); font-weight: 200 800; font-display: swap; }
       :root { color-scheme: dark; font-family: "AIS Body", system-ui, sans-serif; background: #02060b; }
       * { box-sizing: border-box; }
-      html { min-width: 320px; scroll-behavior: smooth; background: #02060b; }
+      html { min-width: 320px; scroll-behavior: smooth; scroll-snap-type: y proximity; background: #02060b; }
       body { min-width: 320px; margin: 0; color: #eef5fc; background: #02060b; }
       a { color: inherit; text-decoration: none; }
       a:focus-visible { outline: 1px solid #d7eaff; outline-offset: 5px; }
-      .hero { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; border: 1px solid rgba(190, 215, 238, .16); border-radius: 22px; background: #02060b; }
+      .hero { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; scroll-snap-align: start; border: 1px solid rgba(190, 215, 238, .16); border-radius: 22px; background: #02060b; }
       .space { position: absolute; z-index: -4; inset: 0; overflow: hidden; background: #02060b url("{{ORBITAL_EARTH_ASSET}}") right center / cover no-repeat; transform: scale(1.003); }
       .space video { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.86) contrast(1.04); }
       .space::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(1, 5, 10, .97) 0%, rgba(1, 5, 10, .74) 34%, rgba(1, 5, 10, .12) 66%), linear-gradient(180deg, rgba(0, 0, 0, .08), rgba(0, 3, 8, .16) 60%, rgba(0, 2, 6, .82)); transition: opacity .55s ease; }
@@ -77,22 +77,14 @@
       .hero.film-playing .space video { filter: saturate(1) contrast(1); }
       .hero.film-playing .grain { opacity: .025; }
       .hero.film-playing .film-hud { opacity: 1; pointer-events: auto; transform: none; }
-      .station-page { position: relative; display: grid; min-height: 100svh; align-content: space-between; overflow: hidden; isolation: isolate; padding: clamp(28px, 4.7vw, 72px) clamp(28px, 5.1vw, 82px) clamp(34px, 5vw, 76px); border: 1px solid rgba(190, 215, 238, .16); border-radius: 22px; background: #080b0c; }
-      .station-page::before { content: ""; position: absolute; z-index: -2; inset: 0; background: url("{{FAR_OBSERVATORY_ASSET}}") center / cover no-repeat; transform: scale(1.004); }
-      .station-page::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, rgba(3, 7, 8, .98) 0%, rgba(3, 7, 8, .82) 32%, rgba(3, 7, 8, .18) 65%), linear-gradient(180deg, rgba(2, 5, 6, .08), rgba(2, 5, 6, .18) 58%, rgba(2, 5, 6, .88)); }
-      .station-topline { display: flex; align-items: center; justify-content: space-between; gap: 2rem; color: rgba(230, 241, 238, .68); font-family: "AIS Mono", monospace; font-size: .63rem; letter-spacing: .18em; text-transform: uppercase; }
-      .station-topline span:first-child { display: inline-flex; align-items: center; gap: .8rem; }
-      .station-topline span:first-child::before { content: ""; width: 34px; height: 1px; background: #8df9e2; box-shadow: 0 0 12px rgba(141, 249, 226, .5); }
-      .station-copy { width: min(44rem, 52vw); margin-top: clamp(6rem, 17vh, 12rem); }
-      .station-copy .eyebrow { color: #8df9e2; }
-      .station-copy h2 { margin: 1.15rem 0 0; font-family: "AIS Display", sans-serif; font-size: clamp(3.6rem, 7vw, 7.4rem); font-weight: 330; letter-spacing: -.055em; line-height: .86; }
-      .station-copy h2 em { display: block; color: #dffcf6; font-family: Georgia, serif; font-weight: 400; }
-      .station-copy > p:not(.eyebrow) { max-width: 38ch; margin: 1.8rem 0 0; color: rgba(226, 238, 234, .66); font-size: clamp(.82rem, 1vw, 1rem); line-height: 1.75; }
-      .station-copy .button { margin-top: 2rem; border-color: rgba(141, 249, 226, .5); }
-      .station-footer { display: grid; grid-template-columns: repeat(3, minmax(130px, 190px)); gap: 1px; width: fit-content; margin-top: clamp(4rem, 9vh, 8rem); background: rgba(141, 249, 226, .16); }
-      .station-metric { padding: 1.15rem 1.35rem; background: rgba(5, 13, 13, .72); backdrop-filter: blur(8px); }
-      .station-metric strong { display: block; color: #e7fff9; font-family: "AIS Display", sans-serif; font-size: 1.35rem; font-weight: 420; letter-spacing: .04em; }
-      .station-metric span { display: block; margin-top: .45rem; color: rgba(220, 238, 233, .6); font-family: "AIS Mono", monospace; font-size: .58rem; letter-spacing: .13em; line-height: 1.45; text-transform: uppercase; }
+      .legacy-page { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; scroll-snap-align: start; border: 1px solid rgba(190, 215, 238, .16); border-radius: 22px; background: #02060b; }
+      .legacy-space { position: absolute; z-index: -4; inset: 0; background: linear-gradient(90deg, rgba(1, 5, 10, .99) 0%, rgba(1, 5, 10, .8) 32%, rgba(1, 5, 10, .08) 62%), url("{{ORBITAL_EARTH_ASSET}}") right center / cover no-repeat; transform: scale(1.003); }
+      .legacy-space::before { content: ""; position: absolute; width: clamp(104px, 11vw, 190px); aspect-ratio: 1; top: 14.5%; right: 10.2%; border-radius: 50%; background: radial-gradient(circle at 33% 30%, #818b96 0 2%, #3f4650 17%, #141b23 43%, #04080d 68%, #000 74%); box-shadow: inset -22px -16px 35px #000, -12px 8px 30px rgba(0, 0, 0, .65); opacity: .88; }
+      .legacy-space::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 66% 49%, transparent 0 12%, rgba(1, 4, 8, .06) 31%, rgba(1, 4, 8, .48) 100%), linear-gradient(180deg, rgba(0, 0, 0, .08), rgba(0, 3, 8, .12) 62%, rgba(0, 2, 6, .65)); }
+      .legacy-page .topbar, .legacy-page .hero-copy { transition: none; }
+      .legacy-page .hero-copy { margin-top: clamp(72px, 12vh, 150px); }
+      .legacy-video-link { display: inline-flex; align-items: center; gap: .75rem; padding: 0; border: 0; color: rgba(235, 243, 250, .86); background: transparent; font-family: "AIS Mono", monospace; font-size: .63rem; letter-spacing: .15em; text-transform: uppercase; white-space: nowrap; cursor: pointer; }
+      .legacy-page .scroll-cue { bottom: 7%; }
       .content { display: grid; grid-template-columns: .75fr 1.25fr; gap: clamp(3rem, 8vw, 9rem); padding: clamp(5rem, 10vw, 10rem) clamp(2rem, 8vw, 9rem); border-top: 1px solid rgba(192, 216, 238, .12); background: radial-gradient(circle at 72% 38%, #0a1b2d, #02060b 43%); }
       .eyebrow { margin: 0; color: #9ecdf5; font-family: "AIS Mono", monospace; font-size: .67rem; letter-spacing: .2em; text-transform: uppercase; }
       .content h2 { margin: .9rem 0 0; font-family: "AIS Display", sans-serif; font-size: clamp(2.7rem, 5vw, 5.5rem); font-weight: 350; letter-spacing: -.04em; line-height: .95; }
@@ -130,13 +122,10 @@
         .content-grid { grid-template-columns: 1fr; }
         .film-hud { align-items: stretch; flex-direction: column; }
         .film-controls button { flex: 1; min-width: 0; }
-        .station-page { min-height: 100svh; padding: 24px; border-radius: 0; }
-        .station-page::before { background-position: 64% center; }
-        .station-page::after { background: linear-gradient(180deg, rgba(3, 7, 8, .3), rgba(3, 7, 8, .8) 46%, rgba(3, 7, 8, .96)); }
-        .station-copy { width: auto; margin-top: 39vh; }
-        .station-copy h2 { font-size: clamp(3.3rem, 17vw, 5.2rem); }
-        .station-footer { grid-template-columns: repeat(3, 1fr); width: 100%; margin-top: 2.5rem; }
-        .station-metric { padding: .85rem .7rem; }
+        .legacy-page { border-radius: 0; }
+        .legacy-space { background-position: 61% top; }
+        .legacy-space::before { top: 17%; right: 5%; }
+        .legacy-page .hero-copy { width: auto; margin: 29vh 24px 0; }
       }
       @media (prefers-reduced-motion: no-preference) {
         .space { animation: reveal 1.4s ease-out both; }
@@ -192,7 +181,7 @@
           <strong>3.2M</strong><span>AI models<br />deployed</span>
         </article>
       </div>
-      <a class="scroll-cue" href="#station" aria-label="Continue to the lunar station"><i></i></a>
+      <a class="scroll-cue" href="#original" aria-label="Continue to the original landing page"><i></i></a>
       <aside class="film-hud" id="film-hud" aria-live="polite">
         <div class="film-hud-copy">
           <small>AI mission film / 00:20 / Sound on</small>
@@ -206,19 +195,29 @@
         <div class="film-progress" aria-hidden="true"><i></i></div>
       </aside>
     </section>
-    <section class="station-page" id="station" aria-labelledby="station-title">
-      <div class="station-topline"><span>Page 02 / Lunar Signal</span><span>Far Observatory · Live</span></div>
-      <div class="station-copy">
-        <p class="eyebrow">Field note 021 / autonomous science</p>
-        <h2 id="station-title">A signal <em>learns to listen.</em></h2>
-        <p>At the quiet edge of the lunar night, station intelligence notices the faint evidence hidden inside very large silences.</p>
-        <a class="button" href="#technology">Enter the observatory <span aria-hidden="true">↓</span></a>
-      </div>
-      <div class="station-footer" aria-label="Lunar station statistics">
-        <div class="station-metric"><strong>12K</strong><span>Ice spectra<br />indexed</span></div>
-        <div class="station-metric"><strong>0.04</strong><span>False signal<br />ratio</span></div>
-        <div class="station-metric"><strong>06</strong><span>Outer moon<br />models</span></div>
-      </div>
+    <section class="legacy-page" id="original" aria-labelledby="original-title">
+      <div class="legacy-space" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div>
+      <header class="topbar">
+        <a class="brand" href="https://ai-in.space/" aria-label="AI in Space home">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="12.5" fill="none" stroke="currentColor" stroke-width=".8"/><path d="M20 0v40M0 20h40M20 8l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" fill="none" stroke="currentColor" stroke-width=".7"/><circle cx="20" cy="20" r="2" fill="currentColor"/></svg>
+          <span>AI IN SPACE</span>
+        </a>
+        <nav aria-label="Original page navigation">
+          <a href="#mission">Mission</a><a href="#technology">Technology</a><a href="#applications">Applications</a><a href="#about">About</a>
+        </nav>
+        <a class="explore-top" href="#technology"><span aria-hidden="true">✦</span> Explore</a>
+      </header>
+      <main class="hero-copy">
+        <h1 id="original-title">AI <span>in space</span></h1>
+        <p class="kicker">Intelligence beyond boundaries</p>
+        <p class="summary">Advancing AI technologies to explore, understand, and shape the future of space.</p>
+        <div class="actions">
+          <a class="button" href="#technology">Explore the future <span aria-hidden="true">→</span></a>
+          <button class="legacy-video-link" id="legacy-film-trigger" type="button"><span class="play" aria-hidden="true">▶</span> Watch video</button>
+        </div>
+      </main>
+      <a class="scroll-cue" href="#technology" aria-label="Continue to technology"><i></i></a>
     </section>
     <section class="content" id="technology" aria-labelledby="technology-title">
       <div>
@@ -238,6 +237,7 @@
       const filmToggle = document.querySelector('#film-toggle');
       const filmExit = document.querySelector('#film-exit');
       const filmProgress = document.querySelector('.film-progress i');
+      const legacyFilmTrigger = document.querySelector('#legacy-film-trigger');
 
       function enterFilm() {
         hero.classList.add('film-playing');
@@ -258,6 +258,7 @@
       }
 
       filmTrigger.addEventListener('click', enterFilm);
+      legacyFilmTrigger.addEventListener('click', enterFilm);
       filmExit.addEventListener('click', exitFilm);
       filmToggle.addEventListener('click', () => {
         if (filmVideo.paused) {
