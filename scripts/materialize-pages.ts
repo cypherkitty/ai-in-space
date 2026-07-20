@@ -83,9 +83,11 @@ function findAsset(prefix: string, suffix: string, exclude = ''): string {
 for (const page of staticLandingPages) {
   const outputPath = join(distDir, page.path, 'index.html');
   const orbitalEarth = findAsset('orbital-earth-', '.jpg', '-preview-');
+  const farObservatory = findAsset('far-observatory-', '.jpg', '-preview-');
   const replacements = new Map([
     ['{{ORBITAL_EARTH_ASSET}}', `../../assets/${orbitalEarth}`],
     ['{{ORBITAL_EARTH_SOCIAL_URL}}', `https://ai-in.space/assets/${orbitalEarth}`],
+    ['{{FAR_OBSERVATORY_ASSET}}', `../../assets/${farObservatory}`],
     ['{{AI_DISCOVERY_VIDEO}}', './ai-discovery.mp4'],
     ['{{SPACE_GROTESK_FONT}}', `../../assets/${findAsset('space-grotesk-latin-wght-normal-', '.woff2')}`],
     ['{{IBM_PLEX_MONO_FONT}}', `../../assets/${findAsset('ibm-plex-mono-latin-400-normal-', '.woff2')}`],
