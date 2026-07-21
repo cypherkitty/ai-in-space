@@ -1,0 +1,11 @@
+name = "ai-in-space-proxy"
+main = "worker.js"
+compatibility_date = "2026-07-20"
+
+[[routes]]
+pattern = "ai-in.space"
+custom_domain = true
+
+[[routes]]
+pattern = "www.ai-in.space"
+custom_domain = true

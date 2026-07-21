@@ -40,7 +40,20 @@ The Vite base is relative, so the build works both at `username.github.io/reposi
 
 ## Custom domain
 
-The production site uses `ai-in.space`. GitHub Pages is configured through the Actions workflow, and `public/CNAME` preserves the apex domain in every build. Namecheap DNS points the apex to GitHub Pages and `www` to `cypherkitty.github.io`; GitHub redirects `www.ai-in.space` to the apex domain.
+The production site is `https://ai-in.space`.
+
+DNS for `ai-in.space` is on Cloudflare. A small edge Worker (`cloudflare/edge-proxy`) owns the apex and `www` custom domains and proxies traffic to the Cloudflare Pages project `ai-in-space` (`https://ai-in-space.pages.dev`).
+
+After moving nameservers to Cloudflare, the zone had no A/CNAME records, so the hostname stopped resolving. The Worker custom domains recreate those records.
+
+To refresh the live site from this machine:
+
+```bash
+npm run build
+wrangler pages deploy dist --project-name ai-in-space
+```
+
+For CI deploys to Cloudflare Pages, add a repo secret `CLOUDFLARE_API_TOKEN` with Account → Cloudflare Pages → Edit permission. GitHub Pages continues to publish from the same workflow as a secondary target.
 
 ## Design system
 
