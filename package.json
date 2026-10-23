@@ -18,7 +18,7 @@
     "svelte-check": "^4.3.3",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
-    "vite": "^7.2.2"
+    "vite": "^7.3.7"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.2.7",
